@@ -1,3 +1,6 @@
+// ---------- Enviroment Setup ----------
+require("dotenv").config();
+
 // ---------- Express Setup ----------
 const express = require("express");
 const app = express();
@@ -5,10 +8,10 @@ require("express-async-errors");
 
 // ---------- Middleware Setup ----------
 
-// -- Imports
+// Imports
 const errorHandlerMiddleware = require("./middleware/error-handler");
 
-// -- Activation
+// Activation
 app.use(errorHandlerMiddleware);
 
 // ---------- Routes Setup ----------
@@ -19,10 +22,14 @@ app.use("/api/v1/auth", authRouter);
 // ---------- Try Init server and DB or throw error ----------
 const port = process.env.PORT || 3154;
 
-const start = () => {
+const connectDB = require("./db/connect");
+
+const start = async () => {
   try {
-    //init DB
-    app.listen(port);
+    await connectDB(process.env.MONGO_URI);
+    app.listen(port, () =>
+      console.log(`Server is listening on port ${port}...`)
+    );
   } catch (error) {
     console.log(error);
   }
