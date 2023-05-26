@@ -29,6 +29,8 @@ module.exports = {
       emerald: "#50c878",
       jade: "#00a86b",
       greensea: "#2E8B57",
+      gray: "#333333",
+      white: "#ffff",
       transparent: colors.transparent,
       red: colors.red,
     },
