@@ -1,25 +1,37 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import MyImpactLogo from "../assets/myimpact-logo.svg";
 
 export default function LandingPage() {
   return (
     <div className="p-5">
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="text-center">
-        <img src={MyImpactLogo} alt="my_impact_logo_obiettivi_onu" className="mx-auto"/>
-        <p className="text-gray text-lg mb-8">
-          Benvenuto nella nostra webapp dedicata agli obiettivi di sviluppo sostenibile delle Nazioni Unite.
-        </p>
-        <div className="flex justify-center gap-3 text-gray">
-          <button className="bg-transparent border text-gray rounded-md py-2 px-4 hover:bg-white hover:text-jade hover:animate-bounce" >
-            Accedi
-          </button>
-          <button className="bg-white hover:text-white text-gray rounded-md py-2 px-4 mr-4 hover:bg-jade hover:animate-bounce">
-            Registrati
-          </button>
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <img
+            src={MyImpactLogo}
+            alt="my_impact_logo_obiettivi_onu"
+            className="mx-auto"
+          />
+          <p className="desktop-l:text-2xl desktop-4k:text-5xl text-gray text-lg mb-8 font-lora">
+            Benvenuto nella nostra webapp dedicata agli obiettivi di sviluppo
+            sostenibile delle Nazioni Unite.
+          </p>
+          <div className="flex justify-center gap-3 text-gray desktop-l:gap-5 desktop-4k:gap-8">
+            <Link
+              to="/login"
+              className=" desktop-l:text-2xl desktop-4k:text-5xl font-montserrat bg-transparent border text-gray rounded-md py-2 px-4 hover:bg-white hover:text-jade hover:animate-bounce"
+            >
+              Accedi
+            </Link>
+            <Link
+              to="/sign-up"
+              className="desktop-l:text-2xl desktop-4k:text-5xl bg-white font-montserrat hover:text-white text-gray rounded-md py-2 px-4 mr-4 hover:bg-jade hover:animate-bounce"
+            >
+              Registrati
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 }

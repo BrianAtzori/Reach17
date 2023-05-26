@@ -20,8 +20,6 @@ module.exports = {
     },
     extend: {},
     fontFamily: {
-      dosis: ["Dosis", "sans-serif"],
-      lato: ["Lato", "sans-serif"],
       lora: ["Lora", "serif"],
       montserrat: ["Montserrat", "sans-serif"],
     },
