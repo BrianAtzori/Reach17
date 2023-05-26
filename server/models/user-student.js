@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const UserStudentSchema = new mongoose.Schema({
   //Image?
@@ -27,18 +29,36 @@ const UserStudentSchema = new mongoose.Schema({
     type: String,
     required: [true, "You must provide a Password to subscribe to My Impact"],
     minLength: 6,
-    match: [
-      "^(?=.[a-z])(?=.[A-Z])(?=.d)(?=.[@#$%^&+=])(?=.*[a-zA-Zd@#$%^&+=]).{8,}$", //Da verificare
-      "Please provide a valid email",
-    ]
+    //Validazione password complessa?
   },
   university: {
     type: String,
     required: [true, "Please select an university"],
   },
-  matricola: {
+  studentCode: {
     type: String,
     required: true,
-    unique: true //Posso generarla in fase di creazione utente dal DB?
+    unique: true, //Posso generarla in fase di creazione utente dal DB?
   },
 });
+
+UserStudentSchema.pre("save", async function (next) {
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
+
+UserStudentSchema.methods.JWTGeneration = function () {
+  return jwt.sign(
+    { userID: this._id, email: this.email, studentCode: this.studentCode },
+    process.env.SEC_J,
+    { expiresIn: process.env.J_LIFT }
+  );
+};
+
+UserStudentSchema.methods.pwdCheck = async function (attempt) {
+  const matching = await bcrypt.compare(attempt, this.password);
+  return matching;
+};
+
+module.exports = mongoose.model("Student", UserStudentSchema);
