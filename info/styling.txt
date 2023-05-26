@@ -1,0 +1,10 @@
+
+#50c878 - Smerald
+#00a86b - Jade
+#2E8B57 - Greensea
+
+#333333 - Text
+
+Font:
+Lora
+Montserrat
