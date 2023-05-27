@@ -24,7 +24,7 @@ export default function LandingPage() {
               Accedi
             </Link>
             <Link
-              to="/sign-up"
+              to="/select-account-type"
               className="desktop-l:text-2xl desktop-4k:text-5xl bg-white font-montserrat hover:text-white text-gray rounded-md py-2 px-4 mr-4 hover:bg-jade hover:animate-bounce"
             >
               Registrati

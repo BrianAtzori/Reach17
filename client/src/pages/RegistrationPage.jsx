@@ -1,11 +1,18 @@
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
+import { newStudentSignUp } from "../services/student/external-calls";
 
 //Magari si può semplificare l'HTML
 //Redirect home page loggando o login?
 
 export default function RegistrationPage() {
-  let studentCode = "1XL8C56BN";
+  
+  // ---------- HOOKS  ----------
+
+  useEffect(() => {
+    setNewStudent({ ...newStudent, studentCode: generateStudentCode() });
+  }, {});
 
   const [newStudent, setNewStudent] = useState({
     name: "",
@@ -13,19 +20,39 @@ export default function RegistrationPage() {
     email: "",
     password: "",
     university: "",
-    studentCode: "1XL8C56BN",
+    studentCode: "",
   });
+
+  // ---------- UTILITIES  ----------
+
+  function generateStudentCode() {
+    var newStudentCode = "";
+    var characters = "8AB5CD1EF2GHIJKLM3N6OPQRS4TUVWXYZ79"; //Numeri da 1 a 9 e lettere da A a Z
+    var length = 8;
+
+    for (let i = 0; i < length; i++) {
+      var index = Math.floor(Math.random() * characters.length);
+      newStudentCode += characters.charAt(index);
+    }
+
+    return newStudentCode;
+  }
+
+  // ---------- FUNCTIONS  ----------
 
   function sendRegistrationForm(event) {
     event.preventDefault();
+    newStudentSignUp(newStudent);
   }
 
   const handleChange = (event) => {
     setNewStudent({ ...newStudent, [event.target.id]: event.target.value });
   };
 
+  // ---------- COMPONENT  ----------
+
   return (
-    <div>
+    <div className="p-5">
       <div className="max-w-md mx-auto">
         <h1 className="text-2xl font-bold mb-4">Registrazione</h1>
         <form
@@ -103,13 +130,13 @@ export default function RegistrationPage() {
           </div>
           <div className="flex items-center justify-center flex-col">
             <span>Una volta registrat* il tuo numero di matricola sarà:</span>
-            <span className="font-bold m-2 bg-greensea text-white p-4 rounded-lg">
+            <span className="font-bold m-2 bg-emerald  text-white p-4 rounded-lg">
               {newStudent.studentCode}
             </span>
           </div>
           <div className="flex items-center justify-center">
             <input
-              className="font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className=" w-full text-white bg-greensea mt-5 font-bold rounded focus:outline-none focus:shadow-outline"
               type="submit"
               value="Registrati"
             ></input>
