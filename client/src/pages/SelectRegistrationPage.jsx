@@ -46,7 +46,7 @@ export default function SelectRegistrationPage() {
               </h2>
               <p className="font-montserrat text-center">{data.description}</p>
               <Link to={data.link}>
-                <button className="mt-4 bg-emerald rounded-md p-2 font-montserrat font-semibold text-white hover:bg-transparent hover:text-emerald hover:border-2 hover:border-solid desktop-4k:p-5 desktop-4k:rounded-2xl">
+                <button className="mt-4 bg-emerald rounded-md p-2 font-montserrat font-semibold text-white hover:bg-transparent hover:text-emerald hover:border-2 hover:border-solid desktop-4k:p-5 desktop-4k:rounded-2xl border-2">
                   Registrati
                 </button>
               </Link>

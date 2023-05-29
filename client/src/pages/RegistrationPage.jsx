@@ -103,7 +103,7 @@ export default function RegistrationPage() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-bold mb-2 desktop-4k:text-4xl" htmlFor="country">
+            <label className="block text-sm font-bold mb-2 desktop-4k:text-4xl" htmlFor="University">
               Ateneo
             </label>
             <select
@@ -126,7 +126,7 @@ export default function RegistrationPage() {
           </div>
           <div className="flex items-center justify-center">
             <input
-              className=" w-full text-white bg-greensea mt-5 font-bold rounded focus:outline-none focus:shadow-outline max-w-md desktop-4k:p-4 desktop-4k:rounded-xl desktop-4k:mt-20"
+              className=" w-full border-2 text-white bg-greensea mt-5 font-bold rounded focus:outline-none focus:shadow-outline max-w-md desktop-4k:p-4 desktop-4k:rounded-xl desktop-4k:mt-20 hover:bg-transparent hover:text-emerald hover:border-2 hover:border-solid"
               type="submit"
               value="Registrati"
             ></input>
