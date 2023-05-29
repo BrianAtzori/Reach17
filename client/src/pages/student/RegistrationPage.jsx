@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { newStudentSignUp } from "../services/student/external-calls";
+import { newStudentSignUp } from "../../services/student/external-calls";
 
 //Magari si può semplificare l'HTML
 //Redirect home page loggando o login?

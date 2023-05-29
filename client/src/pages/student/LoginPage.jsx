@@ -1,7 +1,7 @@
 import React from "react";
-import MyImpactLogo from "../assets/myimpact-logo.svg";
+import MyImpactLogo from "../../assets/myimpact-logo.svg";
 import { useState } from "react";
-import { studentLogin } from "../services/student/external-calls";
+import { studentLogin } from "../../services/student/external-calls";
 
 export default function LoginPage() {
   const [studentLoginValue, setStudentLogin] = useState({
@@ -29,7 +29,7 @@ export default function LoginPage() {
         </div>
         <div className="mb-4 w-full">
           <label
-            className="block text-sm font-bold mb-2 desktop-4k:text-4xl"
+            className="block text-sm font-bold mb-2 desktop-4k:text-4xl font-montserrat"
             htmlFor="firstName"
           >
             E-Mail
@@ -45,7 +45,7 @@ export default function LoginPage() {
         </div>
         <div className="mb-4 w-full ">
           <label
-            className="block text-sm font-bold mb-2 desktop-4k:text-4xl"
+            className="block text-sm font-bold mb-2 desktop-4k:text-4xl font-montserrat"
             htmlFor="lastName"
           >
             Password
