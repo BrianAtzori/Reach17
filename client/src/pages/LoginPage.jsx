@@ -27,7 +27,7 @@ export default function LoginPage() {
             className="mx-auto"
           />
         </div>
-        <div className="mb-4">
+        <div className="mb-4 w-full">
           <label
             className="block text-sm font-bold mb-2 desktop-4k:text-4xl"
             htmlFor="firstName"
@@ -43,7 +43,7 @@ export default function LoginPage() {
             onChange={handleChange}
           />
         </div>
-        <div className="mb-4 ">
+        <div className="mb-4 w-full ">
           <label
             className="block text-sm font-bold mb-2 desktop-4k:text-4xl"
             htmlFor="lastName"

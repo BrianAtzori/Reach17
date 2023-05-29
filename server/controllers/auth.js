@@ -1,5 +1,6 @@
 // ---------- Imports  ----------
 const Student = require("../models/user-student");
+const Teacher = require("../models/user-teacher")
 const { StatusCodes } = require("http-status-codes");
 const { BadRequestError, UnauthenticatedError } = require("../errors");
 
@@ -45,8 +46,50 @@ const registerStudent = async (req, res) => {
   });
 };
 
+// ---------- TEACHER  ----------
+const loginTeacher = async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    throw new BadRequestError(
+      "Please, provide an email and a password to authenticate"
+    );
+  }
+
+  const teacher = await Teacher.findOne({ email });
+
+  if (!teacher) {
+    throw new UnauthenticatedError("Invalid Email");
+  }
+
+  const isPasswordCorrect = await teacher.pwdCheck(password);
+
+  if (!isPasswordCorrect) {
+    throw new UnauthenticatedError("Invalid Password");
+  }
+
+  const token = teacher.JWTGeneration();
+
+  res.status(StatusCodes.OK).json({
+    account: teacher.email,
+    token,
+  });
+};
+
+const registerTeacher = async (req, res) => {
+  console.log(req.body);
+  const newTeacher = await Teacher.create({ ...req.body });
+  const token = newTeacher.JWTGeneration();
+  res.status(StatusCodes.CREATED).json({
+    account: newTeacher.email,
+    token,
+  });
+};
+
 // ---------- Exports  ----------
 module.exports = {
   loginStudent,
   registerStudent,
+  loginTeacher,
+  registerTeacher,
 };
