@@ -1,12 +1,12 @@
 import axios from "axios";
+import { writeToLocalStorage } from "../local-storage";
 
 const newStudentSignUp = async function (newStudentData) {
   console.log(newStudentData);
   axios
     .post(`http://localhost:3154/api/v1/auth/register`, newStudentData)
     .then((res) => {
-      console.log(res);
-      console.log(res.data);
+      writeToLocalStorage(res.data,"studentData")
     });
 };
 
