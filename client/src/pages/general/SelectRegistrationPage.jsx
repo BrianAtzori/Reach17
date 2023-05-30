@@ -12,21 +12,18 @@ export default function SelectRegistrationPage() {
       title: "Studente",
       description: "Registrazione per tutti gli studenti",
       link: "/sign-up",
-      color: "bg-blue-500",
     },
     {
       image: IconTeacher,
       title: "Professori",
       description: "Registrazione per i docenti dei corsi",
       link: "/sign-up-teacher",
-      color: "bg-green-500",
     },
     {
       image: IconUniversity,
       title: "Ateneo",
       description: "Registrazione per accademie, atenei e scuole",
-      link: "",
-      color: "bg-yellow-500",
+      link: "/sign-up-university",
     },
   ];
 

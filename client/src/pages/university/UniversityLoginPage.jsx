@@ -1,25 +1,31 @@
 import React from "react";
 import MyImpactLogo from "../../assets/myimpact-logo.svg";
 import { useState } from "react";
-import { studentLogin } from "../../services/student/external-calls";
+import { universityLogin } from "../../services/university/external-calls";
 
-export default function LoginPage() {
-  const [studentLoginValue, setStudentLogin] = useState({
+export default function TeacherLoginPage() {
+  const [universityLoginValue, setUniversityLogin] = useState({
     email: "",
     password: "",
   });
   const handleChange = (event) => {
-    setStudentLogin({ ...studentLoginValue, [event.target.id]: event.target.value });
+    setUniversityLogin({
+      ...universityLoginValue,
+      [event.target.id]: event.target.value,
+    });
   };
 
   function sendLoginForm(event) {
     event.preventDefault();
-    studentLogin(studentLoginValue);
+    universityLogin(universityLoginValue);
   }
 
   return (
     <div className="p-5 bg-gradient-to-t from-greensea via-jade to-emerald min-h-screen tablet:p-8">
-      <form onSubmit={sendLoginForm} className="flex items-center flex-col justify-center shadow-xl bg-white rounded-lg p-5 max-w-md mx-auto desktop-4k:max-w-6xl desktop-4k:rounded-2xl desktop-4k:p-12">
+      <form
+        onSubmit={sendLoginForm}
+        className="flex items-center flex-col justify-center shadow-xl bg-white rounded-lg p-5 max-w-md mx-auto desktop-4k:max-w-6xl desktop-4k:rounded-2xl desktop-4k:p-12"
+      >
         <div className="text-center">
           <img
             src={MyImpactLogo}
@@ -39,7 +45,7 @@ export default function LoginPage() {
             id="email"
             type="email"
             placeholder="Inserisci la tua mail"
-            value={studentLoginValue.email}
+            value={universityLoginValue.email}
             onChange={handleChange}
           />
         </div>
@@ -55,7 +61,7 @@ export default function LoginPage() {
             id="password"
             type="password"
             placeholder="Inserisci la tua password"
-            value={studentLoginValue.password}
+            value={universityLoginValue.password}
             onChange={handleChange}
           />
         </div>
