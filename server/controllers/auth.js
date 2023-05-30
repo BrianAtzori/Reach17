@@ -1,10 +1,11 @@
 // ---------- Imports  ----------
 const Student = require("../models/user-student");
-const Teacher = require("../models/user-teacher")
+const Teacher = require("../models/user-teacher");
+const University = require("../models/user-university");
 const { StatusCodes } = require("http-status-codes");
 const { BadRequestError, UnauthenticatedError } = require("../errors");
 
-// ---------- STUDENT  ----------
+// ---------- STUDENT ----------
 const loginStudent = async (req, res) => {
   const { email, password } = req.body;
 
@@ -46,7 +47,7 @@ const registerStudent = async (req, res) => {
   });
 };
 
-// ---------- TEACHER  ----------
+// ---------- TEACHER ----------
 const loginTeacher = async (req, res) => {
   const { email, password } = req.body;
 
@@ -86,10 +87,52 @@ const registerTeacher = async (req, res) => {
   });
 };
 
-// ---------- Exports  ----------
+// ---------- UNIVERSITY ----------
+const loginUniversity = async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    throw new BadRequestError(
+      "Please, provide an email and a password to authenticate"
+    );
+  }
+
+  const university = await University.findOne({ email });
+
+  if (!university) {
+    throw new UnauthenticatedError("Invalid Email");
+  }
+
+  const isPasswordCorrect = await university.pwdCheck(password);
+
+  if (!isPasswordCorrect) {
+    throw new UnauthenticatedError("Invalid Password");
+  }
+
+  const token = university.JWTGeneration();
+
+  res.status(StatusCodes.OK).json({
+    account: university.email,
+    token,
+  });
+};
+
+const registerUniversity = async (req, res) => {
+  console.log(req.body);
+  const newUniversity = await University.create({ ...req.body });
+  const token = newUniversity.JWTGeneration();
+  res.status(StatusCodes.CREATED).json({
+    account: newUniversity.email,
+    token,
+  });
+};
+
+// ---------- Exports ----------
 module.exports = {
   loginStudent,
   registerStudent,
   loginTeacher,
   registerTeacher,
+  loginUniversity,
+  registerUniversity,
 };

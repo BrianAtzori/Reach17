@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const UserTeacherSchema = new mongoose.Schema({
+const UserUniversitySchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "You must provide a name to subscribe to My Impact"],
@@ -29,32 +29,32 @@ const UserTeacherSchema = new mongoose.Schema({
     required: [true, "You must provide a Password to subscribe to My Impact"],
     minLength: 6,
   },
-  degrees: {
+  universityName: {
     type: String,
   },
   courses: {
     type: Array,
   },
-  universities: {
+  teachers: {
     type: Array,
   },
 });
 
-UserTeacherSchema.pre("save", async function (next) {
+UserUniversitySchema.pre("save", async function (next) {
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
   next();
 });
 
-UserTeacherSchema.methods.JWTGeneration = function () {
+UserUniversitySchema.methods.JWTGeneration = function () {
   return jwt.sign({ userID: this._id, email: this.email }, process.env.SEC_J, {
     expiresIn: process.env.J_LIFT,
   });
 };
 
-UserTeacherSchema.methods.pwdCheck = async function (attempt) {
-  const matching = await bcrypt.compare(attempt, this.password);
+UserUniversitySchema.methods.pwdCheck = async function (attempt) {
+  const matching = bcrypt.compare(attempt, this.password);
   return matching;
 };
 
-module.exports = mongoose.model("Teacher", UserTeacherSchema);
+module.exports = mongoose.model("University", UserUniversitySchema);
