@@ -1,23 +1,24 @@
-// ---------- Enviroment Setup ----------
+// ---------- ENV SETUP ----------
 require("dotenv").config();
 
-// ---------- Express Setup ----------
+// ---------- EXPRESS SETUP ----------
 const express = require("express");
 const app = express();
 require("express-async-errors");
 app.use(express.json());
 
-// ---------- Middleware Setup ----------
+// ---------- MIDDLEWARE SETUP ----------
 
 // Imports
 const errorHandlerMiddleware = require("./middleware/error-handler");
+const authenticationMiddleware = require("./middleware/authentication");
 
 // Activation
 app.use(errorHandlerMiddleware);
 
-// ---------- Routes Setup ----------
+// ---------- ROUTES SETUP ----------
 
-  //Approfondire problema cors
+//Approfondire problema cors
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -29,8 +30,10 @@ app.use(function (req, res, next) {
 });
 
 const authRouter = require("./routes/auth");
+const courseRouter = require("./routes/courses");
 
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/courses/", authenticationMiddleware, courseRouter);
 
 // ---------- Try Init server and DB or throw error ----------
 const port = process.env.PORT || 3154;

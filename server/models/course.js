@@ -30,6 +30,11 @@ const CourseSchema = new mongoose.Schema({
   registrations: {
     type: Array,
   },
+  createdBy:{
+    type: mongoose.Types.ObjectId,
+    ref:'Owner',
+    required:[true, "Please provide a teacher ID or a university ID"]
+  }
 });
 
 module.exports = mongoose.model("Course", CourseSchema);

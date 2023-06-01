@@ -1,88 +1,95 @@
 const { BadRequestError, NotFoundError } = require("../errors/");
-const Job = require("../models/course");
+const Course = require("../models/course");
 const { StatusCodes } = require("http-status-codes");
 
-const getAllJobs = async (req, res) => {
-  const jobs = await Job.find({ createdBy: req.user.userId }).sort("createdAt");
-  res.status(StatusCodes.OK).json({ jobs, count: jobs.length });
+const getAllCourses = async (req, res) => {
+  const courses = await Course.find({ createdBy: req.user.userId });
+  res.status(StatusCodes.OK).json({ courses });
 };
 
-const getJob = async (req, res) => {
+const getCourse = async (req, res) => {
   const {
     user: { userId },
-    params: { id: jobId },
+    params: { id: courseId },
   } = req;
 
-  const job = await Job.findOne({
-    _id: jobId,
+  const course = await Course.findOne({
+    _id: courseId,
     createdBy: userId,
   });
 
-  if (!job) {
-    throw new NotFoundError("Job not found");
+  if (!course) {
+    throw new NotFoundError("Course not found");
   }
 
   res.status(StatusCodes.OK).json({ job });
 };
 
-const createJob = async (req, res) => {
+const createCourse = async (req, res) => {
   req.body.createdBy = req.user.userId;
-  const job = await Job.create(req.body);
-  res.status(StatusCodes.CREATED).json(job);
+  const course = await Course.create(req.body);
+  res.status(StatusCodes.CREATED).json(course);
 };
 
-const updateJob = async (req, res) => {
+const updateCourse = async (req, res) => {
   const {
-    body: { company, position },
+    body: { title, description, teacher, hours, type },
     user: { userId },
-    params: { id: jobId },
+    params: { id: courseId },
   } = req;
 
-  if (company === "" || position === "") {
-    throw new BadRequestError("Company or position fields cannot be empty");
+  if (
+    title === "" ||
+    description === "" ||
+    teacher === "" ||
+    hours === "" ||
+    type === ""
+  ) {
+    throw new BadRequestError(
+      "Title, description, teacher, hours, type fields cannot be empty"
+    );
   }
 
-  const job = await Job.findByIdAndUpdate(
+  const course = await Course.findByIdAndUpdate(
     {
-      _id: jobId,
+      _id: courseId,
       createdBy: userId,
     },
-    req.body,
     {
-      new: true,
       runValidators: true,
     }
   );
 
-  if (!job) {
-    throw new NotFoundError("Job not found");
+  if (!course) {
+    throw new NotFoundError("Course not found");
   }
 
-  res.status(StatusCodes.OK).json({ job });
+  res.status(StatusCodes.OK).json({ course });
 };
 
-const deleteJob = async (req, res) => {
+const deleteCourse = async (req, res) => {
   const {
-    user: { userId }, // Arriva dal middleware di autenticazione
-    params: { id: jobId },
+    user: { userId },
+    params: { id: courseId },
   } = req;
 
-  const job = await Job.findByIdAndRemove({
-    _id: jobId,
-    createdBy: userId,
-  });
+  const course = await Course.findByIdAndRemove({
+    _id: courseId,
+    createdBy: userId, // E se l'uni vuole rimuovere?
+  })
 
-  if (!job) {
-    throw new NotFoundError("Job not found");
+  if(!course){
+    throw new NotFoundError("Course not found");
   }
 
-  res.status(StatusCodes.OK).json({ job });
+  res.status(StatusCodes.OK).json({course});
+
 };
 
 module.exports = {
-  getAllJobs,
-  createJob,
-  updateJob,
-  deleteJob,
-  getJob,
+  getAllCourses,
+  getCourse,
+  createCourse,
+  updateCourse,
+  deleteCourse,
 };

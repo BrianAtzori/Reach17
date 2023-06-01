@@ -3,15 +3,15 @@ const express = require("express");
 const coursesRouter = express.Router();
 
 const {
-  getAllJobs,
-  getJob,
-  createJob,
-  updateJob,
-  deleteJob,
-} = require("../controllers/jobs");
+  getAllCourses,
+  getCourse,
+  createCourse,
+  updateCourse,
+  deleteCourse,
+} = require("../controllers/courses");
 
-router.route("/").post(createJob).get(getAllJobs);
-router.route("/:id").get(getJob).delete(deleteJob).patch(updateJob);
+coursesRouter.route("/").post(createCourse).get(getAllCourses);
+coursesRouter.route("/:id").get(getCourse).delete(deleteCourse).patch(updateCourse);
 
 // ---------- Exports ----------
 module.exports = coursesRouter;
