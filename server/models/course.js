@@ -32,7 +32,7 @@ const CourseSchema = new mongoose.Schema({
   },
   createdBy:{
     type: mongoose.Types.ObjectId,
-    ref:'Owner',
+    ref:'Teacher',
     required:[true, "Please provide a teacher ID or a university ID"]
   }
 });

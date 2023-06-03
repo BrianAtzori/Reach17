@@ -30,10 +30,10 @@ app.use(function (req, res, next) {
 });
 
 const authRouter = require("./routes/auth");
-const courseRouter = require("./routes/courses");
+const coursesRouter = require("./routes/courses");
 
 app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/courses/", authenticationMiddleware, courseRouter);
+app.use("/api/v1/courses/", authenticationMiddleware, coursesRouter);
 
 // ---------- Try Init server and DB or throw error ----------
 const port = process.env.PORT || 3154;

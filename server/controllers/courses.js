@@ -3,30 +3,30 @@ const Course = require("../models/course");
 const { StatusCodes } = require("http-status-codes");
 
 const getAllCourses = async (req, res) => {
-  const courses = await Course.find({ createdBy: req.user.userId });
+  const courses = await Course.find({ createdBy: req.user.userID });
   res.status(StatusCodes.OK).json({ courses });
 };
 
 const getCourse = async (req, res) => {
   const {
-    user: { userId },
+    user: { userID },
     params: { id: courseId },
   } = req;
 
   const course = await Course.findOne({
     _id: courseId,
-    createdBy: userId,
+    createdBy: userID,
   });
 
   if (!course) {
     throw new NotFoundError("Course not found");
   }
 
-  res.status(StatusCodes.OK).json({ job });
+  res.status(StatusCodes.OK).json({ course });
 };
 
 const createCourse = async (req, res) => {
-  req.body.createdBy = req.user.userId;
+  req.body.createdBy = req.user.userID;
   const course = await Course.create(req.body);
   res.status(StatusCodes.CREATED).json(course);
 };
@@ -34,7 +34,7 @@ const createCourse = async (req, res) => {
 const updateCourse = async (req, res) => {
   const {
     body: { title, description, teacher, hours, type },
-    user: { userId },
+    user: { userID },
     params: { id: courseId },
   } = req;
 
@@ -53,9 +53,11 @@ const updateCourse = async (req, res) => {
   const course = await Course.findByIdAndUpdate(
     {
       _id: courseId,
-      createdBy: userId,
+      createdBy: userID,
     },
+    req.body,
     {
+      new: true,
       runValidators: true,
     }
   );
@@ -69,21 +71,20 @@ const updateCourse = async (req, res) => {
 
 const deleteCourse = async (req, res) => {
   const {
-    user: { userId },
+    user: { userID },
     params: { id: courseId },
   } = req;
 
   const course = await Course.findByIdAndRemove({
     _id: courseId,
-    createdBy: userId, // E se l'uni vuole rimuovere?
-  })
+    createdBy: userID,
+  });
 
-  if(!course){
+  if (!course) {
     throw new NotFoundError("Course not found");
   }
 
-  res.status(StatusCodes.OK).json({course});
-
+  res.status(StatusCodes.OK).json({ course });
 };
 
 module.exports = {
