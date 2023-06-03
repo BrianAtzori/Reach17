@@ -2,12 +2,16 @@ import React from "react";
 import MyImpactLogo from "../../assets/myimpact-logo.svg";
 import { useState } from "react";
 import { teacherLogin } from "../../services/teacher/external-calls";
+import {useNavigate} from 'react-router-dom'
 
 export default function TeacherLoginPage() {
   const [teacherLoginValue, setTeacherLogin] = useState({
     email: "",
     password: "",
   });
+
+  const navigator = useNavigate();
+
   const handleChange = (event) => {
     setTeacherLogin({ ...teacherLoginValue, [event.target.id]: event.target.value });
   };
@@ -15,6 +19,7 @@ export default function TeacherLoginPage() {
   function sendLoginForm(event) {
     event.preventDefault();
     teacherLogin(teacherLoginValue);
+    navigator('/teacher/home/');
   }
 
   return (
@@ -35,7 +40,7 @@ export default function TeacherLoginPage() {
             E-Mail
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+            className=" font-montserrat shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
             id="email"
             type="email"
             placeholder="Inserisci la tua mail"
@@ -51,7 +56,7 @@ export default function TeacherLoginPage() {
             Password
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+            className=" font-montserrat shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
             id="password"
             type="password"
             placeholder="Inserisci la tua password"
