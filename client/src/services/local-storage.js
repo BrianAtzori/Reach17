@@ -2,4 +2,8 @@ const writeToLocalStorage = (item, type) => {
   localStorage.setItem(type, JSON.stringify(item));
 };
 
-export { writeToLocalStorage };
+const readLocalStorage = (type) =>{
+  return localStorage.getItem(type)
+}
+
+export { writeToLocalStorage, readLocalStorage };

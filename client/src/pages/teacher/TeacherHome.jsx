@@ -13,7 +13,7 @@ export default function TeacherHome() {
     {
       title: "Crea un corso",
       description: "La sezione dove potrai creare un nuovo corso",
-      link: "",
+      link: "/teacher/create-course",
     },
     {
       title: "Richiedi associazione corso",
@@ -30,7 +30,7 @@ export default function TeacherHome() {
           return (
             <div
               key={nextId()}
-              className="justify-around w-full h-full desktop-4k:text-4xl flex flex-col items-center justify-center shadow-xl bg-white rounded-lg p-5 max-w-md mx-auto desktop-4k:max-w-6xl desktop-4k:rounded-2xl desktop-4k:p-12"
+              className="justify-around w-full h-full desktop-4k:text-4xl flex flex-col items-center shadow-xl bg-white rounded-lg p-5 max-w-md mx-auto desktop-4k:max-w-6xl desktop-4k:rounded-2xl desktop-4k:p-12"
             >
               <h1 className="font-semibold text-jade font-lora text-xl mb-10 desktop-4k:text-5xl uppercase text-center">
                 {data.title}

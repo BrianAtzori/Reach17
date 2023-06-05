@@ -12,22 +12,26 @@ app.use(express.json());
 // Imports
 const errorHandlerMiddleware = require("./middleware/error-handler");
 const authenticationMiddleware = require("./middleware/authentication");
+const cors = require('cors');
 
 // Activation
 app.use(errorHandlerMiddleware);
+app.use(cors())
 
 // ---------- ROUTES SETUP ----------
 
-//Approfondire problema cors
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Api-Key, X-Requested-With, Content-Type, Accept, Authorization",
+//     "Access-Control-Allow-Credentials",
+//     true
+//   );
+//   next();
+// });
 
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
+//Approfondire problema cors
 
 const authRouter = require("./routes/auth");
 const coursesRouter = require("./routes/courses");
