@@ -11,6 +11,7 @@ import UniversityRegistrationPage from "./pages/university/UniversityRegistratio
 import UniversityLoginPage from "./pages/university/UniversityLoginPage";
 import TeacherHome from "./pages/teacher/TeacherHome";
 import TeacherCreateCourse from "./pages/teacher/modules/TeacherCreateCourse";
+import TeacherCoursesDashboard from "./pages/teacher/modules/TeacherCoursesDashboard";
 
 export default function App() {
   return (
@@ -31,8 +32,9 @@ export default function App() {
         {/* --- TEACHER --- */}
         <Route path="/sign-up-teacher/" element={<TeacherRegistrationPage />} />
         <Route path="/login-teacher/" element={<TeacherLoginPage />} />
-        <Route path="/teacher/home/" element={<TeacherHome></TeacherHome>}/>
-        <Route path="/teacher/create-course" element={<TeacherCreateCourse></TeacherCreateCourse>}></Route>
+        <Route path="/teacher/home/" element={<TeacherHome/>}/>
+        <Route path="/teacher/create-course" element={<TeacherCreateCourse/>}/>
+        <Route path="/teacher/dashboard" element={<TeacherCoursesDashboard/>}/>
 
         {/* --- UNIVERSITY --- */}
         <Route

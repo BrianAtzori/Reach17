@@ -8,7 +8,7 @@ export default function TeacherHome() {
       title: "I tuoi corsi",
       description:
         "Accedi a una dashboard dove visualizzare e modificare i tuoi corsi",
-      link: "",
+      link: "/teacher/dashboard",
     },
     {
       title: "Crea un corso",
