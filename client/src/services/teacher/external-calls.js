@@ -53,9 +53,11 @@ const getAllCourses = async function () {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  axios.get(`http://localhost:3154/api/v1/courses/`, config).then((res) => {
-    return res.data.courses;
-  });
+  return await axios
+    .get(`http://localhost:3154/api/v1/courses/`, config)
+    .then((res) => {
+      return res.data.courses;
+    });
 };
 
 export { newTeacherSignUp, teacherLogin, createCourse, getAllCourses };
