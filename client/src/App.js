@@ -12,6 +12,7 @@ import UniversityLoginPage from "./pages/university/UniversityLoginPage";
 import TeacherHome from "./pages/teacher/TeacherHome";
 import TeacherCreateCourse from "./pages/teacher/modules/TeacherCreateCourse";
 import TeacherCoursesDashboard from "./pages/teacher/modules/TeacherCoursesDashboard";
+import TeacherEditCourse from "./pages/teacher/modules/TeacherEditCourse";
 
 export default function App() {
   return (
@@ -35,6 +36,7 @@ export default function App() {
         <Route path="/teacher/home/" element={<TeacherHome/>}/>
         <Route path="/teacher/create-course" element={<TeacherCreateCourse/>}/>
         <Route path="/teacher/dashboard" element={<TeacherCoursesDashboard/>}/>
+        <Route path="/teacher/edit-course/:id" element={<TeacherEditCourse/>}/>
 
         {/* --- UNIVERSITY --- */}
         <Route

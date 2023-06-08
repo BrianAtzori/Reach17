@@ -60,4 +60,42 @@ const getAllCourses = async function () {
     });
 };
 
-export { newTeacherSignUp, teacherLogin, createCourse, getAllCourses };
+const getCourse = async function (id) {
+  const { token } = JSON.parse(readLocalStorage("teacherData"));
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  return await axios
+    .get(`http://localhost:3154/api/v1/courses/${id}`, config)
+    .then((res) => {
+      return res.data.course;
+    });
+};
+
+const editCourse = async function (editedCourseData, id) {
+  const { token, account } = JSON.parse(readLocalStorage("teacherData"));
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  axios
+    .patch(
+      `http://localhost:3154/api/v1/courses/${id}`,
+      editedCourseData,
+      config
+    )
+    .then((res) => {
+      alert("Corso modificato correttamente!");
+      console.log(res.data);
+    });
+};
+
+export {
+  newTeacherSignUp,
+  teacherLogin,
+  createCourse,
+  getAllCourses,
+  getCourse,
+  editCourse,
+};
