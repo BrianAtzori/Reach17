@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { createCourse } from "../../../services/teacher/external-calls";
+import { useNavigate } from "react-router-dom";
 
 export default function TeacherCreateCourse() {
   const [newCourse, setNewCourse] = useState({
@@ -13,13 +14,17 @@ export default function TeacherCreateCourse() {
     type: "",
   });
 
+  const navigator = useNavigate();
+
   function sendRegistrationForm(event) {
     event.preventDefault();
     createCourse(newCourse);
+    navigator("/teacher/dashboard");
   }
 
   const handleChange = (event) => {
     setNewCourse({ ...newCourse, [event.target.id]: event.target.value });
+
   };
 
   return (

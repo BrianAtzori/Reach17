@@ -9,6 +9,7 @@ const newTeacherSignUp = async function (newTeacherData) {
     .post(`http://localhost:3154/api/v1/auth/register/teacher`, newTeacherData)
     .then((res) => {
       writeToLocalStorage(res.data, "teacherData");
+      alert("Ti sei registrato correttamente a MyImpact, verrai rediretto a breve!")
     });
 };
 
@@ -91,6 +92,24 @@ const editCourse = async function (editedCourseData, id) {
     });
 };
 
+const deleteCourse = async function (id)
+{
+  const { token, account } = JSON.parse(readLocalStorage("teacherData"));
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  axios
+    .delete(
+      `http://localhost:3154/api/v1/courses/${id}`,
+      config
+    )
+    .then((res) => {
+      alert("Corso eliminato correttamente!");
+      console.log(res.data);
+    });
+}
+
 export {
   newTeacherSignUp,
   teacherLogin,
@@ -98,4 +117,5 @@ export {
   getAllCourses,
   getCourse,
   editCourse,
+  deleteCourse
 };

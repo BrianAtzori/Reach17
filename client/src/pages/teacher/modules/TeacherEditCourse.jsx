@@ -4,8 +4,10 @@ import { useState } from "react";
 import {
   getCourse,
   editCourse,
+  deleteCourse
 } from "../../../services/teacher/external-calls";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function TeacherEditCourse() {
   const [editedCourse, setEditedCourse] = useState({
@@ -17,6 +19,8 @@ export default function TeacherEditCourse() {
     hours: "",
     type: "",
   });
+
+  const navigator = useNavigate();
 
   const { id } = useParams();
 
@@ -34,11 +38,17 @@ export default function TeacherEditCourse() {
   function sendRegistrationForm(event) {
     event.preventDefault();
     editCourse(editedCourse, id);
+    navigator("/teacher/dashboard")
   }
 
   const handleChange = (event) => {
     setEditedCourse({ ...editedCourse, [event.target.id]: event.target.value });
   };
+
+  async function courseDeletion(){
+    deleteCourse(id)
+    navigator("/teacher/dashboard")
+  }
 
   return (
     <div className="p-5 bg-gradient-to-t from-greensea via-jade to-emerald h-screen">
@@ -140,11 +150,11 @@ export default function TeacherEditCourse() {
               type="submit"
               value="Modifica corso"
             ></input>
-            <button className=" w-full border-2 text-white bg-red-500 mt-5 font-bold rounded focus:outline-none focus:shadow-outline max-w-md desktop-4k:p-4 desktop-4k:rounded-xl desktop-4k:mt-20 hover:bg-transparent hover:text-red-500 hover:border-2 hover:border-solid">
-              Elimina corso
-            </button>
           </div>
         </form>
+        <button onClick={courseDeletion} className=" w-full border-2 text-white bg-red-500 mt-5 font-bold rounded focus:outline-none focus:shadow-outline max-w-md desktop-4k:p-4 desktop-4k:rounded-xl desktop-4k:mt-20 hover:bg-transparent hover:text-red-500 hover:border-2 hover:border-solid">
+              Elimina corso
+            </button>
       </div>
     </div>
   );

@@ -1,38 +1,49 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { newUniversitySignUp } from "../../services/university/external-calls";
 
 export default function UniversityRegistrationPage() {
+  const navigator = useNavigate();
 
   const [newUniversity, setNewUniversity] = useState({
     name: "",
     surname: "",
     email: "",
     password: "",
-    universityName:"",
-    courses:[""],
-    teachers:[""]
+    universityName: "",
+    courses: [""],
+    teachers: [""],
   });
 
   function sendRegistrationForm(event) {
     event.preventDefault();
     newUniversitySignUp(newUniversity);
+    navigator("/");
   }
 
   const handleChange = (event) => {
-    setNewUniversity({ ...newUniversity, [event.target.id]: event.target.value });
+    setNewUniversity({
+      ...newUniversity,
+      [event.target.id]: event.target.value,
+    });
   };
 
   return (
     <div className="p-5 bg-gradient-to-t from-greensea via-jade to-emerald h-screen">
       <div className="w-full tablet:w-2/3 desktop:w-2/3 desktop-l:w-3/5 desktop-4k:w-3/4 desktop-4k:text-4xl shadow-xl bg-white rounded-lg p-5 max-w-md mx-auto desktop-4k:max-w-6xl desktop-4k:rounded-2xl desktop-4k:p-12">
-        <h1 className="text-2xl font-bold mb-4 desktop-4k:text-4xl font-lora text-gray">Registrazione Atenei</h1>
+        <h1 className="text-2xl font-bold mb-4 desktop-4k:text-4xl font-lora text-gray">
+          Registrazione Atenei
+        </h1>
         <form
           className="pt-6 mb-4 items-start font-montserrat text-gray w-full"
           onSubmit={sendRegistrationForm}
         >
           <div className="mb-4">
-            <label className="block text-sm font-bold mb-2 desktop-4k:text-4xl" htmlFor="firstName">
+            <label
+              className="block text-sm font-bold mb-2 desktop-4k:text-4xl"
+              htmlFor="firstName"
+            >
               Nome
             </label>
             <input
@@ -45,7 +56,10 @@ export default function UniversityRegistrationPage() {
             />
           </div>
           <div className="mb-4 ">
-            <label className="block text-sm font-bold mb-2 desktop-4k:text-4xl" htmlFor="lastName">
+            <label
+              className="block text-sm font-bold mb-2 desktop-4k:text-4xl"
+              htmlFor="lastName"
+            >
               Cognome
             </label>
             <input
@@ -58,7 +72,10 @@ export default function UniversityRegistrationPage() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-bold mb-2 desktop-4k:text-4xl" htmlFor="email">
+            <label
+              className="block text-sm font-bold mb-2 desktop-4k:text-4xl"
+              htmlFor="email"
+            >
               Email
             </label>
             <input
@@ -71,7 +88,10 @@ export default function UniversityRegistrationPage() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-bold mb-2 desktop-4k:text-4xl" htmlFor="password">
+            <label
+              className="block text-sm font-bold mb-2 desktop-4k:text-4xl"
+              htmlFor="password"
+            >
               Password
             </label>
             <input
@@ -84,7 +104,10 @@ export default function UniversityRegistrationPage() {
             />
           </div>
           <div className="mb-4 ">
-            <label className="block text-sm font-bold mb-2 desktop-4k:text-4xl" htmlFor="degrees">
+            <label
+              className="block text-sm font-bold mb-2 desktop-4k:text-4xl"
+              htmlFor="degrees"
+            >
               Nome dell'Ateneo
             </label>
             <input

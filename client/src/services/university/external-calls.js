@@ -7,6 +7,7 @@ const newUniversitySignUp = async function (newUniversityData) {
     .post(`http://localhost:3154/api/v1/auth/register/university`, newUniversityData)
     .then((res) => {
       writeToLocalStorage(res.data,"universityData")
+      alert("Ti sei registrato correttamente a MyImpact, verrai rediretto a breve!")
     });
 };
 

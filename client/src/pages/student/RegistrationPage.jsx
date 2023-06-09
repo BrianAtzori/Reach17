@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { newStudentSignUp } from "../../services/student/external-calls";
 
 //Magari si può semplificare l'HTML
@@ -20,6 +21,8 @@ export default function RegistrationPage() {
     studentCode: "",
   });
 
+  const navigator = useNavigate();
+
   function generateStudentCode() {
     var newStudentCode = "";
     var characters = "8AB5CD1EF2GHIJKLM3N6OPQRS4TUVWXYZ79"; //Numeri da 1 a 9 e lettere da A a Z
@@ -36,6 +39,7 @@ export default function RegistrationPage() {
   function sendRegistrationForm(event) {
     event.preventDefault();
     newStudentSignUp(newStudent);
+    navigator("/");
   }
 
   const handleChange = (event) => {
@@ -45,13 +49,18 @@ export default function RegistrationPage() {
   return (
     <div className="p-5 bg-gradient-to-t from-greensea via-jade to-emerald h-screen">
       <div className="w-full tablet:w-2/3 desktop:w-2/3 desktop-l:w-3/5 desktop-4k:w-3/4 desktop-4k:text-4xl shadow-xl bg-white rounded-lg p-5 max-w-md mx-auto desktop-4k:max-w-6xl desktop-4k:rounded-2xl desktop-4k:p-12">
-        <h1 className="text-2xl font-bold mb-4 desktop-4k:text-4xl font-lora text-gray">Registrazione Studente</h1>
+        <h1 className="text-2xl font-bold mb-4 desktop-4k:text-4xl font-lora text-gray">
+          Registrazione Studente
+        </h1>
         <form
           className="pt-6 mb-4 items-start font-montserrat text-gray w-full"
           onSubmit={sendRegistrationForm}
         >
           <div className="mb-4">
-            <label className="block text-sm font-bold mb-2 desktop-4k:text-4xl" htmlFor="firstName">
+            <label
+              className="block text-sm font-bold mb-2 desktop-4k:text-4xl"
+              htmlFor="firstName"
+            >
               Nome
             </label>
             <input
@@ -64,7 +73,10 @@ export default function RegistrationPage() {
             />
           </div>
           <div className="mb-4 ">
-            <label className="block text-sm font-bold mb-2 desktop-4k:text-4xl" htmlFor="lastName">
+            <label
+              className="block text-sm font-bold mb-2 desktop-4k:text-4xl"
+              htmlFor="lastName"
+            >
               Cognome
             </label>
             <input
@@ -77,7 +89,10 @@ export default function RegistrationPage() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-bold mb-2 desktop-4k:text-4xl" htmlFor="email">
+            <label
+              className="block text-sm font-bold mb-2 desktop-4k:text-4xl"
+              htmlFor="email"
+            >
               Email
             </label>
             <input
@@ -90,7 +105,10 @@ export default function RegistrationPage() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-bold mb-2 desktop-4k:text-4xl" htmlFor="password">
+            <label
+              className="block text-sm font-bold mb-2 desktop-4k:text-4xl"
+              htmlFor="password"
+            >
               Password
             </label>
             <input
@@ -103,7 +121,10 @@ export default function RegistrationPage() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-bold mb-2 desktop-4k:text-4xl" htmlFor="University">
+            <label
+              className="block text-sm font-bold mb-2 desktop-4k:text-4xl"
+              htmlFor="University"
+            >
               Ateneo
             </label>
             <select
