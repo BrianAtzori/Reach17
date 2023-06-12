@@ -13,6 +13,10 @@ import TeacherHome from "./pages/teacher/TeacherHome";
 import TeacherCreateCourse from "./pages/teacher/modules/TeacherCreateCourse";
 import TeacherCoursesDashboard from "./pages/teacher/modules/TeacherCoursesDashboard";
 import TeacherEditCourse from "./pages/teacher/modules/TeacherEditCourse";
+import UniversityHome from "./pages/university/UniversityHome";
+import UniversityCreateCourse from "./pages/university/modules/UniversityCreateCourse";
+import UniversityCourseDashboard from "./pages/university/modules/UniversityCourseDashboard";
+import UniversityEditCourse from "./pages/university/modules/UniversityEditCourse";
 
 export default function App() {
   return (
@@ -39,11 +43,13 @@ export default function App() {
         <Route path="/teacher/edit-course/:id" element={<TeacherEditCourse/>}/>
 
         {/* --- UNIVERSITY --- */}
-        <Route
-          path="/sign-up-university/"
-          element={<UniversityRegistrationPage />}
-        />
+        <Route path="/sign-up-university/" element={<UniversityRegistrationPage />}/>
         <Route path="/login-university/" element={<UniversityLoginPage />} />
+        <Route path="/university/home/" element={<UniversityHome/>}/>
+        <Route path="/university/create-course" element={<UniversityCreateCourse/>}/>
+        <Route path="/university/dashboard" element={<UniversityCourseDashboard/>}/>
+        <Route path="/university/edit-course/:id" element={<UniversityEditCourse />}/> 
+        
       </Routes>
     </div>
   );

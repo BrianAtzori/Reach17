@@ -2,12 +2,16 @@ import React from "react";
 import MyImpactLogo from "../../assets/myimpact-logo.svg";
 import { useState } from "react";
 import { universityLogin } from "../../services/university/external-calls";
+import {useNavigate} from 'react-router-dom'
 
 export default function TeacherLoginPage() {
   const [universityLoginValue, setUniversityLogin] = useState({
     email: "",
     password: "",
   });
+
+  const navigator = useNavigate();
+
   const handleChange = (event) => {
     setUniversityLogin({
       ...universityLoginValue,
@@ -18,6 +22,7 @@ export default function TeacherLoginPage() {
   function sendLoginForm(event) {
     event.preventDefault();
     universityLogin(universityLoginValue);
+    navigator('/university/home/');
   }
 
   return (
