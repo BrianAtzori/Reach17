@@ -18,5 +18,4 @@ authRouter.post("/login/university", loginUniversity);
 authRouter.post("/register/university",registerUniversity);
 
 // ---------- Exports ----------
-
 module.exports = authRouter;

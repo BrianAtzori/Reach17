@@ -8,7 +8,6 @@ require("express-async-errors");
 app.use(express.json());
 
 // ---------- MIDDLEWARE SETUP ----------
-
 // Imports
 const errorHandlerMiddleware = require("./middleware/error-handler");
 const authenticationMiddleware = require("./middleware/authentication");
@@ -35,9 +34,11 @@ app.use(cors())
 
 const authRouter = require("./routes/auth");
 const coursesRouter = require("./routes/courses");
+const { utilitiesRouter } = require("./routes/utilities");
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/courses/", authenticationMiddleware, coursesRouter);
+app.use("/api/v1/utilities", authenticationMiddleware, utilitiesRouter);
 
 // ---------- Try Init server and DB or throw error ----------
 const port = process.env.PORT || 3154;
