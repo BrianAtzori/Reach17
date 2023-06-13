@@ -1,7 +1,8 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createCourse } from "../../../services/teacher/external-calls";
 import { useNavigate } from "react-router-dom";
+import { getAllUsersByCategory } from "../../../services/utilities/external-calls";
 
 export default function TeacherCreateCourse() {
   const [newCourse, setNewCourse] = useState({
@@ -14,6 +15,20 @@ export default function TeacherCreateCourse() {
     type: "",
   });
 
+  const [universities, setUniversities] = useState([]);
+
+  useEffect(() => {
+    retrieveUniversities();
+  }, []);
+
+  async function retrieveUniversities() {
+    const { universities } = await getAllUsersByCategory(
+      "universityData",
+      "universities"
+    );
+    setUniversities(universities);
+  }
+
   const navigator = useNavigate();
 
   function sendRegistrationForm(event) {
@@ -24,7 +39,6 @@ export default function TeacherCreateCourse() {
 
   const handleChange = (event) => {
     setNewCourse({ ...newCourse, [event.target.id]: event.target.value });
-
   };
 
   return (
@@ -81,10 +95,16 @@ export default function TeacherCreateCourse() {
               name="universties"
               onChange={handleChange}
             >
-              <option value="">Seleziona il primo Ateneo per il tuo corso</option>
-              <option value="Università di Torino">Università di Torino</option>
-              <option value="Università di Roma">Università di Roma</option>
-              <option value="Università di Varese">Università di Varese</option>
+              <option value="">
+                Seleziona il primo Ateneo per il tuo corso
+              </option>
+              {universities.map((university) => {
+                return (
+                  <option value={university.universityName}>
+                    {university.universityName}
+                  </option>
+                );
+              })}
             </select>
           </div>
           <div className="mb-4">
