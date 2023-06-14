@@ -1,7 +1,12 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createCourse } from "../../../services/university/external-calls";
 import { useNavigate } from "react-router-dom";
+import {
+  getAllUsersByCategory,
+  getSingleItemByStoredID,
+} from "../../../services/utilities/external-calls";
+import nextId from "react-id-generator";
 
 export default function UniversityCreateCourse() {
   const [newCourse, setNewCourse] = useState({
@@ -14,7 +19,31 @@ export default function UniversityCreateCourse() {
     type: "",
   });
 
+  const [teachersList, setTeachersList] = useState([]);
+  const [retrievedUniversity, setretrievedUniversity] = useState([]);
+
   const navigator = useNavigate();
+
+  useEffect(() => {
+    retrieveTeachers();
+    retrieveSingleUniversity();
+  }, []);
+
+  async function retrieveTeachers() {
+    const { teachers } = await getAllUsersByCategory(
+      "universityData",
+      "teachers"
+    );
+    setTeachersList(teachers);
+  }
+
+  async function retrieveSingleUniversity() {
+    const { university } = await getSingleItemByStoredID(
+      "universityData",
+      "universities"
+    );
+    setretrievedUniversity(university[0]);
+  }
 
   function sendRegistrationForm(event) {
     event.preventDefault();
@@ -80,12 +109,9 @@ export default function UniversityCreateCourse() {
               name="universties"
               onChange={handleChange}
             >
-              <option value="">
-               DA FARE GET DELL'UNI PER CREARLA DI DEFAULT
+              <option value={retrievedUniversity._Id}>
+                {retrievedUniversity.universityName}
               </option>
-              <option value="Università di Torino">Università di Torino</option>
-              <option value="Università di Roma">Università di Roma</option>
-              <option value="Università di Varese">Università di Varese</option>
             </select>
           </div>
           <div className="mb-4">
@@ -95,18 +121,20 @@ export default function UniversityCreateCourse() {
             >
               Insegnante
             </label>
-          <select
+            <select
               className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
               id="teacher"
               name="teacher"
               onChange={handleChange}
             >
-              <option value="">
-               DA FARE GET DEI TEACHER PER SELEZIONARLO
-              </option>
-              <option value="Alfredo">Alfredo</option>
-              <option value="Marco">Marco</option>
-              <option value="Gino">Gino</option>
+              <option value="">Seleziona l'insegnate del tuo corso</option>
+              {teachersList.map((teacher) => {
+                return (
+                  <option key={nextId()} value={teacher._id}>
+                    {teacher.name + " " + teacher.surname}
+                  </option>
+                );
+              })}
             </select>
           </div>
           <div className="mb-4">

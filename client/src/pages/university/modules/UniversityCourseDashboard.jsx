@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { getAllCourses } from "../../../services/university/external-calls";
 import { Link } from "react-router-dom";
+import { getSingleItemByID } from "../../../services/utilities/external-calls";
 
 export default function UniversityCourseDashboard() {
   const [courses, setCourses] = useState([]);
@@ -16,12 +17,28 @@ export default function UniversityCourseDashboard() {
     let coursesList = [];
     coursesList = await getAllCourses();
 
+    coursesList.forEach(async function (course) {
+      course.teacher = await retrieveTeacher(course.teacher);
+    });
+
     let index = 0;
     coursesList.forEach((element) => {
       element.number = index++;
     });
 
+    console.log(coursesList)
+
     setCourses(coursesList);
+  }
+
+  async function retrieveTeacher(id) {
+    const { teacher } = await getSingleItemByID(
+      "universityData",
+      "teachers",
+      id
+    );
+
+    return await teacher[0].name + " " + teacher[0].surname;
   }
 
   return (

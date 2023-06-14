@@ -33,6 +33,7 @@ const loginStudent = async (req, res) => {
     account: student.email,
     studentCode: student.studentCode,
     token,
+    id: university._id
   });
 };
 
@@ -74,6 +75,7 @@ const loginTeacher = async (req, res) => {
   res.status(StatusCodes.OK).json({
     account: teacher.email,
     token,
+    id: university._id
   });
 };
 
@@ -114,6 +116,7 @@ const loginUniversity = async (req, res) => {
   res.status(StatusCodes.OK).json({
     account: university.email,
     token,
+    id: university._id
   });
 };
 

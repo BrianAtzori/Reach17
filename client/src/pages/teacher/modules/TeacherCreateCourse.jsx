@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { createCourse } from "../../../services/teacher/external-calls";
 import { useNavigate } from "react-router-dom";
 import { getAllUsersByCategory } from "../../../services/utilities/external-calls";
+import nextId from "react-id-generator";
 
 export default function TeacherCreateCourse() {
   const [newCourse, setNewCourse] = useState({
@@ -15,7 +16,7 @@ export default function TeacherCreateCourse() {
     type: "",
   });
 
-  const [universities, setUniversities] = useState([]);
+  const [universitiesList, setUniversitiesList] = useState([]);
 
   useEffect(() => {
     retrieveUniversities();
@@ -23,10 +24,10 @@ export default function TeacherCreateCourse() {
 
   async function retrieveUniversities() {
     const { universities } = await getAllUsersByCategory(
-      "universityData",
+      "teacherData",
       "universities"
     );
-    setUniversities(universities);
+    setUniversitiesList(universities);
   }
 
   const navigator = useNavigate();
@@ -98,9 +99,9 @@ export default function TeacherCreateCourse() {
               <option value="">
                 Seleziona il primo Ateneo per il tuo corso
               </option>
-              {universities.map((university) => {
+              {universitiesList.map((university) => {
                 return (
-                  <option value={university.universityName}>
+                  <option key={nextId()} value={university.universityName}>
                     {university.universityName}
                   </option>
                 );
