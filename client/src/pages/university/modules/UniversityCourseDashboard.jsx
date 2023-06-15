@@ -17,18 +17,31 @@ export default function UniversityCourseDashboard() {
     let coursesList = [];
     coursesList = await getAllCourses();
 
-    coursesList.forEach(async function (course) {
-      course.teacher = await retrieveTeacher(course.teacher);
-    });
-
     let index = 0;
-    coursesList.forEach((element) => {
+    coursesList.forEach(async function (element) {
       element.number = index++;
     });
 
-    console.log(coursesList)
+    getTeachersData(coursesList);
+  }
 
-    setCourses(coursesList);
+  async function getTeachersData(coursesList) {
+    let formattedCourseData = [];
+
+    for (let i = 0; i < coursesList.length; i++) {
+      formattedCourseData.push(coursesList[i]);
+    }
+
+    for (let i = 0; i < formattedCourseData.length; i++) {
+      await retrieveTeacher(formattedCourseData[i].teacher).then(
+        (teacherRetrieved) => {
+          formattedCourseData[i].teacher = teacherRetrieved;
+          return formattedCourseData[i];
+        }
+      );
+    }
+
+    setCourses(formattedCourseData);
   }
 
   async function retrieveTeacher(id) {
@@ -38,7 +51,9 @@ export default function UniversityCourseDashboard() {
       id
     );
 
-    return await teacher[0].name + " " + teacher[0].surname;
+    let teacherFullName = await (teacher[0].name + " " + teacher[0].surname);
+
+    return teacherFullName;
   }
 
   return (
