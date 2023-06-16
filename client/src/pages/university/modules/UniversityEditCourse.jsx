@@ -8,6 +8,11 @@ import {
 } from "../../../services/university/external-calls";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import nextId from "react-id-generator";
+import {
+  getSingleItemByID,
+  getAllUsersByCategory,
+} from "../../../services/utilities/external-calls";
 
 export default function UniversityEditCourse() {
   const [editedCourse, setEditedCourse] = useState({
@@ -20,19 +25,66 @@ export default function UniversityEditCourse() {
     type: "",
   });
 
+  const [selectedCourse, setSelectedCourse] = useState({
+    title: "",
+    description: "",
+    teacher: "",
+    universities: "",
+    status: "",
+    hours: "",
+    type: "",
+  });
+
+  const [teachersList, setTeachersList] = useState([]);
+
   const navigator = useNavigate();
 
   const { id } = useParams();
 
   useEffect(() => {
     retrieveCourseData(id);
+    retrieveTeachers();
   }, []);
 
   async function retrieveCourseData(courseID) {
-    let selectedCourseData = {};
-    selectedCourseData = await getCourse(courseID);
-    console.log(selectedCourseData);
-    setEditedCourse(selectedCourseData);
+    let retrievedCourse = await getCourse(courseID)
+    setSelectedCourse(retrievedCourse);
+    console.log(selectedCourse);
+    getTeachersData(selectedCourse);
+  }
+
+  async function getTeachersData(course) {
+    let formattedCourse = course;
+
+    console.log(formattedCourse)
+
+    await retrieveTeacher(course.teacher).then((teacherRetrieved) => {
+      formattedCourse.teacher = teacherRetrieved;
+      return formattedCourse;
+    });
+    console.log(formattedCourse)
+    
+    setEditedCourse(formattedCourse);
+  }
+
+  async function retrieveTeacher(id) {
+    const { teacher } = await getSingleItemByID(
+      "universityData",
+      "teachers",
+      id
+    );
+
+    let teacherFullName = await (teacher[0].name + " " + teacher[0].surname);
+
+    return teacherFullName;
+  }
+
+  async function retrieveTeachers() {
+    const { teachers } = await getAllUsersByCategory(
+      "universityData",
+      "teachers"
+    );
+    setTeachersList(teachers);
   }
 
   function sendRegistrationForm(event) {
@@ -49,6 +101,7 @@ export default function UniversityEditCourse() {
     deleteCourse(id);
     navigator("/university/dashboard");
   }
+
   return (
     <div className="p-5 bg-gradient-to-t from-greensea via-jade to-emerald h-screen">
       <div className="w-full tablet:w-2/3 desktop:w-2/3 desktop-l:w-3/5 desktop-4k:w-3/4 desktop-4k:text-4xl shadow-xl bg-white rounded-lg p-5 max-w-md mx-auto desktop-4k:max-w-6xl desktop-4k:rounded-2xl desktop-4k:p-12">
@@ -95,18 +148,24 @@ export default function UniversityEditCourse() {
               className="block text-sm font-bold mb-2 desktop-4k:text-4xl"
               htmlFor="University"
             >
-              Ateneo
+              Insegnante
             </label>
             <select
               className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
               id="universities"
-              name="universties"
+              name="universities"
               onChange={handleChange}
             >
-              <option value="">CAMBIARE IN TEACHER</option>
-              <option value="Università di Torino">Università di Torino</option>
-              <option value="Università di Roma">Università di Roma</option>
-              <option value="Università di Varese">Università di Varese</option>
+              <option value={selectedCourse.teacher}>
+                {editedCourse.teacher}
+              </option>
+              {teachersList.map((teacher) => {
+                return (
+                  <option key={nextId()} value={teacher._id}>
+                    {teacher.name + " " + teacher.surname}
+                  </option>
+                );
+              })}
             </select>
           </div>
           <div className="mb-4">
@@ -138,7 +197,7 @@ export default function UniversityEditCourse() {
               name="type"
               onChange={handleChange}
             >
-              <option value="">Seleziona la tipologia di corso</option>
+              <option value={editedCourse.type}>{editedCourse.type}</option>
               <option value="Teorico">Teorico</option>
               <option value="Pratico">Pratico</option>
             </select>
