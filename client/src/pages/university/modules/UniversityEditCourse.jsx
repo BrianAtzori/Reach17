@@ -25,16 +25,6 @@ export default function UniversityEditCourse() {
     type: "",
   });
 
-  const [selectedCourse, setSelectedCourse] = useState({
-    title: "",
-    description: "",
-    teacher: "",
-    universities: "",
-    status: "",
-    hours: "",
-    type: "",
-  });
-
   const [teachersList, setTeachersList] = useState([]);
 
   const navigator = useNavigate();
@@ -47,44 +37,34 @@ export default function UniversityEditCourse() {
   }, []);
 
   async function retrieveCourseData(courseID) {
-    let retrievedCourse = await getCourse(courseID)
-    setSelectedCourse(retrievedCourse);
-    console.log(selectedCourse);
-    getTeachersData(selectedCourse);
-  }
-
-  async function getTeachersData(course) {
-    let formattedCourse = course;
-
-    console.log(formattedCourse)
-
-    await retrieveTeacher(course.teacher).then((teacherRetrieved) => {
-      formattedCourse.teacher = teacherRetrieved;
-      return formattedCourse;
-    });
-    console.log(formattedCourse)
-    
-    setEditedCourse(formattedCourse);
-  }
-
-  async function retrieveTeacher(id) {
-    const { teacher } = await getSingleItemByID(
-      "universityData",
-      "teachers",
-      id
-    );
-
-    let teacherFullName = await (teacher[0].name + " " + teacher[0].surname);
-
-    return teacherFullName;
+    let selectedCourseData = {};
+    selectedCourseData = await getCourse(courseID);
+    console.log(selectedCourseData);
+    setEditedCourse(selectedCourseData);
   }
 
   async function retrieveTeachers() {
+    let orderedTeachers = []
+
     const { teachers } = await getAllUsersByCategory(
       "universityData",
       "teachers"
     );
-    setTeachersList(teachers);
+
+    orderedTeachers = teachers.map((teacher)=>{
+
+      //Come sistemo le posizioni? Lodash?
+
+      if(teacher._id == editedCourse.teacher){
+        
+      }
+      else{
+
+      }
+    })  
+    
+    setTeachersList(orderedTeachers);
+
   }
 
   function sendRegistrationForm(event) {
@@ -152,13 +132,13 @@ export default function UniversityEditCourse() {
             </label>
             <select
               className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="universities"
-              name="universities"
+              id="teacher"
+              name="teacher"
               onChange={handleChange}
             >
-              <option value={selectedCourse.teacher}>
+              {/* <option value={selectedCourse.teacher}>
                 {editedCourse.teacher}
-              </option>
+              </option> */}
               {teachersList.map((teacher) => {
                 return (
                   <option key={nextId()} value={teacher._id}>

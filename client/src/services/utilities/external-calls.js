@@ -36,7 +36,7 @@ const getSingleItemByID = async function (userData, category, givenID) {
       config
     )
     .then((res) => {
-      return res.data;
+       return res.data;
     });
 };
 
