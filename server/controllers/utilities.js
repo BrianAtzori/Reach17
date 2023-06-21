@@ -27,6 +27,8 @@ const getTeacher = async (req, res) => {
   const {
     params: { id: teacherID },
   } = req;
+  console.log("QUI:") 
+  console.log(teacherID)
 
   const teacher = await Teacher.find({ _id: teacherID });
 
@@ -45,7 +47,7 @@ const getUniversity = async (req, res) => {
   const university = await University.find({ _id: universityID });
 
   if (!university) {
-    throw new NotFoundError("Teacher not found");
+    throw new NotFoundError("University not found");
   }
 
   res.status(StatusCodes.OK).json({ university });

@@ -30,14 +30,15 @@ const getSingleItemByID = async function (userData, category, givenID) {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
+
   return await axios
     .get(
       `http://localhost:3154/api/v1/utilities/${category}/${givenID}`,
       config
     )
     .then((res) => {
-       return res.data;
+      return res.data;
     });
 };
 
-export { getAllUsersByCategory, getSingleItemByStoredID,getSingleItemByID };
+export { getAllUsersByCategory, getSingleItemByStoredID, getSingleItemByID };

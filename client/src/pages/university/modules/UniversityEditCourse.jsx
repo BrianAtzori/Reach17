@@ -27,44 +27,59 @@ export default function UniversityEditCourse() {
 
   const [teachersList, setTeachersList] = useState([]);
 
+  const [selectedTeacher, setSelectedTeacher] = useState({
+    _id: "",
+    name: "",
+    surname: "",
+    email: "",
+    password: "",
+    degrees: "",
+    courses: [""],
+    universities: [""],
+  });
+
   const navigator = useNavigate();
 
   const { id } = useParams();
 
   useEffect(() => {
-    retrieveCourseData(id);
+    retrieveData(id);
     retrieveTeachers();
   }, []);
 
-  async function retrieveCourseData(courseID) {
+  async function retrieveData(courseID) {
     let selectedCourseData = {};
+
+    let retrievedTeacher = {};
+
     selectedCourseData = await getCourse(courseID);
-    console.log(selectedCourseData);
+
+    retrievedTeacher = await retrieveTeacher(selectedCourseData.teacher);
+
+    setSelectedTeacher(retrievedTeacher.teacher[0]);
+
+    console.log(selectedTeacher);
+
     setEditedCourse(selectedCourseData);
   }
 
-  async function retrieveTeachers() {
-    let orderedTeachers = []
+  async function retrieveTeacher(teacherID) {
+    const teacher = await getSingleItemByID(
+      "universityData",
+      "teachers",
+      teacherID
+    );
 
+    return teacher;
+  }
+
+  async function retrieveTeachers() {
     const { teachers } = await getAllUsersByCategory(
       "universityData",
       "teachers"
     );
 
-    orderedTeachers = teachers.map((teacher)=>{
-
-      //Come sistemo le posizioni? Lodash?
-
-      if(teacher._id == editedCourse.teacher){
-        
-      }
-      else{
-
-      }
-    })  
-    
-    setTeachersList(orderedTeachers);
-
+    setTeachersList(teachers);
   }
 
   function sendRegistrationForm(event) {
@@ -136,9 +151,9 @@ export default function UniversityEditCourse() {
               name="teacher"
               onChange={handleChange}
             >
-              {/* <option value={selectedCourse.teacher}>
-                {editedCourse.teacher}
-              </option> */}
+              <option value={selectedTeacher.id}>
+                {selectedTeacher.name + " " + selectedTeacher.surname}
+              </option>
               {teachersList.map((teacher) => {
                 return (
                   <option key={nextId()} value={teacher._id}>
