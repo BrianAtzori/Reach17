@@ -25,17 +25,10 @@ const teacherLogin = async function (teacherData) {
 //--- COURSES ---
 
 const createCourse = async function (courseData) {
-  // console.log(courseData);
 
-  // console.log(JSON.parse(readLocalStorage("teacherData")))
+  const { token,id } = JSON.parse(readLocalStorage("teacherData"));
 
-  const { token, account } = JSON.parse(readLocalStorage("teacherData"));
-
-  courseData.teacher = account;
-
-  // console.log(token);
-
-  // console.log(courseData)
+  courseData.teacher = id;
 
   const config = {
     headers: { Authorization: `Bearer ${token}` },

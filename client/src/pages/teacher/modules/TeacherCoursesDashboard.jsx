@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { getAllCourses } from "../../../services/teacher/external-calls";
 import { Link } from "react-router-dom";
+import { getSingleItemByID } from "../../../services/utilities/external-calls";
 
 export default function TeacherCoursesDashboard() {
   const [courses, setCourses] = useState([]);
@@ -21,7 +22,36 @@ export default function TeacherCoursesDashboard() {
       element.number = index++;
     });
 
-    setCourses(coursesList);
+    getUniversitiesData(coursesList);
+  }
+
+  async function getUniversitiesData(coursesList) {
+    let formattedCourseData = [];
+
+    for (let i = 0; i < coursesList.length; i++) {
+      formattedCourseData.push(coursesList[i]);
+    }
+
+    for (let i = 0; i < formattedCourseData.length; i++) {
+      await retrieveUniversity(formattedCourseData[i].universities[0]).then(
+        (universityRetrieved) => {
+          formattedCourseData[i].universities[0] = universityRetrieved;
+          return formattedCourseData[i];
+        }
+      );
+    }
+
+    setCourses(formattedCourseData);
+  }
+
+  async function retrieveUniversity(id) {
+    const { university } = await getSingleItemByID(
+      "teacherData",
+      "universities",
+      id
+    );
+
+    return university[0].universityName;
   }
 
   return (
@@ -64,9 +94,9 @@ export default function TeacherCoursesDashboard() {
                 </td>
                 <td className="p-2 desktop-4k:px-10">
                   <Link to={`/teacher/edit-course/${course._id}`}>
-                  <button className="w-full border-2 bg-greensea focus:outline-none focus:shadow-outline max-w-md rounded-md p-2 font-montserrat font-semibold text-white hover:bg-transparent hover:text-emerald hover:border-2 hover:border-solid desktop-4k:p-5 desktop-4k:rounded-2xl">
-                    Modifica
-                  </button>
+                    <button className="w-full border-2 bg-greensea focus:outline-none focus:shadow-outline max-w-md rounded-md p-2 font-montserrat font-semibold text-white hover:bg-transparent hover:text-emerald hover:border-2 hover:border-solid desktop-4k:p-5 desktop-4k:rounded-2xl">
+                      Modifica
+                    </button>
                   </Link>
                 </td>
               </tr>

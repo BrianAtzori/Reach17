@@ -75,7 +75,7 @@ const loginTeacher = async (req, res) => {
   res.status(StatusCodes.OK).json({
     account: teacher.email,
     token,
-    id: university._id
+    id: teacher._id
   });
 };
 

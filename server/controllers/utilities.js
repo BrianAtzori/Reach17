@@ -27,8 +27,6 @@ const getTeacher = async (req, res) => {
   const {
     params: { id: teacherID },
   } = req;
-  console.log("QUI:") 
-  console.log(teacherID)
 
   const teacher = await Teacher.find({ _id: teacherID });
 

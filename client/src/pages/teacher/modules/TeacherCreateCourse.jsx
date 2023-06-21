@@ -11,7 +11,7 @@ export default function TeacherCreateCourse() {
     description: "",
     teacher: "",
     universities: "",
-    status: "",
+    status: "In attesa",
     hours: "",
     type: "",
   });
@@ -95,13 +95,11 @@ export default function TeacherCreateCourse() {
               id="universities"
               name="universties"
               onChange={handleChange}
+              placeholder="Seleziona il primo Ateneo per il tuo corso"
             >
-              <option value="">
-                Seleziona il primo Ateneo per il tuo corso
-              </option>
               {universitiesList.map((university) => {
                 return (
-                  <option key={nextId()} value={university.universityName}>
+                  <option key={nextId()} value={university._id}>
                     {university.universityName}
                   </option>
                 );
@@ -136,8 +134,8 @@ export default function TeacherCreateCourse() {
               id="type"
               name="type"
               onChange={handleChange}
+              placeholder="Seleziona la tipologia di corso"
             >
-              <option value="">Seleziona la tipologia di corso</option>
               <option value="Teorico">Teorico</option>
               <option value="Pratico">Pratico</option>
             </select>
