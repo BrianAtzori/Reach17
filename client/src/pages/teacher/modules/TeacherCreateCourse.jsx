@@ -39,6 +39,7 @@ export default function TeacherCreateCourse() {
   }
 
   const handleChange = (event) => {
+
     setNewCourse({ ...newCourse, [event.target.id]: event.target.value });
   };
 
@@ -96,7 +97,11 @@ export default function TeacherCreateCourse() {
               name="universties"
               onChange={handleChange}
               placeholder="Seleziona il primo Ateneo per il tuo corso"
+              value={newCourse.universities}
             >
+              <option value="">
+                Seleziona il primo Ateneo per il tuo corso
+              </option>
               {universitiesList.map((university) => {
                 return (
                   <option key={nextId()} value={university._id}>
@@ -135,7 +140,9 @@ export default function TeacherCreateCourse() {
               name="type"
               onChange={handleChange}
               placeholder="Seleziona la tipologia di corso"
+              value={newCourse.type}
             >
+              <option value="">Seleziona la tipologia di corso</option>
               <option value="Teorico">Teorico</option>
               <option value="Pratico">Pratico</option>
             </select>

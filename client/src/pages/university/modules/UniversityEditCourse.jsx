@@ -141,7 +141,7 @@ export default function UniversityEditCourse() {
           <div className="mb-4">
             <label
               className="block text-sm font-bold mb-2 desktop-4k:text-4xl"
-              htmlFor="University"
+              htmlFor="Teacher"
             >
               Insegnante
             </label>

@@ -4,12 +4,18 @@ import { useState } from "react";
 import {
   getCourse,
   editCourse,
-  deleteCourse
+  deleteCourse,
 } from "../../../services/teacher/external-calls";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  getSingleItemByID,
+  getAllUsersByCategory,
+} from "../../../services/utilities/external-calls";
+import nextId from "react-id-generator";
 
 export default function TeacherEditCourse() {
+
   const [editedCourse, setEditedCourse] = useState({
     title: "",
     description: "",
@@ -20,34 +26,77 @@ export default function TeacherEditCourse() {
     type: "",
   });
 
+  const [universitiesList, setUniversitiesList] = useState([]);
+
+  // const [selectedUniversity, setSelectedUniversity] = useState({
+  //   _id: "",
+  //   name: "",
+  //   surname: "",
+  //   email: "",
+  //   universityName: "",
+  //   courses: [],
+  //   teachers: [],
+  // });
+
+  const [selectedUniversities, setSelectedUniversities] = useState([]);
+
   const navigator = useNavigate();
 
   const { id } = useParams();
 
   useEffect(() => {
-    retrieveCourseData(id);
+    retrieveData(id);
+    retrieveUniversities();
   }, []);
 
-  async function retrieveCourseData(courseID) {
+  async function retrieveData(courseID) {
     let selectedCourseData = {};
+
+    let retrievedUniversities = [];
+
     selectedCourseData = await getCourse(courseID);
-    console.log(selectedCourseData);
+
+    selectedCourseData.universities.forEach(async (university) => {
+      let retrievedData = await retrieveUniversity(university);
+      retrievedUniversities.push(retrievedData.university[0]);
+      setSelectedUniversities(retrievedUniversities);
+    });
+
     setEditedCourse(selectedCourseData);
+  }
+
+  async function retrieveUniversity(universityID) {
+    const university = await getSingleItemByID(
+      "teacherData",
+      "universities",
+      universityID
+    );
+
+    return university;
+  }
+
+  async function retrieveUniversities() {
+    const { universities } = await getAllUsersByCategory(
+      "universityData",
+      "universities"
+    );
+
+    setUniversitiesList(universities);
   }
 
   function sendRegistrationForm(event) {
     event.preventDefault();
     editCourse(editedCourse, id);
-    navigator("/teacher/dashboard")
+    navigator("/teacher/dashboard");
   }
 
   const handleChange = (event) => {
     setEditedCourse({ ...editedCourse, [event.target.id]: event.target.value });
   };
 
-  async function courseDeletion(){
-    deleteCourse(id)
-    navigator("/teacher/dashboard")
+  async function courseDeletion() {
+    deleteCourse(id);
+    navigator("/teacher/dashboard");
   }
 
   return (
@@ -96,19 +145,46 @@ export default function TeacherEditCourse() {
               className="block text-sm font-bold mb-2 desktop-4k:text-4xl"
               htmlFor="University"
             >
-              Ateneo
+              Atenei
             </label>
-            <select
+            {/* <select
               className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
               id="universities"
-              name="universties"
+              name="universities"
               onChange={handleChange}
+              value={editedCourse.universities}
             >
-              <option value="">Modifica l'Ateneo per il tuo corso</option>
-              <option value="Università di Torino">Università di Torino</option>
-              <option value="Università di Roma">Università di Roma</option>
-              <option value="Università di Varese">Università di Varese</option>
-            </select>
+              <option value={selectedUniversities.id}>
+                {selectedUniversities.universityName}
+              </option>
+              {universitiesList.map((university) => {
+                return (
+                  <option key={nextId()} value={university._id}>
+                    {university.universityName}
+                  </option>
+                );
+              })}
+            </select> */}
+            {selectedUniversities.map((selectedUniversity) => {
+              return (
+                <select
+                  className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+                  id="universities"
+                  name="universities"
+                  onChange={handleChange}
+                  key={nextId()}
+                  value={selectedUniversity.universityName}
+                >
+                  {universitiesList.map((university) => {
+                    return (
+                      <option key={nextId()} value={university._id}>
+                        {university.universityName}
+                      </option>
+                    );
+                  })}
+                </select>
+              );
+            })}
           </div>
           <div className="mb-4">
             <label
@@ -138,6 +214,7 @@ export default function TeacherEditCourse() {
               id="type"
               name="type"
               onChange={handleChange}
+              value={editedCourse.type}
             >
               <option value="">Seleziona la tipologia di corso</option>
               <option value="Teorico">Teorico</option>
@@ -152,9 +229,12 @@ export default function TeacherEditCourse() {
             ></input>
           </div>
         </form>
-        <button onClick={courseDeletion} className=" w-full border-2 text-white bg-red-500 mt-5 font-bold rounded focus:outline-none focus:shadow-outline max-w-md desktop-4k:p-4 desktop-4k:rounded-xl desktop-4k:mt-20 hover:bg-transparent hover:text-red-500 hover:border-2 hover:border-solid">
-              Elimina corso
-            </button>
+        <button
+          onClick={courseDeletion}
+          className=" w-full border-2 text-white bg-red-500 mt-5 font-bold rounded focus:outline-none focus:shadow-outline max-w-md desktop-4k:p-4 desktop-4k:rounded-xl desktop-4k:mt-20 hover:bg-transparent hover:text-red-500 hover:border-2 hover:border-solid"
+        >
+          Elimina corso
+        </button>
       </div>
     </div>
   );

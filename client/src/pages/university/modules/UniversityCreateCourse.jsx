@@ -108,6 +108,7 @@ export default function UniversityCreateCourse() {
               id="universities"
               name="universties"
               onChange={handleChange}
+              value={newCourse.universities}
             >
               <option value={retrievedUniversity._Id}>
                 {retrievedUniversity.universityName}
@@ -127,6 +128,7 @@ export default function UniversityCreateCourse() {
               name="teacher"
               onChange={handleChange}
               placeholder="Seleziona l'insegnante del tuo corso"
+              value={newCourse.teacher}
             >
               {teachersList.map((teacher) => {
                 return (
@@ -166,8 +168,9 @@ export default function UniversityCreateCourse() {
               name="type"
               onChange={handleChange}
               placeholder="Seleziona la tipologia di corso"
+              value={newCourse.type}
             >
-              {/* <option value="">Seleziona la tipologia di corso</option> */}
+              <option value="">Seleziona la tipologia di corso</option>
               <option value="Teorico">Teorico</option>
               <option value="Pratico">Pratico</option>
             </select>
