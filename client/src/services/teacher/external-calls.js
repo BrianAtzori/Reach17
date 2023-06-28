@@ -68,7 +68,7 @@ const getCourse = async function (id) {
 };
 
 const editCourse = async function (editedCourseData, id) {
-  const { token, account } = JSON.parse(readLocalStorage("teacherData"));
+  const { token} = JSON.parse(readLocalStorage("teacherData"));
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };

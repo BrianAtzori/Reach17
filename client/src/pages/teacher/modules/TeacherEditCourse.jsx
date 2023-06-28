@@ -13,14 +13,14 @@ import {
   getAllUsersByCategory,
 } from "../../../services/utilities/external-calls";
 import nextId from "react-id-generator";
+import _ from "lodash";
 
 export default function TeacherEditCourse() {
-
   const [editedCourse, setEditedCourse] = useState({
     title: "",
     description: "",
     teacher: "",
-    universities: "",
+    universities: [],
     status: "",
     hours: "",
     type: "",
@@ -28,44 +28,75 @@ export default function TeacherEditCourse() {
 
   const [universitiesList, setUniversitiesList] = useState([]);
 
-  // const [selectedUniversity, setSelectedUniversity] = useState({
-  //   _id: "",
-  //   name: "",
-  //   surname: "",
-  //   email: "",
-  //   universityName: "",
-  //   courses: [],
-  //   teachers: [],
-  // });
-
   const [selectedUniversities, setSelectedUniversities] = useState([]);
+
+  const [newUniversity, setNewUniversity] = useState({});
 
   const navigator = useNavigate();
 
   const { id } = useParams();
 
   useEffect(() => {
-    retrieveData(id);
-    retrieveUniversities();
+    retrieveData();
   }, []);
 
-  async function retrieveData(courseID) {
-    let selectedCourseData = {};
+  async function retrieveData() {
+    let course = await retrieveCourseData(id);
+    setEditedCourse(course);
 
-    let retrievedUniversities = [];
+    let universities = await retrieveAllUniversities();
+    setUniversitiesList(universities);
 
-    selectedCourseData = await getCourse(courseID);
-
-    selectedCourseData.universities.forEach(async (university) => {
-      let retrievedData = await retrieveUniversity(university);
-      retrievedUniversities.push(retrievedData.university[0]);
-      setSelectedUniversities(retrievedUniversities);
-    });
-
-    setEditedCourse(selectedCourseData);
+    let selectedUnis = await retrieveSelectedUniversities();
+    setSelectedUniversities(selectedUnis);
   }
 
-  async function retrieveUniversity(universityID) {
+  async function retrieveCourseData(courseID) {
+    let selectedCourseData = {};
+    selectedCourseData = await getCourse(courseID);
+    return selectedCourseData;
+  }
+
+  async function retrieveAllUniversities() {
+    const { universities } = await getAllUsersByCategory(
+      "teacherData",
+      "universities"
+    );
+
+    return universities;
+  }
+
+  async function retrieveSelectedUniversities() {
+    let retrievedUniversities = [];
+
+    retrievedUniversities = await retrieveCourseData(id)
+      .then((data) => {
+        return data;
+      })
+      .then(async (course) => {
+        let fetchedUniversities = [];
+        fetchedUniversities = await fetchUnisInfo(course.universities);
+        return fetchedUniversities;
+      })
+      .then((unis) => {
+        return unis;
+      });
+
+    return retrievedUniversities;
+  }
+
+  async function fetchUnisInfo(universtitiesIDs) {
+    let fetchedUnis = [];
+
+    for (let i = 0; i < universtitiesIDs.length; i++) {
+      let university = await retrieveSingleUniversity(universtitiesIDs[i]);
+      fetchedUnis.push(university.university[0]);
+    }
+
+    return fetchedUnis;
+  }
+
+  async function retrieveSingleUniversity(universityID) {
     const university = await getSingleItemByID(
       "teacherData",
       "universities",
@@ -75,23 +106,46 @@ export default function TeacherEditCourse() {
     return university;
   }
 
-  async function retrieveUniversities() {
-    const { universities } = await getAllUsersByCategory(
-      "universityData",
-      "universities"
-    );
-
-    setUniversitiesList(universities);
-  }
-
   function sendRegistrationForm(event) {
     event.preventDefault();
-    editCourse(editedCourse, id);
+
+    launchCourseEditing();
+  }
+
+  async function mergeUniversities() {
+    let newSelectedUniversities = selectedUniversities.map((uni) => {
+      return uni._id;
+    });
+
+    newSelectedUniversities.push(newUniversity);
+
+    newSelectedUniversities = _.uniq(newSelectedUniversities);
+
+    let newCourse = _.clone(editedCourse);
+
+    newCourse.universities = newSelectedUniversities;
+
+    return newCourse;
+  }
+
+  async function launchCourseEditing() {
+    let newCourse = await mergeUniversities();
+    setEditedCourse(newCourse);
+
+    editCourse(newCourse, id);
+
     navigator("/teacher/dashboard");
   }
 
   const handleChange = (event) => {
-    setEditedCourse({ ...editedCourse, [event.target.id]: event.target.value });
+    setEditedCourse({
+      ...editedCourse,
+      [event.target.id]: event.target.value,
+    });
+  };
+
+  const handleUniChange = (event) => {
+    setNewUniversity(event.target.value);
   };
 
   async function courseDeletion() {
@@ -145,18 +199,37 @@ export default function TeacherEditCourse() {
               className="block text-sm font-bold mb-2 desktop-4k:text-4xl"
               htmlFor="University"
             >
-              Atenei
+              Attualmente il tuo corso è erogato in questi Atenei:
             </label>
-            {/* <select
+            <div className="flex flex-row flex-wrap gap-2 justify-around">
+              {selectedUniversities.map((university) => {
+                return (
+                  <span
+                    key={nextId()}
+                    className="bg-greensea text-white font-semibold p-2 rounded-lg"
+                  >
+                    {university.universityName}
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+          <div className="mb-4">
+            <label
+              className="block text-sm font-bold mb-2 desktop-4k:text-4xl"
+              htmlFor="University"
+            >
+              Seleziona qui un nuovo Ateneo:
+            </label>
+            <select
               className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
               id="universities"
               name="universities"
-              onChange={handleChange}
-              value={editedCourse.universities}
+              onChange={handleUniChange}
+              value={newUniversity}
+              placeholder="Seleziona un nuovo ateneo"
             >
-              <option value={selectedUniversities.id}>
-                {selectedUniversities.universityName}
-              </option>
+              <option value="">Seleziona un nuovo ateneo</option>
               {universitiesList.map((university) => {
                 return (
                   <option key={nextId()} value={university._id}>
@@ -164,27 +237,7 @@ export default function TeacherEditCourse() {
                   </option>
                 );
               })}
-            </select> */}
-            {selectedUniversities.map((selectedUniversity) => {
-              return (
-                <select
-                  className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-                  id="universities"
-                  name="universities"
-                  onChange={handleChange}
-                  key={nextId()}
-                  value={selectedUniversity.universityName}
-                >
-                  {universitiesList.map((university) => {
-                    return (
-                      <option key={nextId()} value={university._id}>
-                        {university.universityName}
-                      </option>
-                    );
-                  })}
-                </select>
-              );
-            })}
+            </select>
           </div>
           <div className="mb-4">
             <label
