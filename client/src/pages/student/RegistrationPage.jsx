@@ -3,13 +3,13 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { newStudentSignUp } from "../../services/student/external-calls";
-
-//Magari si può semplificare l'HTML
-//Redirect home page loggando o login?
+import { getAllUsersByCategory } from "../../services/utilities/external-calls";
+import nextId from "react-id-generator";
 
 export default function RegistrationPage() {
   useEffect(() => {
     setNewStudent({ ...newStudent, studentCode: generateStudentCode() });
+    retrieveUniversities();
   }, []);
 
   const [newStudent, setNewStudent] = useState({
@@ -21,7 +21,17 @@ export default function RegistrationPage() {
     studentCode: "",
   });
 
+  const [universitiesList, setUniversitiesList] = useState([]);
+
   const navigator = useNavigate();
+
+  async function retrieveUniversities() {
+    const { universities } = await getAllUsersByCategory(
+      "studentData",
+      "universities"
+    );
+    setUniversitiesList(universities);
+  }
 
   function generateStudentCode() {
     var newStudentCode = "";
@@ -134,9 +144,13 @@ export default function RegistrationPage() {
               onChange={handleChange}
             >
               <option value="">Seleziona il tuo Ateneo</option>
-              <option value="Università di Torino">Università di Torino</option>
-              <option value="Università di Roma">Università di Roma</option>
-              <option value="Università di Varese">Università di Varese</option>
+              {universitiesList.map((university) => {
+                return (
+                  <option key={nextId()} value={university._id}>
+                    {university.universityName}
+                  </option>
+                );
+              })}
             </select>
           </div>
           <div className="flex items-center justify-center flex-col desktop-4k:mt-20 desktop-4k:gap-10">
