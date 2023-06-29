@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const UserStudentSchema = new mongoose.Schema({
-  //Image?
   name: {
     type: String,
     required: [true, "You must provide a name to subscribe to My Impact"],
@@ -37,7 +36,7 @@ const UserStudentSchema = new mongoose.Schema({
   studentCode: {
     type: String,
     required: true,
-    unique: true, //Posso generarla in fase di creazione utente dal DB?
+    unique: true,
   },
 });
 

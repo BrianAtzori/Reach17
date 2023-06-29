@@ -150,10 +150,8 @@ export default function UniversityEditCourse() {
               id="teacher"
               name="teacher"
               onChange={handleChange}
+              value={editedCourse.teacher}
             >
-              <option value={selectedTeacher.id}>
-                {selectedTeacher.name + " " + selectedTeacher.surname}
-              </option>
               {teachersList.map((teacher) => {
                 return (
                   <option key={nextId()} value={teacher._id}>

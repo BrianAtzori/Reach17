@@ -13,14 +13,14 @@ export default function UniversityCreateCourse() {
     title: "",
     description: "",
     teacher: "",
-    universities: "",
+    universities: [],
     status: "",
     hours: "",
     type: "",
   });
 
   const [teachersList, setTeachersList] = useState([]);
-  const [retrievedUniversity, setretrievedUniversity] = useState([]);
+  const [retrievedUniversity, setRetrievedUniversity] = useState([]);
 
   const navigator = useNavigate();
 
@@ -42,7 +42,7 @@ export default function UniversityCreateCourse() {
       "universityData",
       "universities"
     );
-    setretrievedUniversity(university[0]);
+    setRetrievedUniversity(university[0]);
   }
 
   function sendRegistrationForm(event) {
@@ -52,7 +52,7 @@ export default function UniversityCreateCourse() {
   }
 
   const handleChange = (event) => {
-    setNewCourse({ ...newCourse, [event.target.id]: event.target.value });
+    setNewCourse({ ...newCourse, [event.target.id]: event.target.value , universities: [retrievedUniversity._id]});
   };
 
   return (
@@ -108,9 +108,9 @@ export default function UniversityCreateCourse() {
               id="universities"
               name="universties"
               onChange={handleChange}
-              value={newCourse.universities}
+              value={retrievedUniversity.universityName}
             >
-              <option value={retrievedUniversity._Id}>
+              <option value={retrievedUniversity._id}>
                 {retrievedUniversity.universityName}
               </option>
             </select>
@@ -130,6 +130,7 @@ export default function UniversityCreateCourse() {
               placeholder="Seleziona l'insegnante del tuo corso"
               value={newCourse.teacher}
             >
+              <option>Seleziona l'insegnante del tuo corso</option>
               {teachersList.map((teacher) => {
                 return (
                   <option key={nextId()} value={teacher._id}>
