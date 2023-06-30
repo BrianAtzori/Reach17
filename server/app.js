@@ -11,11 +11,11 @@ app.use(express.json());
 // Imports
 const errorHandlerMiddleware = require("./middleware/error-handler");
 const authenticationMiddleware = require("./middleware/authentication");
-const cors = require('cors');
+const cors = require("cors");
 
 // Activation
 app.use(errorHandlerMiddleware);
-app.use(cors())
+app.use(cors());
 
 // ---------- ROUTES SETUP ----------
 
@@ -35,10 +35,12 @@ app.use(cors())
 const authRouter = require("./routes/auth");
 const coursesRouter = require("./routes/courses");
 const { utilitiesRouter } = require("./routes/utilities");
+const {noAuthUtilitiesRouter} = require("./routes/utilities-no-auth");
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/courses/", authenticationMiddleware, coursesRouter);
 app.use("/api/v1/utilities", authenticationMiddleware, utilitiesRouter);
+app.use("/api/v1/public/", noAuthUtilitiesRouter);
 
 // ---------- Try Init server and DB or throw error ----------
 const port = process.env.PORT || 3154;

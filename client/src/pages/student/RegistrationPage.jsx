@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { newStudentSignUp } from "../../services/student/external-calls";
-import { getAllUsersByCategory } from "../../services/utilities/external-calls";
+import { getAllUsersByCategoryWithoutAuth } from "../../services/utilities/external-calls";
 import nextId from "react-id-generator";
 
 export default function RegistrationPage() {
@@ -26,8 +26,7 @@ export default function RegistrationPage() {
   const navigator = useNavigate();
 
   async function retrieveUniversities() {
-    const { universities } = await getAllUsersByCategory(
-      "studentData",
+    const { universities } = await getAllUsersByCategoryWithoutAuth(
       "universities"
     );
     setUniversitiesList(universities);

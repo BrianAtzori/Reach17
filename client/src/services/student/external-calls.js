@@ -11,10 +11,10 @@ const newStudentSignUp = async function (newStudentData) {
     });
 };
 
-const studentLogin = async function (StudentData) {
-  console.log(StudentData);
+const studentLogin = async function (studentData) {
+  console.log(studentData);
   axios
-    .post(`http://localhost:3154/api/v1/auth/login`, StudentData)
+    .post(`http://localhost:3154/api/v1/auth/login`, studentData)
     .then((res) => {
       writeToLocalStorage(res.data,"studentData")
     });

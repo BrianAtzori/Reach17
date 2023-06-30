@@ -33,7 +33,7 @@ const loginStudent = async (req, res) => {
     account: student.email,
     studentCode: student.studentCode,
     token,
-    id: university._id
+    id: student._id
   });
 };
 

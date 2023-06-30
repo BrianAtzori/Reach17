@@ -13,6 +13,14 @@ const getAllUsersByCategory = async function (userData, category) {
     });
 };
 
+const getAllUsersByCategoryWithoutAuth = async function (category) {
+  return await axios
+    .get(`http://localhost:3154/api/v1/public/for-students/${category}`)
+    .then((res) => {
+      return res.data;
+    });
+};
+
 const getSingleItemByStoredID = async function (userData, category) {
   const { token, id } = JSON.parse(readLocalStorage(userData));
   const config = {
@@ -41,4 +49,4 @@ const getSingleItemByID = async function (userData, category, givenID) {
     });
 };
 
-export { getAllUsersByCategory, getSingleItemByStoredID, getSingleItemByID };
+export { getAllUsersByCategory, getAllUsersByCategoryWithoutAuth, getSingleItemByStoredID, getSingleItemByID };
