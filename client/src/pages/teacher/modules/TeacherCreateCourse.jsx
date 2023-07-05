@@ -39,7 +39,6 @@ export default function TeacherCreateCourse() {
   }
 
   const handleChange = (event) => {
-
     setNewCourse({ ...newCourse, [event.target.id]: event.target.value });
   };
 

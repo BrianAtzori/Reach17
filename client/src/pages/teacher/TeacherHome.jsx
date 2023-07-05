@@ -19,7 +19,7 @@ export default function TeacherHome() {
       title: "Richiedi associazione corso",
       description:
         "Qui potrai richiedere ad un'università di erogare il tuo corso ",
-      link: "",
+      link: "/teacher/association-request",
     },
   ];
 

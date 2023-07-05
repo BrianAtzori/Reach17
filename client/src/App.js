@@ -17,6 +17,7 @@ import UniversityHome from "./pages/university/UniversityHome";
 import UniversityCreateCourse from "./pages/university/modules/UniversityCreateCourse";
 import UniversityCourseDashboard from "./pages/university/modules/UniversityCourseDashboard";
 import UniversityEditCourse from "./pages/university/modules/UniversityEditCourse";
+import TeacherAssociationRequest from "./pages/teacher/modules/TeacherAssociationRequest";
 
 export default function App() {
   return (
@@ -41,6 +42,7 @@ export default function App() {
         <Route path="/teacher/create-course" element={<TeacherCreateCourse/>}/>
         <Route path="/teacher/dashboard" element={<TeacherCoursesDashboard/>}/>
         <Route path="/teacher/edit-course/:id" element={<TeacherEditCourse/>}/>
+        <Route path="//teacher/association-request" element={<TeacherAssociationRequest/>}/>
 
         {/* --- UNIVERSITY --- */}
         <Route path="/sign-up-university/" element={<UniversityRegistrationPage />}/>
