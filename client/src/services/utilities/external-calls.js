@@ -49,4 +49,26 @@ const getSingleItemByID = async function (userData, category, givenID) {
     });
 };
 
-export { getAllUsersByCategory, getAllUsersByCategoryWithoutAuth, getSingleItemByStoredID, getSingleItemByID };
+const getAllAssociationRequests = async function () {
+  const { token } = JSON.parse(readLocalStorage("universityData"));
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  return await axios
+    .get(
+      `http://localhost:3154/api/v1/utilities/university/pending-requests`,
+      config
+    )
+    .then((res) => {
+      return res.data;
+    });
+};
+
+export {
+  getAllUsersByCategory,
+  getAllUsersByCategoryWithoutAuth,
+  getSingleItemByStoredID,
+  getSingleItemByID,
+  getAllAssociationRequests,
+};

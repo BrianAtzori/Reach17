@@ -18,8 +18,8 @@ export default function UniversityHome() {
     {
       title: "Approva un corso",
       description:
-        "Qui potrai approvare le richieste di associazione corso da parte di un professore",
-      link: "",
+        "Qui potrai approvare le richieste di erogazione corsi fatte da parte dei un professori",
+      link: "/university/confirm-course-association",
     },
   ];
 

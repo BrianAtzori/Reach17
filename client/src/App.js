@@ -18,6 +18,7 @@ import UniversityCreateCourse from "./pages/university/modules/UniversityCreateC
 import UniversityCourseDashboard from "./pages/university/modules/UniversityCourseDashboard";
 import UniversityEditCourse from "./pages/university/modules/UniversityEditCourse";
 import TeacherAssociationRequest from "./pages/teacher/modules/TeacherAssociationRequest";
+import UniversityConfirmAssociations from "./pages/university/modules/UniversityConfirmAssociations";
 
 export default function App() {
   return (
@@ -50,7 +51,8 @@ export default function App() {
         <Route path="/university/home/" element={<UniversityHome/>}/>
         <Route path="/university/create-course" element={<UniversityCreateCourse/>}/>
         <Route path="/university/dashboard" element={<UniversityCourseDashboard/>}/>
-        <Route path="/university/edit-course/:id" element={<UniversityEditCourse />}/> 
+        <Route path="/university/edit-course/:id" element={<UniversityEditCourse />}/>
+        <Route path="/university/confirm-course-association" element={<UniversityConfirmAssociations/>}/>
         
       </Routes>
     </div>

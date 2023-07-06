@@ -111,6 +111,24 @@ const deleteCourse = async function (id) {
     });
 };
 
+const confirmAssociation = async function (courseID) {
+  const { token } = JSON.parse(readLocalStorage("universityData"));
+
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  axios
+    .patch(
+      `http://localhost:3154/api/v1/courses/university/confirm-association`,
+      JSON.parse(JSON.stringify({ courseId: courseID })),
+      config
+    )
+    .then((res) => {
+      alert(res.data);
+    });
+};
+
 export {
   newUniversitySignUp,
   universityLogin,
@@ -119,4 +137,5 @@ export {
   getCourse,
   editCourse,
   deleteCourse,
+  confirmAssociation,
 };
