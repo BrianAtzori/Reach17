@@ -141,6 +141,7 @@ export default function RegistrationPage() {
               id="university"
               name="university"
               onChange={handleChange}
+              value={newStudent.university}
             >
               <option value="">Seleziona il tuo Ateneo</option>
               {universitiesList.map((university) => {

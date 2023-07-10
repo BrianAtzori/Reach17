@@ -1,11 +1,36 @@
 const { BadRequestError, NotFoundError } = require("../errors/");
 const Course = require("../models/course");
 const University = require("../models/user-university");
+const Student = require("../models/user-student");
 const { StatusCodes } = require("http-status-codes");
 
 const getAllCourses = async (req, res) => {
   const courses = await Course.find({ createdBy: req.user.userID });
   res.status(StatusCodes.OK).json({ courses });
+};
+
+const getAllUniversityCourses = async (req, res) => {
+  const studentId = req.user.userID;
+
+  if (!studentId) {
+    throw new BadRequestError("No ID provided");
+  }
+
+  const studentData = await Student.findById(studentId);
+
+  const courses = await Course.find({});
+
+  const filteredCourses = courses.map((course) => {
+    for(let i=0; i<course.universities.length; i++){
+      if(course.universities[i] === studentData.university){
+        return course
+      }
+    }
+  });
+
+  console.log(filteredCourses)
+
+  res.status(StatusCodes.OK).json(filteredCourses);
 };
 
 const getCourse = async (req, res) => {
@@ -192,4 +217,5 @@ module.exports = {
   deleteCourse,
   associateCourse,
   confirmAssociation,
+  getAllUniversityCourses
 };

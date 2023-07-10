@@ -2,24 +2,35 @@ import React from "react";
 import MyImpactLogo from "../../assets/myimpact-logo.svg";
 import { useState } from "react";
 import { studentLogin } from "../../services/student/external-calls";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const [studentLoginValue, setStudentLogin] = useState({
     email: "",
     password: "",
   });
+
+  const navigator = useNavigate();
+
   const handleChange = (event) => {
-    setStudentLogin({ ...studentLoginValue, [event.target.id]: event.target.value });
+    setStudentLogin({
+      ...studentLoginValue,
+      [event.target.id]: event.target.value,
+    });
   };
 
   function sendLoginForm(event) {
     event.preventDefault();
     studentLogin(studentLoginValue);
+    navigator("/student/home/");
   }
 
   return (
     <div className="p-5 bg-gradient-to-t from-greensea via-jade to-emerald min-h-screen tablet:p-8">
-      <form onSubmit={sendLoginForm} className="flex items-center flex-col justify-center shadow-xl bg-white rounded-lg p-5 max-w-md mx-auto desktop-4k:max-w-6xl desktop-4k:rounded-2xl desktop-4k:p-12">
+      <form
+        onSubmit={sendLoginForm}
+        className="flex items-center flex-col justify-center shadow-xl bg-white rounded-lg p-5 max-w-md mx-auto desktop-4k:max-w-6xl desktop-4k:rounded-2xl desktop-4k:p-12"
+      >
         <div className="text-center">
           <img
             src={MyImpactLogo}

@@ -1,13 +1,17 @@
 import axios from "axios";
-import { writeToLocalStorage } from "../local-storage";
+import { writeToLocalStorage, readLocalStorage } from "../local-storage";
+
+// --- AUTH ---
 
 const newStudentSignUp = async function (newStudentData) {
   console.log(newStudentData);
   axios
     .post(`http://localhost:3154/api/v1/auth/register`, newStudentData)
     .then((res) => {
-      writeToLocalStorage(res.data,"studentData")
-      alert("Ti sei registrato correttamente a MyImpact, verrai rediretto a breve!")
+      writeToLocalStorage(res.data, "studentData");
+      alert(
+        "Ti sei registrato correttamente a MyImpact, verrai rediretto a breve!"
+      );
     });
 };
 
@@ -16,8 +20,26 @@ const studentLogin = async function (studentData) {
   axios
     .post(`http://localhost:3154/api/v1/auth/login`, studentData)
     .then((res) => {
-      writeToLocalStorage(res.data,"studentData")
+      writeToLocalStorage(res.data, "studentData");
     });
 };
 
-export { newStudentSignUp, studentLogin };
+//--- COURSES ---
+
+const getAllUniversityCourses = async function () {
+  const { token } = JSON.parse(readLocalStorage("studentData"));
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  return await axios
+    .get(
+      `http://localhost:3154/api/v1/courses/student/available-courses`,
+      config
+    )
+    .then((res) => {
+      return res.data;
+    });
+};
+
+export { newStudentSignUp, studentLogin, getAllUniversityCourses };

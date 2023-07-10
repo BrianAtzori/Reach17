@@ -19,6 +19,9 @@ import UniversityCourseDashboard from "./pages/university/modules/UniversityCour
 import UniversityEditCourse from "./pages/university/modules/UniversityEditCourse";
 import TeacherAssociationRequest from "./pages/teacher/modules/TeacherAssociationRequest";
 import UniversityConfirmAssociations from "./pages/university/modules/UniversityConfirmAssociations";
+import StudentHome from "./pages/student/StudentHome";
+import StudentCourseDashboard from "./pages/student/modules/StudentCoursesDashboard"
+import StudentCourses from "./pages/student/modules/StudentCourses";
 
 export default function App() {
   return (
@@ -35,6 +38,9 @@ export default function App() {
         {/* --- STUDENT --- */}
         <Route path="/login/" element={<LoginPage />} />
         <Route path="/sign-up/" element={<RegistrationPage />} />
+        <Route path="/student/home/" element={<StudentHome/> }/>
+        <Route path="/student/dashboard/" element={<StudentCourseDashboard/>}/>
+        <Route path="/student/your-courses/" element={<StudentCourses/>}/>
 
         {/* --- TEACHER --- */}
         <Route path="/sign-up-teacher/" element={<TeacherRegistrationPage />} />
@@ -43,7 +49,7 @@ export default function App() {
         <Route path="/teacher/create-course" element={<TeacherCreateCourse/>}/>
         <Route path="/teacher/dashboard" element={<TeacherCoursesDashboard/>}/>
         <Route path="/teacher/edit-course/:id" element={<TeacherEditCourse/>}/>
-        <Route path="//teacher/association-request" element={<TeacherAssociationRequest/>}/>
+        <Route path="/teacher/association-request" element={<TeacherAssociationRequest/>}/>
 
         {/* --- UNIVERSITY --- */}
         <Route path="/sign-up-university/" element={<UniversityRegistrationPage />}/>
