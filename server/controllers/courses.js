@@ -51,6 +51,23 @@ const getCourse = async (req, res) => {
   res.status(StatusCodes.OK).json({ course });
 };
 
+const getCourseDetailsForStudents = async (req, res) => {
+  const {
+    user: { userID },
+    params: { id: courseId },
+  } = req;
+
+  const course = await Course.findOne({
+    _id: courseId,
+  });
+
+  if (!course) {
+    throw new NotFoundError("Course not found");
+  }
+
+  res.status(StatusCodes.OK).json({ course });
+};
+
 const createCourse = async (req, res) => {
   req.body.createdBy = req.user.userID;
   const course = await Course.create(req.body);
@@ -217,5 +234,6 @@ module.exports = {
   deleteCourse,
   associateCourse,
   confirmAssociation,
-  getAllUniversityCourses
+  getAllUniversityCourses,
+  getCourseDetailsForStudents
 };

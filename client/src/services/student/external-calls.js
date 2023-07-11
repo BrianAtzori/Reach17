@@ -42,4 +42,17 @@ const getAllUniversityCourses = async function () {
     });
 };
 
-export { newStudentSignUp, studentLogin, getAllUniversityCourses };
+const getCourse = async function (id) {
+  const { token } = JSON.parse(readLocalStorage("studentData"));
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  return await axios
+    .get(`http://localhost:3154/api/v1/courses/student/course-details/${id}`, config)
+    .then((res) => {
+      return res.data.course;
+    });
+};
+
+export { newStudentSignUp, studentLogin, getAllUniversityCourses, getCourse };

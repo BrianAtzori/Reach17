@@ -11,7 +11,8 @@ const {
   deleteCourse,
   associateCourse,
   confirmAssociation,
-  getAllUniversityCourses
+  getAllUniversityCourses,
+  getCourseDetailsForStudents
 } = require("../controllers/courses");
 
 // ---------- Routes ----------
@@ -21,6 +22,7 @@ coursesRouter.route("/:id").get(getCourse).delete(deleteCourse).patch(updateCour
 coursesRouter.route("/association/:id").patch(associateCourse);
 coursesRouter.route("/university/confirm-association").patch(confirmAssociation);
 coursesRouter.route("/student/available-courses").get(getAllUniversityCourses);
+coursesRouter.route("/student/course-details/:id").get(getCourseDetailsForStudents);
 
 // ---------- Exports ----------
 module.exports = coursesRouter;

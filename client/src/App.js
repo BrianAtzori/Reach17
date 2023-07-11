@@ -22,6 +22,7 @@ import UniversityConfirmAssociations from "./pages/university/modules/University
 import StudentHome from "./pages/student/StudentHome";
 import StudentCourseDashboard from "./pages/student/modules/StudentCoursesDashboard"
 import StudentCourses from "./pages/student/modules/StudentCourses";
+import CourseDetails from "./pages/student/modules/CourseDetails";
 
 export default function App() {
   return (
@@ -41,6 +42,7 @@ export default function App() {
         <Route path="/student/home/" element={<StudentHome/> }/>
         <Route path="/student/dashboard/" element={<StudentCourseDashboard/>}/>
         <Route path="/student/your-courses/" element={<StudentCourses/>}/>
+        <Route path="/student/course-details/:id" element={<CourseDetails/>}/>
 
         {/* --- TEACHER --- */}
         <Route path="/sign-up-teacher/" element={<TeacherRegistrationPage />} />

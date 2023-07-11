@@ -12,14 +12,17 @@ const auth = (req, res, next) => {
   }
   const token = authHeader.split(" ")[1];
 
-  // console.log(token)
+  // console.log(token);
 
   try {
     const payload = jwt.verify(token, process.env.SEC_J);
 
+    console.log(payload);
+
     req.user = { userID: payload.userID, account: payload.email };
 
     next();
+    
   } catch (err) {
     throw new UnauthenticatedError("Authentication not valid");
   }

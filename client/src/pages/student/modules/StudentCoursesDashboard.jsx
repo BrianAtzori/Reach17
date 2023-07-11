@@ -17,7 +17,7 @@ export default function StudentCoursesDashboard() {
     let coursesList = [];
     coursesList = await getAllUniversityCourses();
 
-    console.log(coursesList)
+    console.log(coursesList);
 
     let index = 0;
     coursesList.forEach((element) => {
@@ -53,13 +53,19 @@ export default function StudentCoursesDashboard() {
     return teacherFullName;
   }
 
+  async function signUpForCourse(id) {
+    //Chiamata per iscriversi
+  }
+
   return (
     <div className="p-5 bg-gradient-to-t from-greensea via-jade to-emerald min-h-screen tablet:p-8">
       <table className="w-full h-full border-separate border-spacing-2 border border-slate-400 table-auto desktop-4k:text-4xl shadow-xl bg-white rounded-lg p-5 mx-auto desktop-4k:rounded-2xl desktop-4k:p-12">
         <thead className="font-lora text-2xl text-greensea">
           <tr>
             <td className="py-4">
-              <h1 className="desktop-4k:text-6xl">Corsi disponibili nel tuo ateneo</h1>
+              <h1 className="desktop-4k:text-6xl">
+                Corsi disponibili nel tuo ateneo
+              </h1>
             </td>
           </tr>
         </thead>
@@ -93,16 +99,19 @@ export default function StudentCoursesDashboard() {
                 </td>
                 <td className="p-2 desktop-4k:px-10">
                   <div className="w-full flex justify-around">
-                  <Link>
-                    <button className="w-full h-full border-2 bg-greensea focus:outline-none focus:shadow-outline max-w-md rounded-md p-2 font-montserrat font-semibold text-white hover:bg-transparent hover:text-emerald hover:border-2 hover:border-solid desktop-4k:p-5 desktop-4k:rounded-2xl">
-                      Visualizza dettagli
-                    </button>
-                  </Link>
-                  <Link>
-                    <button className="w-full h-full border-2 bg-greensea focus:outline-none focus:shadow-outline max-w-md rounded-md p-2 font-montserrat font-semibold text-white hover:bg-transparent hover:text-emerald hover:border-2 hover:border-solid desktop-4k:p-5 desktop-4k:rounded-2xl">
-                      Iscriviti al corso
-                    </button>
-                  </Link>
+                    <Link to={`/student/course-details/${course._id}`}>
+                      <button className="w-full h-full border-2 bg-greensea focus:outline-none focus:shadow-outline max-w-md rounded-md p-2 font-montserrat font-semibold text-white hover:bg-transparent hover:text-emerald hover:border-2 hover:border-solid desktop-4k:p-5 desktop-4k:rounded-2xl">
+                        Visualizza dettagli
+                      </button>
+                    </Link>
+                    <div>
+                      <button
+                        onClick={() => signUpForCourse(course._id)}
+                        className="w-full h-full border-2 bg-greensea focus:outline-none focus:shadow-outline max-w-md rounded-md p-2 font-montserrat font-semibold text-white hover:bg-transparent hover:text-emerald hover:border-2 hover:border-solid desktop-4k:p-5 desktop-4k:rounded-2xl"
+                      >
+                        Iscriviti al corso
+                      </button>
+                    </div>
                   </div>
                 </td>
               </tr>
