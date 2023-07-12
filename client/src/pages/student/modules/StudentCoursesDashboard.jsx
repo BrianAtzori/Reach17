@@ -4,7 +4,10 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { getSingleItemByID } from "../../../services/utilities/external-calls";
-import { getAllUniversityCourses } from "../../../services/student/external-calls";
+import {
+  getAllUniversityCourses,
+  courseSignUp,
+} from "../../../services/student/external-calls";
 
 export default function StudentCoursesDashboard() {
   const [courses, setCourses] = useState([]);
@@ -54,7 +57,7 @@ export default function StudentCoursesDashboard() {
   }
 
   async function signUpForCourse(id) {
-    //Chiamata per iscriversi
+    await courseSignUp(id);
   }
 
   return (

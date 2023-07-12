@@ -49,10 +49,37 @@ const getCourse = async function (id) {
   };
 
   return await axios
-    .get(`http://localhost:3154/api/v1/courses/student/course-details/${id}`, config)
+    .get(
+      `http://localhost:3154/api/v1/courses/student/course-details/${id}`,
+      config
+    )
     .then((res) => {
       return res.data.course;
     });
 };
 
-export { newStudentSignUp, studentLogin, getAllUniversityCourses, getCourse };
+const courseSignUp = async function (id) {
+  const { token } = JSON.parse(readLocalStorage("studentData"));
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  return await axios
+    .post(
+      `http://localhost:3154/api/v1/courses/student/course-registration/`,
+      JSON.parse(JSON.stringify({ courseId: id })),
+      config
+    )
+    .then((res) => {
+      alert(res.data);
+      return;
+    });
+};
+
+export {
+  newStudentSignUp,
+  studentLogin,
+  getAllUniversityCourses,
+  getCourse,
+  courseSignUp,
+};

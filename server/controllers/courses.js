@@ -21,14 +21,14 @@ const getAllUniversityCourses = async (req, res) => {
   const courses = await Course.find({});
 
   const filteredCourses = courses.map((course) => {
-    for(let i=0; i<course.universities.length; i++){
-      if(course.universities[i] === studentData.university){
-        return course
+    for (let i = 0; i < course.universities.length; i++) {
+      if (course.universities[i] === studentData.university) {
+        return course;
       }
     }
   });
 
-  console.log(filteredCourses)
+  console.log(filteredCourses);
 
   res.status(StatusCodes.OK).json(filteredCourses);
 };
@@ -226,6 +226,48 @@ const confirmAssociation = async (req, res) => {
   res.status(StatusCodes.OK).json(result);
 };
 
+const courseSignUp = async (req, res) => {
+  let result = "";
+
+  const courseID = req.body.courseId;
+
+  if (!courseID) {
+    throw new BadRequestError("No course provided!");
+  }
+
+  const studentID = req.user.userID;
+
+  if (!studentID) {
+    throw new BadRequestError("Something went wrong, try again!");
+  }
+
+  const selectedCourse = await Course.findById(courseID);
+
+  if (!selectedCourse) {
+    throw new BadRequestError("Course not found");
+  }
+
+  const checkIfAlreadySubscribed = selectedCourse.registrations.find(
+    (registration) => registration == studentID
+  );
+
+  if (checkIfAlreadySubscribed) {
+    result = "Hai già effettuato l'iscrizione a questo corso!";
+  } else {
+    selectedCourse.registrations.push(studentID);
+
+    const modifiedCourse = await Course.findByIdAndUpdate(
+      { _id: selectedCourse._id },
+      selectedCourse,
+      { runValidators: true }
+    );
+
+    result = "Iscrizione completata correttamente!";
+  }
+
+  res.status(StatusCodes.OK).json(result);
+};
+
 module.exports = {
   getAllCourses,
   getCourse,
@@ -235,5 +277,6 @@ module.exports = {
   associateCourse,
   confirmAssociation,
   getAllUniversityCourses,
-  getCourseDetailsForStudents
+  getCourseDetailsForStudents,
+  courseSignUp,
 };
