@@ -17,7 +17,7 @@ const auth = (req, res, next) => {
   try {
     const payload = jwt.verify(token, process.env.SEC_J);
 
-    console.log(payload);
+    // console.log(payload);
 
     req.user = { userID: payload.userID, account: payload.email };
 

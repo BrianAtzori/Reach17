@@ -3,6 +3,7 @@ const Course = require("../models/course");
 const University = require("../models/user-university");
 const Student = require("../models/user-student");
 const { StatusCodes } = require("http-status-codes");
+const course = require("../models/course");
 
 const getAllCourses = async (req, res) => {
   const courses = await Course.find({ createdBy: req.user.userID });
@@ -268,6 +269,32 @@ const courseSignUp = async (req, res) => {
   res.status(StatusCodes.OK).json(result);
 };
 
+const getCourseRegistrations = async (req, res) => {
+
+  const coursesRegistrations = [];
+
+  const studentID = req.user.userID;
+
+  if (!studentID) {
+    throw new BadRequestError("Something went wrong, try again!");
+  }
+
+  const allCourses = await Course.find({});
+
+  for (let i = 0; i < allCourses.length; i++) {
+    const checkIfSubscribed = allCourses[i].registrations.find(
+      (registration) => registration == studentID
+    );
+
+    if (checkIfSubscribed) {
+      coursesRegistrations.push(allCourses[i]);
+    }
+  }
+
+  res.status(StatusCodes.OK).json(coursesRegistrations); 
+
+};
+
 module.exports = {
   getAllCourses,
   getCourse,
@@ -279,4 +306,5 @@ module.exports = {
   getAllUniversityCourses,
   getCourseDetailsForStudents,
   courseSignUp,
+  getCourseRegistrations,
 };

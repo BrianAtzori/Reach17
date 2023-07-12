@@ -76,10 +76,24 @@ const courseSignUp = async function (id) {
     });
 };
 
+const getAllCourseRegistrations = async function () {
+  const { token } = JSON.parse(readLocalStorage("studentData"));
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  return await axios
+    .get(`http://localhost:3154/api/v1/courses/student/courses-list/`, config)
+    .then((res) => {
+      return res.data;
+    });
+};
+
 export {
   newStudentSignUp,
   studentLogin,
   getAllUniversityCourses,
   getCourse,
   courseSignUp,
+  getAllCourseRegistrations,
 };

@@ -13,7 +13,8 @@ const {
   confirmAssociation,
   getAllUniversityCourses,
   getCourseDetailsForStudents,
-  courseSignUp
+  courseSignUp,
+  getCourseRegistrations,
 } = require("../controllers/courses");
 
 // ---------- Routes ----------
@@ -25,6 +26,7 @@ coursesRouter.route("/university/confirm-association").patch(confirmAssociation)
 coursesRouter.route("/student/available-courses").get(getAllUniversityCourses);
 coursesRouter.route("/student/course-details/:id").get(getCourseDetailsForStudents);
 coursesRouter.route("/student/course-registration/").post(courseSignUp);
+coursesRouter.route("/student/courses-list/").get(getCourseRegistrations);
 
 // ---------- Exports ----------
 module.exports = coursesRouter;
