@@ -6,6 +6,10 @@ const { StatusCodes } = require("http-status-codes");
 const course = require("../models/course");
 
 const getAllCourses = async (req, res) => {
+  //cerco ID
+  //Determino se uni o teacher
+  //Se uni cerco nei corsi, se creati da me salvo, altrimenti se contiene in universities il mio ID, salvo
+  //Se teacher cerco nei corsi, se creati da me salvo, altrimenti se contiene in teacher il mio ID, salvo
   const courses = await Course.find({ createdBy: req.user.userID });
   res.status(StatusCodes.OK).json({ courses });
 };
