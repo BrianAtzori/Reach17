@@ -2,10 +2,9 @@ import React from "react";
 import nextId from "react-id-generator";
 import { useEffect } from "react";
 import { useState } from "react";
-import { confirmAssociation } from "../../../services/university/external-calls";
-import { getAllAssociationRequests } from "../../../services/utilities/external-calls";
+import { getAllPendingRequests } from "../../../services/utilities/external-calls";
 
-export default function UniversityConfirmAssociations() {
+export default function TeacherPendingRequests() {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
@@ -15,13 +14,9 @@ export default function UniversityConfirmAssociations() {
   async function getCoursesData() {
     let coursesList = [];
 
-    coursesList = await getAllAssociationRequests();
+    coursesList = await getAllPendingRequests();
 
     setCourses(coursesList);
-  }
-
-  function confirmCourseAssociation(courseID) {
-    confirmAssociation(courseID);
   }
 
   return (
@@ -43,12 +38,6 @@ export default function UniversityConfirmAssociations() {
                 <span>{course.hours + " H |"}</span>
                 <span>{" " + course.type}</span>
               </div>
-              <button
-                onClick={() => confirmCourseAssociation(course._id)}
-                className="w-full border-2 bg-greensea focus:outline-none focus:shadow-outline max-w-md rounded-md p-2 font-montserrat font-semibold text-white hover:bg-transparent hover:text-emerald hover:border-2 hover:border-solid desktop-4k:p-5 desktop-4k:rounded-2xl"
-              >
-                Conferma richiesta
-              </button>
             </div>
           );
         })}

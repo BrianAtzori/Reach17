@@ -21,6 +21,11 @@ export default function TeacherHome() {
         "Qui potrai richiedere ad un'università di erogare il tuo corso ",
       link: "/teacher/association-request",
     },
+    {
+      title: "Richieste associazione in attesa",
+      description: "Visualizza tutte le tue richieste in attesa",
+      link: "/teacher/pending-requests",
+    },
   ];
 
   return (

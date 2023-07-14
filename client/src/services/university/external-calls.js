@@ -62,7 +62,7 @@ const getAllCourses = async function () {
   return await axios
     .get(`http://localhost:3154/api/v1/courses/`, config)
     .then((res) => {
-      return res.data.courses;
+      return res.data;
     });
 };
 
@@ -129,6 +129,18 @@ const confirmAssociation = async function (courseID) {
     });
 };
 
+const getAllStudents = async function () {
+  const { token } = JSON.parse(readLocalStorage("universityData"));
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  return await axios
+    .get(`http://localhost:3154/api/v1/utilities/university/students`, config)
+    .then((res) => {
+      return res.data;
+    });
+};
+
 export {
   newUniversitySignUp,
   universityLogin,
@@ -138,4 +150,5 @@ export {
   editCourse,
   deleteCourse,
   confirmAssociation,
+  getAllStudents,
 };

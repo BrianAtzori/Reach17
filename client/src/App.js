@@ -23,6 +23,8 @@ import StudentHome from "./pages/student/StudentHome";
 import StudentCourseDashboard from "./pages/student/modules/StudentCoursesDashboard"
 import StudentCourses from "./pages/student/modules/StudentCourses";
 import CourseDetails from "./pages/student/modules/CourseDetails";
+import TeacherPendingRequests from "./pages/teacher/modules/TeacherPendingRequests";
+import UniversityStudentList from "./pages/university/modules/UniversityStudentList";
 
 export default function App() {
   return (
@@ -52,6 +54,7 @@ export default function App() {
         <Route path="/teacher/dashboard" element={<TeacherCoursesDashboard/>}/>
         <Route path="/teacher/edit-course/:id" element={<TeacherEditCourse/>}/>
         <Route path="/teacher/association-request" element={<TeacherAssociationRequest/>}/>
+        <Route path="/teacher/pending-requests" element={<TeacherPendingRequests/>}/>
 
         {/* --- UNIVERSITY --- */}
         <Route path="/sign-up-university/" element={<UniversityRegistrationPage />}/>
@@ -61,6 +64,7 @@ export default function App() {
         <Route path="/university/dashboard" element={<UniversityCourseDashboard/>}/>
         <Route path="/university/edit-course/:id" element={<UniversityEditCourse />}/>
         <Route path="/university/confirm-course-association" element={<UniversityConfirmAssociations/>}/>
+        <Route path="/university/students-list" element={<UniversityStudentList/>} />
         
       </Routes>
     </div>

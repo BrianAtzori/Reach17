@@ -2,6 +2,7 @@ const { BadRequestError, NotFoundError } = require("../errors/");
 const University = require("../models/user-university");
 const Teacher = require("../models/user-teacher");
 const Course = require("../models/course");
+const Student = require("../models/user-student");
 const { StatusCodes } = require("http-status-codes");
 
 const getAllUniversities = async (req, res) => {
@@ -71,11 +72,42 @@ const getAllAssociationRequests = async (req, res) => {
 
   for (let i = 0; i < filteredCourses.length; i++) {
     const pendingCourse = await Course.findById({ _id: filteredCourses[i] });
-    console.log(pendingCourse)
+    console.log(pendingCourse);
     pendingCourses.push(pendingCourse);
   }
 
   res.status(StatusCodes.OK).json(pendingCourses);
+};
+
+const getAllPendingRequests = async (req, res) => {
+  const teacher = await Teacher.find({ _id: req.user.userID });
+
+  if (!teacher) {
+    throw new NotFoundError("Teacher not found");
+  }
+
+  const pendingCourses = await Course.find({
+    createdBy: teacher[0]._id,
+    status: "In attesa",
+  });
+
+  res.status(StatusCodes.OK).json(pendingCourses);
+};
+
+const getAllStudents = async (req, res) => {
+  const universityID = req.user.userID;
+
+  if (!universityID) {
+    throw new BadRequestError("Something went wrong with your request");
+  }
+
+  const students = await Student.find({ university: universityID });
+
+  if (!students) {
+    throw new NotFoundError("No students are enrolled in your university.");
+  }
+
+  res.status(StatusCodes.OK).json(students);
 };
 
 module.exports = {
@@ -84,4 +116,6 @@ module.exports = {
   getTeacher,
   getUniversity,
   getAllAssociationRequests,
+  getAllPendingRequests,
+  getAllStudents,
 };

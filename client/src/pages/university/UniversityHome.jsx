@@ -21,6 +21,12 @@ export default function UniversityHome() {
         "Qui potrai approvare le richieste di erogazione corsi fatte da parte dei un professori",
       link: "/university/confirm-course-association",
     },
+    {
+      title: "Elenco studenti",
+      description:
+        "Visualizza l'anagrafica dei tuoi studenti",
+      link: "/university/students-list",
+    },
   ];
 
   return (

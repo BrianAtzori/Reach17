@@ -65,10 +65,27 @@ const getAllAssociationRequests = async function () {
     });
 };
 
+const getAllPendingRequests = async function () {
+  const { token } = JSON.parse(readLocalStorage("teacherData"));
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  return await axios
+    .get(
+      `http://localhost:3154/api/v1/utilities/teacher/pending-requests`,
+      config
+    )
+    .then((res) => {
+      return res.data;
+    });
+};
+
 export {
   getAllUsersByCategory,
   getAllUsersByCategoryWithoutAuth,
   getSingleItemByStoredID,
   getSingleItemByID,
   getAllAssociationRequests,
+  getAllPendingRequests,
 };

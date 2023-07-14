@@ -1,17 +1,53 @@
 const { BadRequestError, NotFoundError } = require("../errors/");
 const Course = require("../models/course");
 const University = require("../models/user-university");
+const Teacher = require("../models/user-teacher");
 const Student = require("../models/user-student");
 const { StatusCodes } = require("http-status-codes");
-const course = require("../models/course");
 
 const getAllCourses = async (req, res) => {
-  //cerco ID
-  //Determino se uni o teacher
-  //Se uni cerco nei corsi, se creati da me salvo, altrimenti se contiene in universities il mio ID, salvo
-  //Se teacher cerco nei corsi, se creati da me salvo, altrimenti se contiene in teacher il mio ID, salvo
-  const courses = await Course.find({ createdBy: req.user.userID });
-  res.status(StatusCodes.OK).json({ courses });
+  const courses = [];
+
+  const userID = req.user.userID;
+
+  const university = await University.findById(userID);
+
+  const teacher = await Teacher.findById(userID);
+
+  const allCourses = await Course.find({});
+
+  if (university) {
+    for (let i = 0; i < allCourses.length; i++) {
+      if (allCourses[i].createdBy === userID) {
+        courses.push(allCourses[i]);
+        continue;
+      }
+
+      for (let x = 0; x < allCourses[i].universities.length; x++) {
+        if (allCourses[i].universities[x] === userID) {
+          courses.push(allCourses[i]);
+          continue;
+        }
+      }
+    }
+
+    res.status(StatusCodes.OK).json(courses);
+  } else if (teacher) {
+    for (let i = 0; i < allCourses.length; i++) {
+      if (allCourses[i].createdBy === userID) {
+        courses.push(allCourses[i]);
+        continue;
+      }
+
+      if (allCourses[i].teacher === userID) {
+        courses.push(allCourses[i]);
+        continue;
+      }
+    }
+    res.status(StatusCodes.OK).json(courses);
+  }
+
+  throw new NotFoundError("User not found");
 };
 
 const getAllUniversityCourses = async (req, res) => {
@@ -46,7 +82,6 @@ const getCourse = async (req, res) => {
 
   const course = await Course.findOne({
     _id: courseId,
-    createdBy: userID,
   });
 
   if (!course) {
@@ -191,9 +226,9 @@ const associateCourse = async (req, res) => {
 const confirmAssociation = async (req, res) => {
   let result = "";
 
-  const courseToConfirm = req.body.courseId;
+  const courseToConfirmID = req.body.courseId;
 
-  if (!courseToConfirm) {
+  if (!courseToConfirmID) {
     throw new BadRequestError();
   }
 
@@ -209,14 +244,20 @@ const confirmAssociation = async (req, res) => {
     throw new NotFoundError();
   }
 
+  const courseToUpdate = await Course.findById(courseToConfirmID);
+
   for (let i = 0; i < university.courses.length; i++) {
     if (university.courses[i].toString().includes("PENDING")) {
       let course = university.courses[i].split(":");
 
-      if (course[1] === courseToConfirm) {
+      if (course[1] === courseToConfirmID) {
         university.courses[i] = course[1];
 
         result = "Richiesta di associazione completata!";
+
+        courseToUpdate.status = "Confermato";
+
+        await Course.findByIdAndUpdate(courseToConfirmID, courseToUpdate);
 
         await University.findByIdAndUpdate(university, university);
       }
@@ -274,7 +315,6 @@ const courseSignUp = async (req, res) => {
 };
 
 const getCourseRegistrations = async (req, res) => {
-
   const coursesRegistrations = [];
 
   const studentID = req.user.userID;
@@ -295,8 +335,7 @@ const getCourseRegistrations = async (req, res) => {
     }
   }
 
-  res.status(StatusCodes.OK).json(coursesRegistrations); 
-
+  res.status(StatusCodes.OK).json(coursesRegistrations);
 };
 
 module.exports = {
