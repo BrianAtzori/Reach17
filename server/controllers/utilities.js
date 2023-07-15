@@ -110,6 +110,31 @@ const getAllStudents = async (req, res) => {
   res.status(StatusCodes.OK).json(students);
 };
 
+const getAllStudentsEnrolled = async (req, res) => {
+  const studentsList = [];
+
+  const {
+    params: { id: courseID },
+  } = req;
+
+  if (!courseID) {
+    throw new BadRequestError("Something went wrong with your request");
+  }
+
+  const course = await Course.find({ _id: courseID });
+
+  if (!course) {
+    throw new NotFoundError("No course found");
+  }
+
+  for (let i = 0; i < course[0].registrations.length; i++) {
+    const student = await Student.findById(course[0].registrations[i]);
+    studentsList.push(student);
+  }
+
+  res.status(StatusCodes.OK).json(studentsList);
+};
+
 module.exports = {
   getAllUniversities,
   getAllTeachers,
@@ -118,4 +143,5 @@ module.exports = {
   getAllAssociationRequests,
   getAllPendingRequests,
   getAllStudents,
+  getAllStudentsEnrolled,
 };

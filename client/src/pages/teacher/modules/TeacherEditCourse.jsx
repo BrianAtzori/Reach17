@@ -14,6 +14,7 @@ import {
 } from "../../../services/utilities/external-calls";
 import nextId from "react-id-generator";
 import _ from "lodash";
+import StudentsEnrolledComponent from "../../../components/StudentsEnrolledComponent";
 
 export default function TeacherEditCourse() {
   const [editedCourse, setEditedCourse] = useState({
@@ -154,7 +155,7 @@ export default function TeacherEditCourse() {
   }
 
   return (
-    <div className="p-5 bg-gradient-to-t from-greensea via-jade to-emerald h-screen">
+    <div className="p-5 bg-gradient-to-t from-greensea via-jade to-emerald min-h-screen h-fit">
       <div className="w-full tablet:w-2/3 desktop:w-2/3 desktop-l:w-3/5 desktop-4k:w-3/4 desktop-4k:text-4xl shadow-xl bg-white rounded-lg p-5 max-w-md mx-auto desktop-4k:max-w-6xl desktop-4k:rounded-2xl desktop-4k:p-12">
         <h1 className="text-2xl font-bold mb-4 desktop-4k:text-4xl font-lora text-gray">
           Modifica il tuo corso
@@ -289,6 +290,10 @@ export default function TeacherEditCourse() {
           Elimina corso
         </button>
       </div>
+      <StudentsEnrolledComponent
+        mode={"teacher"}
+        singleCourseID={id}
+      ></StudentsEnrolledComponent>
     </div>
   );
 }

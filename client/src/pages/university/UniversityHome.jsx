@@ -30,7 +30,7 @@ export default function UniversityHome() {
   ];
 
   return (
-    <div className="p-5 bg-gradient-to-t from-greensea via-jade to-emerald min-h-screen tablet:p-8">
+    <div className="p-5 bg-gradient-to-t from-greensea via-jade to-emerald min-h-screen h-fit tablet:p-8">
       <div className="grid grid-cols-1 gap-5 desktop:grid-cols-3 p-5 desktop-4k:gap-10">
         {Functions.map((data) => {
           return (

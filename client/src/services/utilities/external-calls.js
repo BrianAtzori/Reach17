@@ -81,6 +81,21 @@ const getAllPendingRequests = async function () {
     });
 };
 
+const getAllStudentsEnrolled = async function (courseID, mode) {
+  const { token } = JSON.parse(readLocalStorage(mode));
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  return await axios
+    .get(
+      `http://localhost:3154/api/v1/utilities/students-enrolled/${courseID}`,
+      config
+    )
+    .then((res) => {
+      return res.data;
+    });
+};
+
 export {
   getAllUsersByCategory,
   getAllUsersByCategoryWithoutAuth,
@@ -88,4 +103,5 @@ export {
   getSingleItemByID,
   getAllAssociationRequests,
   getAllPendingRequests,
+  getAllStudentsEnrolled,
 };

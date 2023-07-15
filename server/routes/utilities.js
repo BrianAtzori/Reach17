@@ -10,7 +10,8 @@ const {
   getUniversity,
   getAllAssociationRequests,
   getAllPendingRequests,
-  getAllStudents
+  getAllStudents,
+  getAllStudentsEnrolled
 } = require("../controllers/utilities");
 
 // ---------- Routes ----------
@@ -21,6 +22,7 @@ utilitiesRouter.route("/universities/:id").get(getUniversity);
 utilitiesRouter.route("/university/students").get(getAllStudents);
 utilitiesRouter.route("/university/pending-requests").get(getAllAssociationRequests);
 utilitiesRouter.route("/teacher/pending-requests").get(getAllPendingRequests);
+utilitiesRouter.route("/students-enrolled/:id").get(getAllStudentsEnrolled);
 
 
 // ---------- Exports ----------
