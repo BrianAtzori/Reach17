@@ -59,8 +59,6 @@ export default function UniversityEditCourse() {
 
     setSelectedTeacher(retrievedTeacher[0]);
 
-    console.log(selectedTeacher);
-
     setEditedCourse(selectedCourseData);
   }
 

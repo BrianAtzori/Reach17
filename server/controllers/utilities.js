@@ -72,7 +72,6 @@ const getAllAssociationRequests = async (req, res) => {
 
   for (let i = 0; i < filteredCourses.length; i++) {
     const pendingCourse = await Course.findById({ _id: filteredCourses[i] });
-    console.log(pendingCourse);
     pendingCourses.push(pendingCourse);
   }
 

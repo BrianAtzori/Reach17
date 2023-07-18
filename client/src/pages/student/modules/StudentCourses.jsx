@@ -16,8 +16,6 @@ export default function StudentCourses() {
     let coursesList = [];
     coursesList = await getAllCourseRegistrations();
 
-    console.log(coursesList);
-
     let index = 0;
     coursesList.forEach((element) => {
       element.number = index++;
@@ -45,7 +43,7 @@ export default function StudentCourses() {
   }
 
   async function retrieveTeacher(id) {
-    const  teacher  = await getSingleItemByID("studentData", "teachers", id);
+    const teacher = await getSingleItemByID("studentData", "teachers", id);
 
     let teacherFullName = await (teacher.name + " " + teacher.surname);
 

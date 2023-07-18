@@ -4,7 +4,6 @@ import { writeToLocalStorage, readLocalStorage } from "../local-storage";
 // --- AUTH ---
 
 const newTeacherSignUp = async function (newTeacherData) {
-  console.log(newTeacherData);
   axios
     .post(`http://localhost:3154/api/v1/auth/register/teacher`, newTeacherData)
     .then((res) => {
@@ -16,7 +15,6 @@ const newTeacherSignUp = async function (newTeacherData) {
 };
 
 const teacherLogin = async function (teacherData) {
-  console.log(teacherData);
   axios
     .post(`http://localhost:3154/api/v1/auth/login/teacher`, teacherData)
     .then((res) => {
@@ -39,7 +37,6 @@ const createCourse = async function (courseData) {
     .post(`http://localhost:3154/api/v1/courses/`, courseData, config)
     .then((res) => {
       alert("Corso inserito correttamente!");
-      console.log(res.data);
     });
 };
 
@@ -82,7 +79,6 @@ const editCourse = async function (editedCourseData, id) {
     )
     .then((res) => {
       alert("Corso modificato correttamente!");
-      console.log(res.data);
     });
 };
 
@@ -96,7 +92,6 @@ const deleteCourse = async function (id) {
     .delete(`http://localhost:3154/api/v1/courses/${id}`, config)
     .then((res) => {
       alert("Corso eliminato correttamente!");
-      console.log(res.data);
     });
 };
 

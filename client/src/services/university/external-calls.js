@@ -4,7 +4,6 @@ import { writeToLocalStorage, readLocalStorage } from "../local-storage";
 // --- AUTH ---
 
 const newUniversitySignUp = async function (newUniversityData) {
-  console.log(newUniversityData);
   axios
     .post(
       `http://localhost:3154/api/v1/auth/register/university`,
@@ -19,7 +18,6 @@ const newUniversitySignUp = async function (newUniversityData) {
 };
 
 const universityLogin = async function (universityData) {
-  console.log(universityData);
   axios
     .post(`http://localhost:3154/api/v1/auth/login/university`, universityData)
     .then((res) => {
@@ -30,17 +28,9 @@ const universityLogin = async function (universityData) {
 //--- COURSES ---
 
 const createCourse = async function (courseData) {
-  // console.log(courseData);
-
-  // console.log(JSON.parse(readLocalStorage("teacherData")))
-
   const { token, account } = JSON.parse(readLocalStorage("universityData"));
 
   courseData.university = account;
-
-  // console.log(token);
-
-  // console.log(courseData)
 
   const config = {
     headers: { Authorization: `Bearer ${token}` },
@@ -50,7 +40,6 @@ const createCourse = async function (courseData) {
     .post(`http://localhost:3154/api/v1/courses/`, courseData, config)
     .then((res) => {
       alert("Corso inserito correttamente!");
-      console.log(res.data);
     });
 };
 
@@ -93,7 +82,6 @@ const editCourse = async function (editedCourseData, id) {
     )
     .then((res) => {
       alert("Corso modificato correttamente!");
-      console.log(res.data);
     });
 };
 
@@ -107,7 +95,6 @@ const deleteCourse = async function (id) {
     .delete(`http://localhost:3154/api/v1/courses/${id}`, config)
     .then((res) => {
       alert("Corso eliminato correttamente!");
-      console.log(res.data);
     });
 };
 

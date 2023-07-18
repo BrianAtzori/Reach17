@@ -33,12 +33,11 @@ const loginStudent = async (req, res) => {
     account: student.email,
     studentCode: student.studentCode,
     token,
-    id: student._id
+    id: student._id,
   });
 };
 
 const registerStudent = async (req, res) => {
-  console.log(req.body);
   const newStudent = await Student.create({ ...req.body });
   const token = newStudent.JWTGeneration();
   res.status(StatusCodes.CREATED).json({
@@ -75,12 +74,11 @@ const loginTeacher = async (req, res) => {
   res.status(StatusCodes.OK).json({
     account: teacher.email,
     token,
-    id: teacher._id
+    id: teacher._id,
   });
 };
 
 const registerTeacher = async (req, res) => {
-  console.log(req.body);
   const newTeacher = await Teacher.create({ ...req.body });
   const token = newTeacher.JWTGeneration();
   res.status(StatusCodes.CREATED).json({
@@ -116,12 +114,11 @@ const loginUniversity = async (req, res) => {
   res.status(StatusCodes.OK).json({
     account: university.email,
     token,
-    id: university._id
+    id: university._id,
   });
 };
 
 const registerUniversity = async (req, res) => {
-  console.log(req.body);
   const newUniversity = await University.create({ ...req.body });
   const token = newUniversity.JWTGeneration();
   res.status(StatusCodes.CREATED).json({

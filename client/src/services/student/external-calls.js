@@ -4,7 +4,6 @@ import { writeToLocalStorage, readLocalStorage } from "../local-storage";
 // --- AUTH ---
 
 const newStudentSignUp = async function (newStudentData) {
-  console.log(newStudentData);
   axios
     .post(`http://localhost:3154/api/v1/auth/register`, newStudentData)
     .then((res) => {
@@ -16,7 +15,6 @@ const newStudentSignUp = async function (newStudentData) {
 };
 
 const studentLogin = async function (studentData) {
-  console.log(studentData);
   axios
     .post(`http://localhost:3154/api/v1/auth/login`, studentData)
     .then((res) => {

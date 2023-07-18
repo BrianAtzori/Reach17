@@ -20,8 +20,6 @@ export default function StudentCoursesDashboard() {
     let coursesList = [];
     coursesList = await getAllUniversityCourses();
 
-    console.log(coursesList);
-
     let index = 0;
     coursesList.forEach((element) => {
       element.number = index++;

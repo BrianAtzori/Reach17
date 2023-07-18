@@ -69,8 +69,6 @@ const getAllUniversityCourses = async (req, res) => {
     }
   });
 
-  console.log(filteredCourses);
-
   res.status(StatusCodes.OK).json(filteredCourses);
 };
 
