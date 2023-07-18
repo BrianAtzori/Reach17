@@ -12,8 +12,8 @@ export default function UniversityRegistrationPage() {
     email: "",
     password: "",
     universityName: "",
-    courses: [""],
-    teachers: [""],
+    courses: [],
+    teachers: [],
   });
 
   function sendRegistrationForm(event) {
