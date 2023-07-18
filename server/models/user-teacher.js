@@ -5,19 +5,19 @@ const jwt = require("jsonwebtoken");
 const UserTeacherSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, "You must provide a name to subscribe to My Impact"],
+    required: [true, "You must provide a name to subscribe to Reach 17"],
     minLength: 3,
     maxLength: 50,
   },
   surname: {
     type: String,
-    required: [true, "You must provide a surname to subscribe to My Impact"],
+    required: [true, "You must provide a surname to subscribe to Reach 17"],
     minLength: 3,
     maxLength: 50,
   },
   email: {
     type: String,
-    required: [true, "You must provide an email to subscribe to My Impact"],
+    required: [true, "You must provide an email to subscribe to Reach 17"],
     match: [
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g,
       "Please provide a valid email",
@@ -26,7 +26,7 @@ const UserTeacherSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: [true, "You must provide a Password to subscribe to My Impact"],
+    required: [true, "You must provide a Password to subscribe to Reach 17"],
     minLength: 6,
   },
   degrees: {

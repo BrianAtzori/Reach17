@@ -10,7 +10,7 @@ const newStudentSignUp = async function (newStudentData) {
     .then((res) => {
       writeToLocalStorage(res.data, "studentData");
       alert(
-        "Ti sei registrato correttamente a MyImpact, verrai rediretto a breve!"
+        "Ti sei registrato correttamente a Reach 17, verrai rediretto a breve!"
       );
     });
 };

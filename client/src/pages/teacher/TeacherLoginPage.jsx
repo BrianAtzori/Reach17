@@ -1,5 +1,5 @@
 import React from "react";
-import MyImpactLogo from "../../assets/myimpact-logo.svg";
+import Reach17Logo from "../../assets/reach17-logo.png";
 import { useState } from "react";
 import { teacherLogin } from "../../services/teacher/external-calls";
 import { useNavigate } from "react-router-dom";
@@ -33,8 +33,8 @@ export default function TeacherLoginPage() {
       >
         <div className="text-center">
           <img
-            src={MyImpactLogo}
-            alt="my_impact_logo_obiettivi_onu"
+            src={Reach17Logo}
+            alt="reach17_logo_obiettivi_onu"
             className="mx-auto"
           />
         </div>

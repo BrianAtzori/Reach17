@@ -13,7 +13,7 @@ const newUniversitySignUp = async function (newUniversityData) {
     .then((res) => {
       writeToLocalStorage(res.data, "universityData");
       alert(
-        "Ti sei registrato correttamente a MyImpact, verrai rediretto a breve!"
+        "Ti sei registrato correttamente a Reach 17, verrai rediretto a breve!"
       );
     });
 };
