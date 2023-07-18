@@ -49,9 +49,9 @@ export default function StudentCoursesDashboard() {
   }
 
   async function retrieveTeacher(id) {
-    const { teacher } = await getSingleItemByID("studentData", "teachers", id);
+    const teacher = await getSingleItemByID("studentData", "teachers", id);
 
-    let teacherFullName = await (teacher[0].name + " " + teacher[0].surname);
+    let teacherFullName = await (teacher.name + " " + teacher.surname);
 
     return teacherFullName;
   }

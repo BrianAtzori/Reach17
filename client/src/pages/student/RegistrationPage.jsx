@@ -26,7 +26,7 @@ export default function RegistrationPage() {
   const navigator = useNavigate();
 
   async function retrieveUniversities() {
-    const { universities } = await getAllUsersByCategoryWithoutAuth(
+    const universities = await getAllUsersByCategoryWithoutAuth(
       "universities"
     );
     setUniversitiesList(universities);

@@ -23,7 +23,7 @@ export default function TeacherCreateCourse() {
   }, []);
 
   async function retrieveUniversities() {
-    const { universities } = await getAllUsersByCategory(
+    const universities = await getAllUsersByCategory(
       "teacherData",
       "universities"
     );

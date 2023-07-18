@@ -10,7 +10,7 @@ import _ from "lodash";
 import { courseSignUp } from "../../../services/student/external-calls";
 
 export default function CourseDetails() {
-  const [selectedCourse, setselectedCourse] = useState({
+  const [selectedCourse, setSelectedCourse] = useState({
     title: "",
     description: "",
     teacher: "",
@@ -42,7 +42,7 @@ export default function CourseDetails() {
 
   async function retrieveData() {
     let course = await retrieveCourseData(id);
-    setselectedCourse(course);
+    setSelectedCourse(course);
 
     let selectedUnis = await retrieveSelectedUniversities();
     setSelectedUniversities(selectedUnis);
@@ -81,14 +81,14 @@ export default function CourseDetails() {
 
     for (let i = 0; i < universtitiesIDs.length; i++) {
       let university = await retrieveSingleUniversity(universtitiesIDs[i]);
-      fetchedUnis.push(university.university[0]);
+      fetchedUnis.push(university[0]);
     }
 
     return fetchedUnis;
   }
 
   async function retrieveSingleUniversity(universityID) {
-    const university = await getSingleItemByID(
+    const {university} = await getSingleItemByID(
       "studentData",
       "universities",
       universityID
@@ -106,12 +106,12 @@ export default function CourseDetails() {
       })
       .then(async (course) => {
         let fetchedTeacher = [];
-        fetchedTeacher = await await getSingleItemByID(
+        fetchedTeacher = await getSingleItemByID(
           "studentData",
           "teachers",
           course.teacher
         );
-        return fetchedTeacher.teacher[0];
+        return fetchedTeacher[0];
       });
 
     return retrievedTeacher;

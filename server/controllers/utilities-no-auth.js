@@ -10,7 +10,7 @@ const getAllUniversitiesForStudents = async (req, res) => {
     throw new NotFoundError("No university found");
   }
 
-  res.status(StatusCodes.OK).json({ universities });
+  res.status(StatusCodes.OK).json(universities);
 };
 
 module.exports = {

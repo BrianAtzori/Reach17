@@ -54,7 +54,7 @@ const getCourse = async function (id) {
       config
     )
     .then((res) => {
-      return res.data.course;
+      return res.data;
     });
 };
 

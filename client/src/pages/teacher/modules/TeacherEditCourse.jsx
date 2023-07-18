@@ -59,7 +59,7 @@ export default function TeacherEditCourse() {
   }
 
   async function retrieveAllUniversities() {
-    const { universities } = await getAllUsersByCategory(
+    const universities = await getAllUsersByCategory(
       "teacherData",
       "universities"
     );

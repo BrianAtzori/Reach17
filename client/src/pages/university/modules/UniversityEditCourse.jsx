@@ -57,7 +57,7 @@ export default function UniversityEditCourse() {
 
     retrievedTeacher = await retrieveTeacher(selectedCourseData.teacher);
 
-    setSelectedTeacher(retrievedTeacher.teacher[0]);
+    setSelectedTeacher(retrievedTeacher[0]);
 
     console.log(selectedTeacher);
 
@@ -70,15 +70,11 @@ export default function UniversityEditCourse() {
       "teachers",
       teacherID
     );
-
     return teacher;
   }
 
   async function retrieveTeachers() {
-    const { teachers } = await getAllUsersByCategory(
-      "universityData",
-      "teachers"
-    );
+    const teachers = await getAllUsersByCategory("universityData", "teachers");
 
     setTeachersList(teachers);
   }

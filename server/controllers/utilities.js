@@ -12,7 +12,7 @@ const getAllUniversities = async (req, res) => {
     throw new NotFoundError("No university found");
   }
 
-  res.status(StatusCodes.OK).json({ universities });
+  res.status(StatusCodes.OK).json(universities);
 };
 
 const getAllTeachers = async (req, res) => {
@@ -22,7 +22,7 @@ const getAllTeachers = async (req, res) => {
     throw new NotFoundError("No teacher found");
   }
 
-  res.status(StatusCodes.OK).json({ teachers });
+  res.status(StatusCodes.OK).json(teachers);
 };
 
 const getTeacher = async (req, res) => {
@@ -36,7 +36,7 @@ const getTeacher = async (req, res) => {
     throw new NotFoundError("Teacher not found");
   }
 
-  res.status(StatusCodes.OK).json({ teacher });
+  res.status(StatusCodes.OK).json(teacher);
 };
 
 const getUniversity = async (req, res) => {
@@ -50,7 +50,7 @@ const getUniversity = async (req, res) => {
     throw new NotFoundError("University not found");
   }
 
-  res.status(StatusCodes.OK).json({ university });
+  res.status(StatusCodes.OK).json(university);
 };
 
 const getAllAssociationRequests = async (req, res) => {

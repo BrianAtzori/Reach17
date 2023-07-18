@@ -88,7 +88,7 @@ const getCourse = async (req, res) => {
     throw new NotFoundError("Course not found");
   }
 
-  res.status(StatusCodes.OK).json({ course });
+  res.status(StatusCodes.OK).json(course);
 };
 
 const getCourseDetailsForStudents = async (req, res) => {
@@ -105,7 +105,7 @@ const getCourseDetailsForStudents = async (req, res) => {
     throw new NotFoundError("Course not found");
   }
 
-  res.status(StatusCodes.OK).json({ course });
+  res.status(StatusCodes.OK).json(course);
 };
 
 const createCourse = async (req, res) => {
@@ -149,7 +149,7 @@ const updateCourse = async (req, res) => {
     throw new NotFoundError("Course not found");
   }
 
-  res.status(StatusCodes.OK).json({ course });
+  res.status(StatusCodes.OK).json(course);
 };
 
 const deleteCourse = async (req, res) => {
@@ -167,7 +167,7 @@ const deleteCourse = async (req, res) => {
     throw new NotFoundError("Course not found");
   }
 
-  res.status(StatusCodes.OK).json({ course });
+  res.status(StatusCodes.OK).json(course);
 };
 
 const associateCourse = async (req, res) => {

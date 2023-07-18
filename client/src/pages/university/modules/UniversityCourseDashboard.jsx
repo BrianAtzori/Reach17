@@ -45,7 +45,7 @@ export default function UniversityCourseDashboard() {
   }
 
   async function retrieveTeacher(id) {
-    const { teacher } = await getSingleItemByID(
+    const teacher  = await getSingleItemByID(
       "universityData",
       "teachers",
       id

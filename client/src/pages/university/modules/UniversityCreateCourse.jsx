@@ -30,15 +30,12 @@ export default function UniversityCreateCourse() {
   }, []);
 
   async function retrieveTeachers() {
-    const { teachers } = await getAllUsersByCategory(
-      "universityData",
-      "teachers"
-    );
+    const teachers = await getAllUsersByCategory("universityData", "teachers");
     setTeachersList(teachers);
   }
 
   async function retrieveSingleUniversity() {
-    const { university } = await getSingleItemByStoredID(
+    const university = await getSingleItemByStoredID(
       "universityData",
       "universities"
     );

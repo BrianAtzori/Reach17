@@ -64,7 +64,7 @@ const getCourse = async function (id) {
   return await axios
     .get(`http://localhost:3154/api/v1/courses/${id}`, config)
     .then((res) => {
-      return res.data.course;
+      return res.data;
     });
 };
 
