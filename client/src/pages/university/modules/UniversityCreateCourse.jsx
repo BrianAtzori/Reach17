@@ -42,7 +42,7 @@ export default function UniversityCreateCourse() {
     setRetrievedUniversity(university[0]);
   }
 
-  function sendRegistrationForm(event) {
+  function sendCourseCreationForm(event) {
     event.preventDefault();
     createCourse(newCourse);
     navigator("/university/dashboard");
@@ -64,7 +64,7 @@ export default function UniversityCreateCourse() {
         </h1>
         <form
           className="pt-6 mb-4 items-start font-montserrat text-gray w-full"
-          onSubmit={sendRegistrationForm}
+          onSubmit={sendCourseCreationForm}
         >
           <div className="mb-4">
             <label

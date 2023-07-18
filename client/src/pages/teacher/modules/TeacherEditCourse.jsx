@@ -107,7 +107,7 @@ export default function TeacherEditCourse() {
     return university;
   }
 
-  function sendRegistrationForm(event) {
+  function sendCourseEditingForm(event) {
     event.preventDefault();
 
     launchCourseEditing();
@@ -162,7 +162,7 @@ export default function TeacherEditCourse() {
         </h1>
         <form
           className="pt-6 mb-4 items-start font-montserrat text-gray w-full"
-          onSubmit={sendRegistrationForm}
+          onSubmit={sendCourseEditingForm}
         >
           <div className="mb-4">
             <label

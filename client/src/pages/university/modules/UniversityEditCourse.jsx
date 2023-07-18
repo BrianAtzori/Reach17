@@ -77,7 +77,7 @@ export default function UniversityEditCourse() {
     setTeachersList(teachers);
   }
 
-  function sendRegistrationForm(event) {
+  function sendCourseEditingForm(event) {
     event.preventDefault();
     editCourse(editedCourse, id);
     navigator("/university/dashboard");
@@ -100,7 +100,7 @@ export default function UniversityEditCourse() {
         </h1>
         <form
           className="pt-6 mb-4 items-start font-montserrat text-gray w-full"
-          onSubmit={sendRegistrationForm}
+          onSubmit={sendCourseEditingForm}
         >
           <div className="mb-4">
             <label

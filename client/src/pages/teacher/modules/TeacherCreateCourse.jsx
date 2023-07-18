@@ -32,7 +32,7 @@ export default function TeacherCreateCourse() {
 
   const navigator = useNavigate();
 
-  function sendRegistrationForm(event) {
+  function sendCourseCreationForm(event) {
     event.preventDefault();
     createCourse(newCourse);
     navigator("/teacher/dashboard");
@@ -50,7 +50,7 @@ export default function TeacherCreateCourse() {
         </h1>
         <form
           className="pt-6 mb-4 items-start font-montserrat text-gray w-full"
-          onSubmit={sendRegistrationForm}
+          onSubmit={sendCourseCreationForm}
         >
           <div className="mb-4">
             <label
