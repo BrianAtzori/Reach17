@@ -7,35 +7,40 @@ const app = express();
 require("express-async-errors");
 app.use(express.json());
 
+// ---------- SECURITY SETUP ----------
+//Imports
+const helmet = require("helmet");
+const cors = require("cors");
+const xss = require("xss-clean");
+const rateLimiter = require("express-rate-limit");
+//Activation
+app.use(cors());
+app.use(helmet());
+app.use(cors());
+app.use(xss());
+
+app.set("Trust Proxy", 1); //Se sono dietro reverse proxy per limiter
+app.use(
+  rateLimiter({
+    windowMs: 15 * 60 * 100,
+    max: 100,
+  })
+);
+
 // ---------- MIDDLEWARE SETUP ----------
 // Imports
 const errorHandlerMiddleware = require("./middleware/error-handler");
 const authenticationMiddleware = require("./middleware/authentication");
-const cors = require("cors");
 
 // Activation
 app.use(errorHandlerMiddleware);
-app.use(cors());
 
 // ---------- ROUTES SETUP ----------
-
-// app.use(function (req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Api-Key, X-Requested-With, Content-Type, Accept, Authorization",
-//     "Access-Control-Allow-Credentials",
-//     true
-//   );
-//   next();
-// });
-
-//Approfondire problema cors
 
 const authRouter = require("./routes/auth");
 const coursesRouter = require("./routes/courses");
 const { utilitiesRouter } = require("./routes/utilities");
-const {noAuthUtilitiesRouter} = require("./routes/utilities-no-auth");
+const { noAuthUtilitiesRouter } = require("./routes/utilities-no-auth");
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/courses/", authenticationMiddleware, coursesRouter);
