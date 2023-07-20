@@ -49,10 +49,14 @@ export default function TeacherAssociationRequest() {
     }
   };
 
-  function sendRegistrationForm(event) {
+  function sendAssociationForm(event) {
     event.preventDefault();
-    associateCourse(courseToAssociate, universityToAssociate);
-    navigator("/teacher/dashboard");
+    if (courseToAssociate === "" || universityToAssociate === "") {
+      alert("Verifica i dati inseriti, alcuni campi sono vuoti!");
+    } else {
+      associateCourse(courseToAssociate, universityToAssociate);
+      navigator("/teacher/dashboard");
+    }
   }
 
   return (
@@ -63,7 +67,7 @@ export default function TeacherAssociationRequest() {
         </h1>
         <form
           className="pt-6 mb-4 items-start font-montserrat text-gray w-full"
-          onSubmit={sendRegistrationForm}
+          onSubmit={sendAssociationForm}
         >
           <div className="mb-4">
             <label

@@ -27,6 +27,9 @@ const UserStudentSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, "You must provide a Password to subscribe to Reach 17"],
+    match: [
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=])(?=.*[a-zA-Z\d@#$%^&+=]).{8,}$/,
+    ],
     minLength: 6,
   },
   university: {

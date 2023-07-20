@@ -38,7 +38,7 @@ export default function CourseDetails() {
   const { id } = useParams();
 
   useEffect(() => {
-    // retrieveData();
+    retrieveData();
   }, []);
 
   async function retrieveData() {

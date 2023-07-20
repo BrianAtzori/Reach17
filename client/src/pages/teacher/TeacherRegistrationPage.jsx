@@ -14,10 +14,30 @@ export default function TeacherRegistrationPage() {
     degrees: "",
   });
 
+  const passwordCheck = new RegExp(
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=])(?=.*[a-zA-Z\d@#$%^&+=]).{8,}$/
+  );
+
   function sendRegistrationForm(event) {
     event.preventDefault();
-    newTeacherSignUp(newTeacher);
-    navigator("/");
+    if (
+      newTeacher.name === "" ||
+      newTeacher.surname === "" ||
+      newTeacher.email === "" ||
+      newTeacher.password === "" ||
+      newTeacher.degrees === ""
+    ) {
+      alert("Verifica i dati inseriti, alcuni campi sono vuoti!");
+    } else {
+      if (passwordCheck.test(newTeacher.password)) {
+        newTeacherSignUp(newTeacher);
+        navigator("/");
+      } else {
+        alert(
+          "La password deve contenere almeno 8 caratteri e almeno una lettera minuscola, una lettera maiuscola, un numero e un carattere speciale tra @, #, $, %, ^, &, + e ="
+        );
+      }
+    }
   }
 
   const handleChange = (event) => {

@@ -265,6 +265,7 @@ export default function TeacherEditCourse() {
                   placeholder="Inserisci il numero di ore del tuo corso"
                   value={editedCourse.hours}
                   onChange={handleChange}
+                  min="0"
                 />
               </div>
               <div className="mb-4">

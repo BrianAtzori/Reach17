@@ -41,6 +41,7 @@ export default function StudentCoursesDashboard() {
     }
 
     for (let i = 0; i < formattedCourseData.length; i++) {
+      console.log(formattedCourseData[i].teacher)
       await retrieveTeacher(formattedCourseData[i].teacher).then(
         (teacherRetrieved) => {
           formattedCourseData[i].teacher = teacherRetrieved;

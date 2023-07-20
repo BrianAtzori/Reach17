@@ -21,8 +21,13 @@ export default function LoginPage() {
 
   function sendLoginForm(event) {
     event.preventDefault();
-    studentLogin(studentLoginValue);
-    navigator("/student/home/");
+
+    if (studentLoginValue.email === "" || studentLoginValue.password === "") {
+      alert("Verifica i dati inseriti, alcuni campi sono vuoti!");
+    } else {
+      studentLogin(studentLoginValue);
+      navigator("/student/home/");
+    }
   }
 
   return (

@@ -21,8 +21,12 @@ export default function TeacherLoginPage() {
 
   function sendLoginForm(event) {
     event.preventDefault();
-    teacherLogin(teacherLoginValue);
-    navigator("/teacher/home/");
+    if (teacherLoginValue.email === "" || teacherLoginValue.password === "") {
+      alert("Verifica i dati inseriti, alcuni campi sono vuoti!");
+    } else {
+      teacherLogin(teacherLoginValue);
+      navigator("/teacher/home/");
+    }
   }
 
   return (

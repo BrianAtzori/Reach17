@@ -67,13 +67,25 @@ const getAllUniversityCourses = async (req, res) => {
     for (let i = 0; i < course.universities.length; i++) {
       if (course.universities[i] === studentData.university) {
         return course;
+      } else {
+        continue;
       }
     }
   });
 
-  filteredCourses.pop();
+  const selectedCourses = [];
 
-  res.status(StatusCodes.OK).json(filteredCourses);
+  for (let x = 0; x < filteredCourses.length; x++) {
+    if (
+      filteredCourses[x] != null &&
+      filteredCourses[x] != undefined &&
+      filteredCourses[x] != ""
+    ) {
+      selectedCourses.push(filteredCourses[x]);
+    }
+  }
+
+  res.status(StatusCodes.OK).json(selectedCourses);
 };
 
 const getCourse = async (req, res) => {

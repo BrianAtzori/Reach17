@@ -34,8 +34,19 @@ export default function TeacherCreateCourse() {
 
   function sendCourseCreationForm(event) {
     event.preventDefault();
-    createCourse(newCourse);
-    navigator("/teacher/dashboard");
+
+    if (
+      newCourse.title === "" ||
+      newCourse.description === "" ||
+      newCourse.hours === "" ||
+      newCourse.universities === "" ||
+      newCourse.type === ""
+    ) {
+      alert("Verifica i dati inseriti, alcuni campi sono vuoti!");
+    } else {
+      createCourse(newCourse);
+      navigator("/teacher/dashboard");
+    }
   }
 
   const handleChange = (event) => {
@@ -124,6 +135,7 @@ export default function TeacherCreateCourse() {
               placeholder="Inserisci il numero di ore del tuo corso"
               value={newCourse.hours}
               onChange={handleChange}
+              min="0"
             />
           </div>
           <div className="mb-4">

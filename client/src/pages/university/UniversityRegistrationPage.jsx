@@ -16,10 +16,30 @@ export default function UniversityRegistrationPage() {
     teachers: [],
   });
 
+  const passwordCheck = new RegExp(
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=])(?=.*[a-zA-Z\d@#$%^&+=]).{8,}$/
+  );
+
   function sendRegistrationForm(event) {
     event.preventDefault();
-    newUniversitySignUp(newUniversity);
-    navigator("/");
+    if (
+      newUniversity.name === "" ||
+      newUniversity.surname === "" ||
+      newUniversity.email === "" ||
+      newUniversity.password === "" ||
+      newUniversity.universityName === ""
+    ) {
+      alert("Verifica i dati inseriti, alcuni campi sono vuoti!");
+    } else {
+      if (passwordCheck.test(newUniversity.password)) {
+        newUniversitySignUp(newUniversity);
+        navigator("/");
+      } else {
+        alert(
+          "La password deve contenere almeno 8 caratteri e almeno una lettera minuscola, una lettera maiuscola, un numero e un carattere speciale tra @, #, $, %, ^, &, + e ="
+        );
+      }
+    }
   }
 
   const handleChange = (event) => {

@@ -21,8 +21,16 @@ export default function TeacherLoginPage() {
 
   function sendLoginForm(event) {
     event.preventDefault();
-    universityLogin(universityLoginValue);
-    navigator("/university/home/");
+
+    if (
+      universityLoginValue.email === "" ||
+      universityLoginValue.password === ""
+    ) {
+      alert("Verifica i dati inseriti, alcuni campi sono vuoti!");
+    } else {
+      universityLogin(universityLoginValue);
+      navigator("/university/home/");
+    }
   }
 
   return (

@@ -25,10 +25,12 @@ export default function RegistrationPage() {
 
   const navigator = useNavigate();
 
+  const passwordCheck = new RegExp(
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=])(?=.*[a-zA-Z\d@#$%^&+=]).{8,}$/
+  );
+
   async function retrieveUniversities() {
-    const universities = await getAllUsersByCategoryWithoutAuth(
-      "universities"
-    );
+    const universities = await getAllUsersByCategoryWithoutAuth("universities");
     setUniversitiesList(universities);
   }
 
@@ -47,8 +49,25 @@ export default function RegistrationPage() {
 
   function sendRegistrationForm(event) {
     event.preventDefault();
-    newStudentSignUp(newStudent);
-    navigator("/");
+    if (
+      newStudent.name === "" ||
+      newStudent.surname === "" ||
+      newStudent.email === "" ||
+      newStudent.password === "" ||
+      newStudent.university === ""
+    ) {
+      alert("Verifica i dati inseriti, alcuni campi sono vuoti!");
+    } else {
+      console.log(newStudent.password);
+      if (passwordCheck.test(newStudent.password)) {
+        newStudentSignUp(newStudent);
+        navigator("/");
+      } else {
+        alert(
+          "La password deve contenere almeno 8 caratteri e almeno una lettera minuscola, una lettera maiuscola, un numero e un carattere speciale tra @, #, $, %, ^, &, + e ="
+        );
+      }
+    }
   }
 
   const handleChange = (event) => {
