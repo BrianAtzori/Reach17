@@ -87,12 +87,18 @@ export default function TeacherEditCourse() {
     return retrievedUniversities;
   }
 
-  async function fetchUnisInfo(universtitiesIDs) {
+  async function fetchUnisInfo(universitiesIDs) {
     let fetchedUnis = [];
 
-    for (let i = 0; i < universtitiesIDs.length; i++) {
-      let university = await retrieveSingleUniversity(universtitiesIDs[i]);
-      fetchedUnis.push(university.university[0]);
+    console.log(universitiesIDs);
+
+    for (let i = 0; i < universitiesIDs.length; i++) {
+      if (universitiesIDs[i].toString().includes("PENDING")) {
+        continue;
+      } else {
+        let university = await retrieveSingleUniversity(universitiesIDs[i]);
+        fetchedUnis.push(university[0]);
+      }
     }
 
     return fetchedUnis;
@@ -238,7 +244,7 @@ export default function TeacherEditCourse() {
                   <option value="">Seleziona un nuovo ateneo</option>
                   {universitiesList.map((university) => {
                     return (
-                      <option key={nextId()} value={university._id}>
+                      <option key={nextId()} value={"PENDING:"+university._id}>
                         {university.universityName}
                       </option>
                     );

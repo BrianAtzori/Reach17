@@ -10,6 +10,10 @@ const getAllCourses = async (req, res) => {
 
   const userID = req.user.userID;
 
+  if (!userID) {
+    throw new NotFoundError("User not found");
+  }
+
   const university = await University.findById(userID);
 
   const teacher = await Teacher.findById(userID);
@@ -46,8 +50,6 @@ const getAllCourses = async (req, res) => {
     }
     res.status(StatusCodes.OK).json(courses);
   }
-
-  throw new NotFoundError("User not found");
 };
 
 const getAllUniversityCourses = async (req, res) => {
@@ -68,6 +70,8 @@ const getAllUniversityCourses = async (req, res) => {
       }
     }
   });
+
+  filteredCourses.pop();
 
   res.status(StatusCodes.OK).json(filteredCourses);
 };
@@ -211,11 +215,18 @@ const associateCourse = async (req, res) => {
   }
 
   if (result === "") {
+    course.status = "In attesa";
+
+    course.universities.push("PENDING:" + university.id);
+
+    await Course.findByIdAndUpdate(course, course);
+
     university.courses.push("PENDING:" + courseId);
-    result =
-      "Richiesta di associazione completata, attendi l'accettazione da parte dell'Università.";
 
     await University.findByIdAndUpdate(university, university);
+
+    result =
+      "Richiesta di associazione completata, attendi l'accettazione da parte dell'Università.";
   }
 
   res.status(StatusCodes.OK).json(result);
@@ -253,9 +264,30 @@ const confirmAssociation = async (req, res) => {
 
         result = "Richiesta di associazione completata!";
 
-        courseToUpdate.status = "Confermato";
+        for (let x = 0; x < courseToUpdate.universities.length; x++) {
+          if (courseToUpdate.universities[x].toString().includes("PENDING")) {
+            let universitySelected = courseToUpdate.universities[x].split(":");
 
-        await Course.findByIdAndUpdate(courseToConfirmID, courseToUpdate);
+            if (universitySelected[1] === university.id) {
+              courseToUpdate.universities[x] = universitySelected[1];
+            }
+          }
+        }
+
+        let courseStatus = "Confermato";
+
+        for (let y = 0; y < courseToUpdate.universities.length; y++) {
+          if (courseToUpdate.universities[y].toString().includes("PENDING")) {
+            courseStatus = "In attesa";
+            break;
+          } else {
+            courseStatus = "Confermato";
+          }
+        }
+
+        courseToUpdate.status = courseStatus;
+
+        await Course.findByIdAndUpdate(courseToUpdate, courseToUpdate);
 
         await University.findByIdAndUpdate(university, university);
       }

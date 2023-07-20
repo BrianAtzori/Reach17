@@ -93,7 +93,7 @@ export default function TeacherCreateCourse() {
             <select
               className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
               id="universities"
-              name="universties"
+              name="universities"
               onChange={handleChange}
               placeholder="Seleziona il primo Ateneo per il tuo corso"
               value={newCourse.universities}
@@ -103,7 +103,7 @@ export default function TeacherCreateCourse() {
               </option>
               {universitiesList.map((university) => {
                 return (
-                  <option key={nextId()} value={university._id}>
+                  <option key={nextId()} value={"PENDING:" + university._id}>
                     {university.universityName}
                   </option>
                 );

@@ -24,7 +24,9 @@ export default function StudentCoursesDashboard() {
     if (coursesList.length > 0) {
       let index = 0;
       coursesList.forEach((element) => {
-        element.number = index++;
+        if (element != null) {
+          element.number = index++;
+        }
       });
     }
 
@@ -52,7 +54,7 @@ export default function StudentCoursesDashboard() {
   async function retrieveTeacher(id) {
     const teacher = await getSingleItemByID("studentData", "teachers", id);
 
-    let teacherFullName = await (teacher.name + " " + teacher.surname);
+    let teacherFullName = await (teacher[0].name + " " + teacher[0].surname);
 
     return teacherFullName;
   }
@@ -62,7 +64,7 @@ export default function StudentCoursesDashboard() {
   }
 
   return (
-    <div className="p-5 bg-gradient-to-t from-greensea via-jade to-emerald min-h-screen h-fit tablet:p-8">
+    <div className="p-5 bg-gradient-to-t from-greensea via-jade to-emerald min-h-screen h-fit tablet:p-8 min-w-full w-fit">
       {courses.length === 0 ? (
         <EmptyComponent
           message={"Nessun corso disponibile nel tuo Ateneo"}

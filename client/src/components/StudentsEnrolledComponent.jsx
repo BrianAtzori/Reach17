@@ -45,7 +45,7 @@ export default function StudentsEnrolledComponent({ mode, singleCourseID }) {
       {students.length === 0 ? (
         <EmptyComponent message={"Nessuno studente iscritto"}></EmptyComponent>
       ) : (
-        <table className="mt-5 w-full h-full border-separate border-spacing-2 border border-slate-400 table-auto desktop-4k:text-4xl shadow-xl bg-white rounded-lg p-5 mx-auto desktop-4k:rounded-2xl desktop-4k:p-12">
+        <table className="mt-5 w-full h-full border-separate border-spacing-2 border border-slate-400 table-auto desktop-4k:text-4xl shadow-xl bg-white rounded-lg p-5 mx-auto desktop-4k:rounded-2xl desktop-4k:p-12 min-w-full">
           <thead className="font-lora text-2xl text-greensea">
             <tr>
               <td className="py-4">

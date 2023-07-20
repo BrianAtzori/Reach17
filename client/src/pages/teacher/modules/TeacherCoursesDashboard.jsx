@@ -36,12 +36,21 @@ export default function TeacherCoursesDashboard() {
     }
 
     for (let i = 0; i < formattedCourseData.length; i++) {
-      await retrieveUniversity(formattedCourseData[i].universities[0]).then(
-        (universityRetrieved) => {
-          formattedCourseData[i].universities[0] = universityRetrieved;
-          return formattedCourseData[i];
+      for (let x = 0; x < formattedCourseData[i].universities.length; x++) {
+        if (
+          formattedCourseData[i].universities[x].toString().includes("PENDING")
+        ) {
+          formattedCourseData[i].universities[x] =
+            "In attesa di conferma dall'Ateneo principale";
+        } else {
+          await retrieveUniversity(formattedCourseData[i].universities[x]).then(
+            (universityRetrieved) => {
+              formattedCourseData[i].universities[x] = universityRetrieved;
+              return formattedCourseData[i];
+            }
+          );
         }
-      );
+      }
     }
 
     setCourses(formattedCourseData);
@@ -62,7 +71,7 @@ export default function TeacherCoursesDashboard() {
       {courses.length === 0 ? (
         <EmptyComponent
           message={
-            "Non hai ancora creato un corso e un Ateneo non ti ha ancora assegnato delle lezioni"
+            "Non hai ancora creato un corso o non è stato ancora confermato dall'Ateneo e gli Atenei non ti ha ancora assegnato delle lezioni"
           }
         ></EmptyComponent>
       ) : (

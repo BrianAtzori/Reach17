@@ -56,7 +56,7 @@ export default function UniversityCourseDashboard() {
   }
 
   return (
-    <div className="p-5 bg-gradient-to-t from-greensea via-jade to-emerald min-h-screen h-fit tablet:p-8">
+    <div className="p-5 bg-gradient-to-t from-greensea via-jade to-emerald min-h-screen h-fit tablet:p-8 min-w-full w-fit">
       {courses.length === 0 ? (
         <EmptyComponent message={"Non hai ancora creato un corso e non hai corsi proposti dagli insegnanti, verifica eventuali le richieste"}></EmptyComponent>
       ) : (

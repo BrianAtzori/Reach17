@@ -32,9 +32,6 @@ const UserTeacherSchema = new mongoose.Schema({
   degrees: {
     type: String,
   },
-  courses: {
-    type: Array,
-  },
 });
 
 UserTeacherSchema.pre("save", async function (next) {

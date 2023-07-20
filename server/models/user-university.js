@@ -35,9 +35,6 @@ const UserUniversitySchema = new mongoose.Schema({
   courses: {
     type: Array,
   },
-  teachers: {
-    type: Array,
-  },
 });
 
 UserUniversitySchema.pre("save", async function (next) {

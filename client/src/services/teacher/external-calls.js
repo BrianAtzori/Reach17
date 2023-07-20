@@ -36,7 +36,16 @@ const createCourse = async function (courseData) {
   axios
     .post(`http://localhost:3154/api/v1/courses/`, courseData, config)
     .then((res) => {
-      alert("Corso inserito correttamente!");
+      alert(
+        "Corso inserito correttamente, verrà effettuata la richiesta di erogazione all'università!"
+      );
+      return res.data;
+    })
+    .then((courseCreated) => {
+      associateCourse(
+        courseCreated._id,
+        courseData.universities.toString().split(":")[1]
+      );
     });
 };
 
@@ -79,6 +88,17 @@ const editCourse = async function (editedCourseData, id) {
     )
     .then((res) => {
       alert("Corso modificato correttamente!");
+      return res.data;
+    })
+    .then((editedCourse) => {
+      for (let i = 0; i < editedCourse.universities.length; i++) {
+        if (editedCourse.universities[i].toString().includes("PENDING")) {
+          associateCourse(
+            editedCourse._id,
+            editedCourse.universities.toString().split(":")[1]
+          );
+        }
+      }
     });
 };
 
