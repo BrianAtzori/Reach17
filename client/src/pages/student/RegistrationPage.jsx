@@ -58,7 +58,6 @@ export default function RegistrationPage() {
     ) {
       alert("Verifica i dati inseriti, alcuni campi sono vuoti!");
     } else {
-      console.log(newStudent.password);
       if (passwordCheck.test(newStudent.password)) {
         newStudentSignUp(newStudent);
         navigator("/");

@@ -11,6 +11,57 @@ const newTeacherSignUp = async function (newTeacherData) {
       alert(
         "Ti sei registrato correttamente a Reach 17, verrai rediretto a breve!"
       );
+    })
+    .catch(function (error) {
+      switch (error.response.status) {
+        case 400: {
+          alert(
+            "Richiesta non effettuata correttamente, verifica i dati oppure contatta il supporto!"
+          );
+          window.location.href = "/sign-up-teacher";
+          break;
+        }
+        case 401: {
+          alert(
+            "Accesso non autorizzato: Username/Password non validi, riprova!"
+          );
+          window.location.href = "/sign-up-teacher";
+          break;
+        }
+        case 403: {
+          alert(
+            "Accesso non autorizzato: Non hai il permesso di accedere a questa risorsa"
+          );
+          window.location.href = "/sign-up-teacher";
+          break;
+        }
+        case 500: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          window.location.href = "/sign-up-teacher";
+          break;
+        }
+        case 503: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          window.location.href = "/sign-up-teacher";
+          break;
+        }
+        case 404: {
+          alert(
+            "Richiesta non completata correttamente: il corso, lo studente o l'università non sono stati trovati"
+          );
+          window.location.href = "/sign-up-teacher";
+          break;
+        }
+        default: {
+          alert("Qualcosa è andato storto, contatta il supporto!");
+          window.location.href = "/sign-up-teacher";
+          break;
+        }
+      }
     });
 };
 
@@ -19,6 +70,57 @@ const teacherLogin = async function (teacherData) {
     .post(`http://localhost:3154/api/v1/auth/login/teacher`, teacherData)
     .then((res) => {
       writeToLocalStorage(res.data, "teacherData");
+    })
+    .catch(function (error) {
+      switch (error.response.status) {
+        case 400: {
+          alert(
+            "Richiesta non effettuata correttamente, verifica i dati oppure contatta il supporto!"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 401: {
+          alert(
+            "Accesso non autorizzato: Username/Password non validi, riprova!"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 403: {
+          alert(
+            "Accesso non autorizzato: Non hai il permesso di accedere a questa risorsa"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 500: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 503: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 404: {
+          alert(
+            "Richiesta non completata correttamente: il corso, lo studente o l'università non sono stati trovati"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        default: {
+          alert("Qualcosa è andato storto, contatta il supporto!");
+          window.location.href = "/login-teacher";
+          break;
+        }
+      }
     });
 };
 
@@ -46,6 +148,57 @@ const createCourse = async function (courseData) {
         courseCreated._id,
         courseData.universities.toString().split(":")[1]
       );
+    })
+    .catch(function (error) {
+      switch (error.response.status) {
+        case 400: {
+          alert(
+            "Richiesta non effettuata correttamente, verifica i dati oppure contatta il supporto!"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 401: {
+          alert(
+            "Accesso non autorizzato: Username/Password non validi, riprova!"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 403: {
+          alert(
+            "Accesso non autorizzato: Non hai il permesso di accedere a questa risorsa"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 500: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 503: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 404: {
+          alert(
+            "Richiesta non completata correttamente: il corso, lo studente o l'università non sono stati trovati"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        default: {
+          alert("Qualcosa è andato storto, contatta il supporto!");
+          window.location.href = "/login-teacher";
+          break;
+        }
+      }
     });
 };
 
@@ -58,6 +211,57 @@ const getAllCourses = async function () {
     .get(`http://localhost:3154/api/v1/courses/`, config)
     .then((res) => {
       return res.data;
+    })
+    .catch(function (error) {
+      switch (error.response.status) {
+        case 400: {
+          alert(
+            "Richiesta non effettuata correttamente, verifica i dati oppure contatta il supporto!"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 401: {
+          alert(
+            "Accesso non autorizzato: Username/Password non validi, riprova!"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 403: {
+          alert(
+            "Accesso non autorizzato: Non hai il permesso di accedere a questa risorsa"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 500: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 503: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 404: {
+          alert(
+            "Richiesta non completata correttamente: il corso, lo studente o l'università non sono stati trovati"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        default: {
+          alert("Qualcosa è andato storto, contatta il supporto!");
+          window.location.href = "/login-teacher";
+          break;
+        }
+      }
     });
 };
 
@@ -71,6 +275,108 @@ const getCourse = async function (id) {
     .get(`http://localhost:3154/api/v1/courses/${id}`, config)
     .then((res) => {
       return res.data;
+    })
+    .catch(function (error) {
+      switch (error.response.status) {
+        case 400: {
+          alert(
+            "Richiesta non effettuata correttamente, verifica i dati oppure contatta il supporto!"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 401: {
+          alert(
+            "Accesso non autorizzato: Username/Password non validi, riprova!"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 403: {
+          alert(
+            "Accesso non autorizzato: Non hai il permesso di accedere a questa risorsa"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 500: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 503: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 404: {
+          alert(
+            "Richiesta non completata correttamente: il corso, lo studente o l'università non sono stati trovati"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        default: {
+          alert("Qualcosa è andato storto, contatta il supporto!");
+          window.location.href = "/login-teacher";
+          break;
+        }
+      }
+    })
+    .catch(function (error) {
+      switch (error.response.status) {
+        case 400: {
+          alert(
+            "Richiesta non effettuata correttamente, verifica i dati oppure contatta il supporto!"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 401: {
+          alert(
+            "Accesso non autorizzato: Username/Password non validi, riprova!"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 403: {
+          alert(
+            "Accesso non autorizzato: Non hai il permesso di accedere a questa risorsa"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 500: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 503: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 404: {
+          alert(
+            "Richiesta non completata correttamente: il corso, lo studente o l'università non sono stati trovati"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        default: {
+          alert("Qualcosa è andato storto, contatta il supporto!");
+          window.location.href = "/login-teacher";
+          break;
+        }
+      }
     });
 };
 
@@ -99,6 +405,57 @@ const editCourse = async function (editedCourseData, id) {
           );
         }
       }
+    })
+    .catch(function (error) {
+      switch (error.response.status) {
+        case 400: {
+          alert(
+            "Richiesta non effettuata correttamente, verifica i dati oppure contatta il supporto!"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 401: {
+          alert(
+            "Accesso non autorizzato: Username/Password non validi, riprova!"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 403: {
+          alert(
+            "Accesso non autorizzato: Non hai il permesso di accedere a questa risorsa"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 500: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 503: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 404: {
+          alert(
+            "Richiesta non completata correttamente: il corso, lo studente o l'università non sono stati trovati"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        default: {
+          alert("Qualcosa è andato storto, contatta il supporto!");
+          window.location.href = "/login-teacher";
+          break;
+        }
+      }
     });
 };
 
@@ -112,6 +469,57 @@ const deleteCourse = async function (id) {
     .delete(`http://localhost:3154/api/v1/courses/${id}`, config)
     .then((res) => {
       alert("Corso eliminato correttamente!");
+    })
+    .catch(function (error) {
+      switch (error.response.status) {
+        case 400: {
+          alert(
+            "Richiesta non effettuata correttamente, verifica i dati oppure contatta il supporto!"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 401: {
+          alert(
+            "Accesso non autorizzato: Username/Password non validi, riprova!"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 403: {
+          alert(
+            "Accesso non autorizzato: Non hai il permesso di accedere a questa risorsa"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 500: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 503: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 404: {
+          alert(
+            "Richiesta non completata correttamente: il corso, lo studente o l'università non sono stati trovati"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        default: {
+          alert("Qualcosa è andato storto, contatta il supporto!");
+          window.location.href = "/login-teacher";
+          break;
+        }
+      }
     });
 };
 
@@ -130,6 +538,57 @@ const associateCourse = async function (courseID, universityID) {
     )
     .then((res) => {
       alert(res.data);
+    })
+    .catch(function (error) {
+      switch (error.response.status) {
+        case 400: {
+          alert(
+            "Richiesta non effettuata correttamente, verifica i dati oppure contatta il supporto!"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 401: {
+          alert(
+            "Accesso non autorizzato: Username/Password non validi, riprova!"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 403: {
+          alert(
+            "Accesso non autorizzato: Non hai il permesso di accedere a questa risorsa"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 500: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 503: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        case 404: {
+          alert(
+            "Richiesta non completata correttamente: il corso, lo studente o l'università non sono stati trovati"
+          );
+          window.location.href = "/login-teacher";
+          break;
+        }
+        default: {
+          alert("Qualcosa è andato storto, contatta il supporto!");
+          window.location.href = "/login-teacher";
+          break;
+        }
+      }
     });
 };
 

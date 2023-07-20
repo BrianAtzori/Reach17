@@ -90,8 +90,6 @@ export default function TeacherEditCourse() {
   async function fetchUnisInfo(universitiesIDs) {
     let fetchedUnis = [];
 
-    console.log(universitiesIDs);
-
     for (let i = 0; i < universitiesIDs.length; i++) {
       if (universitiesIDs[i].toString().includes("PENDING")) {
         continue;
@@ -244,7 +242,10 @@ export default function TeacherEditCourse() {
                   <option value="">Seleziona un nuovo ateneo</option>
                   {universitiesList.map((university) => {
                     return (
-                      <option key={nextId()} value={"PENDING:"+university._id}>
+                      <option
+                        key={nextId()}
+                        value={"PENDING:" + university._id}
+                      >
                         {university.universityName}
                       </option>
                     );

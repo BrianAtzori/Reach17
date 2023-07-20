@@ -22,10 +22,7 @@ export default function TeacherLoginPage() {
   function sendLoginForm(event) {
     event.preventDefault();
 
-    if (
-      universityLoginValue.email === "" ||
-      universityLoginValue.password === ""
-    ) {
+    if (universityLoginValue.email === "" || universityLoginValue.password === "") {
       alert("Verifica i dati inseriti, alcuni campi sono vuoti!");
     } else {
       universityLogin(universityLoginValue);

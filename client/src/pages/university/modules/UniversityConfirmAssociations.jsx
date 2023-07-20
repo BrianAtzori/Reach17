@@ -40,7 +40,7 @@ export default function UniversityConfirmAssociations() {
                 <h1 className="font-semibold text-jade font-lora text-xl desktop-4k:text-5xl uppercase text-center">
                   {course.title}
                 </h1>
-                <p className="font-montserrat text-center mb-5">
+                <p className="font-montserrat text-center mb-5 break-all">
                   {course.description}
                 </p>
                 <div className="flex flex-row gap-2 font-lora mb-5">

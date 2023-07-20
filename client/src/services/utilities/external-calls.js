@@ -10,6 +10,50 @@ const getAllUsersByCategory = async function (userData, category) {
     .get(`http://localhost:3154/api/v1/utilities/${category}`, config)
     .then((res) => {
       return res.data;
+    })
+    .catch(function (error) {
+      switch (error.response.status) {
+        case 400: {
+          alert(
+            "Richiesta non effettuata correttamente, verifica i dati oppure contatta il supporto!"
+          );
+          break;
+        }
+        case 401: {
+          alert(
+            "Accesso non autorizzato: Username/Password non validi, riprova!"
+          );
+          break;
+        }
+        case 403: {
+          alert(
+            "Accesso non autorizzato: Non hai il permesso di accedere a questa risorsa"
+          );
+          break;
+        }
+        case 500: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          break;
+        }
+        case 503: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          break;
+        }
+        case 404: {
+          alert(
+            "Richiesta non completata correttamente: il corso, lo studente o l'università non sono stati trovati"
+          );
+          break;
+        }
+        default: {
+          alert("Qualcosa è andato storto, contatta il supporto!");
+          break;
+        }
+      }
     });
 };
 
@@ -18,6 +62,50 @@ const getAllUsersByCategoryWithoutAuth = async function (category) {
     .get(`http://localhost:3154/api/v1/public/for-students/${category}`)
     .then((res) => {
       return res.data;
+    })
+    .catch(function (error) {
+      switch (error.response.status) {
+        case 400: {
+          alert(
+            "Richiesta non effettuata correttamente, verifica i dati oppure contatta il supporto!"
+          );
+          break;
+        }
+        case 401: {
+          alert(
+            "Accesso non autorizzato: Username/Password non validi, riprova!"
+          );
+          break;
+        }
+        case 403: {
+          alert(
+            "Accesso non autorizzato: Non hai il permesso di accedere a questa risorsa"
+          );
+          break;
+        }
+        case 500: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          break;
+        }
+        case 503: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          break;
+        }
+        case 404: {
+          alert(
+            "Richiesta non completata correttamente: il corso, lo studente o l'università non sono stati trovati"
+          );
+          break;
+        }
+        default: {
+          alert("Qualcosa è andato storto, contatta il supporto!");
+          break;
+        }
+      }
     });
 };
 
@@ -30,6 +118,50 @@ const getSingleItemByStoredID = async function (userData, category) {
     .get(`http://localhost:3154/api/v1/utilities/${category}/${id}`, config)
     .then((res) => {
       return res.data;
+    })
+    .catch(function (error) {
+      switch (error.response.status) {
+        case 400: {
+          alert(
+            "Richiesta non effettuata correttamente, verifica i dati oppure contatta il supporto!"
+          );
+          break;
+        }
+        case 401: {
+          alert(
+            "Accesso non autorizzato: Username/Password non validi, riprova!"
+          );
+          break;
+        }
+        case 403: {
+          alert(
+            "Accesso non autorizzato: Non hai il permesso di accedere a questa risorsa"
+          );
+          break;
+        }
+        case 500: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          break;
+        }
+        case 503: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          break;
+        }
+        case 404: {
+          alert(
+            "Richiesta non completata correttamente: il corso, lo studente o l'università non sono stati trovati"
+          );
+          break;
+        }
+        default: {
+          alert("Qualcosa è andato storto, contatta il supporto!");
+          break;
+        }
+      }
     });
 };
 
@@ -46,6 +178,50 @@ const getSingleItemByID = async function (userData, category, givenID) {
     )
     .then((res) => {
       return res.data;
+    })
+    .catch(function (error) {
+      switch (error.response.status) {
+        case 400: {
+          alert(
+            "Richiesta non effettuata correttamente, verifica i dati oppure contatta il supporto!"
+          );
+          break;
+        }
+        case 401: {
+          alert(
+            "Accesso non autorizzato: Username/Password non validi, riprova!"
+          );
+          break;
+        }
+        case 403: {
+          alert(
+            "Accesso non autorizzato: Non hai il permesso di accedere a questa risorsa"
+          );
+          break;
+        }
+        case 500: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          break;
+        }
+        case 503: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          break;
+        }
+        case 404: {
+          alert(
+            "Richiesta non completata correttamente: il corso, lo studente o l'università non sono stati trovati"
+          );
+          break;
+        }
+        default: {
+          alert("Qualcosa è andato storto, contatta il supporto!");
+          break;
+        }
+      }
     });
 };
 
@@ -62,6 +238,50 @@ const getAllAssociationRequests = async function () {
     )
     .then((res) => {
       return res.data;
+    })
+    .catch(function (error) {
+      switch (error.response.status) {
+        case 400: {
+          alert(
+            "Richiesta non effettuata correttamente, verifica i dati oppure contatta il supporto!"
+          );
+          break;
+        }
+        case 401: {
+          alert(
+            "Accesso non autorizzato: Username/Password non validi, riprova!"
+          );
+          break;
+        }
+        case 403: {
+          alert(
+            "Accesso non autorizzato: Non hai il permesso di accedere a questa risorsa"
+          );
+          break;
+        }
+        case 500: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          break;
+        }
+        case 503: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          break;
+        }
+        case 404: {
+          alert(
+            "Richiesta non completata correttamente: il corso, lo studente o l'università non sono stati trovati"
+          );
+          break;
+        }
+        default: {
+          alert("Qualcosa è andato storto, contatta il supporto!");
+          break;
+        }
+      }
     });
 };
 
@@ -78,6 +298,50 @@ const getAllPendingRequests = async function () {
     )
     .then((res) => {
       return res.data;
+    })
+    .catch(function (error) {
+      switch (error.response.status) {
+        case 400: {
+          alert(
+            "Richiesta non effettuata correttamente, verifica i dati oppure contatta il supporto!"
+          );
+          break;
+        }
+        case 401: {
+          alert(
+            "Accesso non autorizzato: Username/Password non validi, riprova!"
+          );
+          break;
+        }
+        case 403: {
+          alert(
+            "Accesso non autorizzato: Non hai il permesso di accedere a questa risorsa"
+          );
+          break;
+        }
+        case 500: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          break;
+        }
+        case 503: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          break;
+        }
+        case 404: {
+          alert(
+            "Richiesta non completata correttamente: il corso, lo studente o l'università non sono stati trovati"
+          );
+          break;
+        }
+        default: {
+          alert("Qualcosa è andato storto, contatta il supporto!");
+          break;
+        }
+      }
     });
 };
 
@@ -93,6 +357,50 @@ const getAllStudentsEnrolled = async function (courseID, mode) {
     )
     .then((res) => {
       return res.data;
+    })
+    .catch(function (error) {
+      switch (error.response.status) {
+        case 400: {
+          alert(
+            "Richiesta non effettuata correttamente, verifica i dati oppure contatta il supporto!"
+          );
+          break;
+        }
+        case 401: {
+          alert(
+            "Accesso non autorizzato: Username/Password non validi, riprova!"
+          );
+          break;
+        }
+        case 403: {
+          alert(
+            "Accesso non autorizzato: Non hai il permesso di accedere a questa risorsa"
+          );
+          break;
+        }
+        case 500: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          break;
+        }
+        case 503: {
+          alert(
+            "Errore del server: Aggiorna la pagina oppure contatta il supporto"
+          );
+          break;
+        }
+        case 404: {
+          alert(
+            "Richiesta non completata correttamente: il corso, lo studente o l'università non sono stati trovati"
+          );
+          break;
+        }
+        default: {
+          alert("Qualcosa è andato storto, contatta il supporto!");
+          break;
+        }
+      }
     });
 };
 
