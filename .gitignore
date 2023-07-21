@@ -1,3 +1,5 @@
 /node_modules
 .env
 /info/db.txt
+# Local Netlify folder
+.netlify
