@@ -6,9 +6,11 @@ import { getAllCourses } from "../../../services/teacher/external-calls";
 import { Link } from "react-router-dom";
 import { getSingleItemByID } from "../../../services/utilities/external-calls";
 import EmptyComponent from "../../../components/EmptyComponent";
+import LoadingComponent from "../../../components/LoadingComponent";
 
 export default function TeacherCoursesDashboard() {
   const [courses, setCourses] = useState([]);
+  const [loading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getCoursesData();
@@ -16,7 +18,7 @@ export default function TeacherCoursesDashboard() {
 
   async function getCoursesData() {
     let coursesList = [];
-    coursesList = await getAllCourses();
+    coursesList = await getAllCourses().then(() => setIsLoading(false));
 
     if (coursesList.length > 0) {
       let index = 0;
@@ -68,7 +70,9 @@ export default function TeacherCoursesDashboard() {
 
   return (
     <div className="p-5 bg-gradient-to-t from-greensea via-jade to-emerald min-h-screen h-fit tablet:p-8 min-w-full w-fit">
-      {courses.length === 0 ? (
+      {loading ? (
+        <LoadingComponent></LoadingComponent>
+      ) : courses.length === 0 && loading === false ? (
         <EmptyComponent
           message={
             "Non hai ancora creato un corso o non è stato ancora confermato dall'Ateneo e gli Atenei non ti hanno ancora assegnato delle lezioni"

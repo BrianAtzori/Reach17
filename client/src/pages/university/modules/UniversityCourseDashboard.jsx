@@ -6,9 +6,11 @@ import { getAllCourses } from "../../../services/university/external-calls";
 import { Link } from "react-router-dom";
 import { getSingleItemByID } from "../../../services/utilities/external-calls";
 import EmptyComponent from "../../../components/EmptyComponent";
+import LoadingComponent from "../../../components/LoadingComponent";
 
 export default function UniversityCourseDashboard() {
   const [courses, setCourses] = useState([]);
+  const [loading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getCoursesData();
@@ -45,6 +47,8 @@ export default function UniversityCourseDashboard() {
     }
 
     setCourses(formattedCourseData);
+
+    setIsLoading(false);
   }
 
   async function retrieveTeacher(id) {
@@ -57,7 +61,9 @@ export default function UniversityCourseDashboard() {
 
   return (
     <div className="p-5 bg-gradient-to-t from-greensea via-jade to-emerald min-h-screen h-fit tablet:p-8 min-w-full w-fit">
-      {courses.length === 0 ? (
+      {loading ? (
+        <LoadingComponent></LoadingComponent>
+      ) : courses.length === 0 && loading === false ? (
         <EmptyComponent
           message={
             "Non hai ancora creato un corso e non hai corsi proposti dagli insegnanti, verifica eventuali richieste di associazione"

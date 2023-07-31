@@ -5,9 +5,11 @@ import { useState } from "react";
 import { confirmAssociation } from "../../../services/university/external-calls";
 import { getAllAssociationRequests } from "../../../services/utilities/external-calls";
 import EmptyComponent from "../../../components/EmptyComponent";
+import LoadingComponent from "../../../components/LoadingComponent";
 
 export default function UniversityConfirmAssociations() {
   const [courses, setCourses] = useState([]);
+  const [loading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getCoursesData();
@@ -16,7 +18,9 @@ export default function UniversityConfirmAssociations() {
   async function getCoursesData() {
     let coursesList = [];
 
-    coursesList = await getAllAssociationRequests();
+    coursesList = await getAllAssociationRequests().then(() => {
+      setIsLoading(false);
+    });
 
     setCourses(coursesList);
   }
@@ -27,8 +31,14 @@ export default function UniversityConfirmAssociations() {
 
   return (
     <div className="p-5 bg-gradient-to-t from-greensea via-jade to-emerald min-h-screen h-fit tablet:p-8">
-      {courses.length === 0 ? (
-        <EmptyComponent message={"Nessuna richiesta di associazione in attesa di essere confermata"}></EmptyComponent>
+      {loading ? (
+        <LoadingComponent></LoadingComponent>
+      ) : courses.length === 0 && loading === false ? (
+        <EmptyComponent
+          message={
+            "Nessuna richiesta di associazione in attesa di essere confermata"
+          }
+        ></EmptyComponent>
       ) : (
         <div className="grid grid-cols-1 gap-5 desktop:grid-cols-3 p-5 desktop-4k:gap-10">
           {courses.map((course) => {

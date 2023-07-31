@@ -16,6 +16,7 @@ import nextId from "react-id-generator";
 import _ from "lodash";
 import StudentsEnrolledComponent from "../../../components/StudentsEnrolledComponent";
 import EmptyComponent from "../../../components/EmptyComponent";
+import LoadingComponent from "../../../components/LoadingComponent";
 
 export default function TeacherEditCourse() {
   const [editedCourse, setEditedCourse] = useState({
@@ -27,6 +28,8 @@ export default function TeacherEditCourse() {
     hours: "",
     type: "",
   });
+
+  const [loading, setIsLoading] = useState(true);
 
   const [universitiesList, setUniversitiesList] = useState([]);
 
@@ -51,6 +54,8 @@ export default function TeacherEditCourse() {
 
     let selectedUnis = await retrieveSelectedUniversities();
     setSelectedUniversities(selectedUnis);
+
+    setIsLoading(false);
   }
 
   async function retrieveCourseData(courseID) {
@@ -161,7 +166,9 @@ export default function TeacherEditCourse() {
 
   return (
     <div className="p-5 bg-gradient-to-t from-greensea via-jade to-emerald min-h-screen h-fit">
-      {editedCourse.title === "" ? (
+      {loading ? (
+        <LoadingComponent></LoadingComponent>
+      ) : editedCourse.title === "" && loading === false ? (
         <EmptyComponent message={"Corso non trovato"}></EmptyComponent>
       ) : (
         <>

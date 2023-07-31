@@ -15,6 +15,7 @@ import {
 } from "../../../services/utilities/external-calls";
 import StudentsEnrolledComponent from "../../../components/StudentsEnrolledComponent";
 import EmptyComponent from "../../../components/EmptyComponent";
+import LoadingComponent from "../../../components/LoadingComponent";
 
 export default function UniversityEditCourse() {
   const [editedCourse, setEditedCourse] = useState({
@@ -28,6 +29,7 @@ export default function UniversityEditCourse() {
   });
 
   const [teachersList, setTeachersList] = useState([]);
+  const [loading, setIsLoading] = useState(true);
 
   const [selectedTeacher, setSelectedTeacher] = useState({
     _id: "",
@@ -61,6 +63,8 @@ export default function UniversityEditCourse() {
     setSelectedTeacher(retrievedTeacher[0]);
 
     setEditedCourse(selectedCourseData);
+
+    setIsLoading(false);
   }
 
   async function retrieveTeacher(teacherID) {
@@ -95,7 +99,9 @@ export default function UniversityEditCourse() {
 
   return (
     <div className="p-5 bg-gradient-to-t from-greensea via-jade to-emerald min-h-screen h-fit">
-      {editedCourse.title === "" ? (
+      {loading ? (
+        <LoadingComponent></LoadingComponent>
+      ) : editedCourse.title === "" && loading === false ? (
         <EmptyComponent message={"Corso non trovato"}></EmptyComponent>
       ) : (
         <>

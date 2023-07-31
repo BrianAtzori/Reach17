@@ -9,9 +9,11 @@ import {
   courseSignUp,
 } from "../../../services/student/external-calls";
 import EmptyComponent from "../../../components/EmptyComponent";
+import LoadingComponent from "../../../components/LoadingComponent";
 
 export default function StudentCoursesDashboard() {
   const [courses, setCourses] = useState([]);
+  const [loading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getCoursesData();
@@ -49,6 +51,7 @@ export default function StudentCoursesDashboard() {
       );
     }
     setCourses(formattedCourseData);
+    setIsLoading(false);
   }
 
   async function retrieveTeacher(id) {
@@ -65,7 +68,9 @@ export default function StudentCoursesDashboard() {
 
   return (
     <div className="p-5 bg-gradient-to-t from-greensea via-jade to-emerald min-h-screen h-fit tablet:p-8 min-w-full w-fit">
-      {courses.length === 0 ? (
+      {loading ? (
+        <LoadingComponent></LoadingComponent>
+      ) : courses.length === 0 && loading === false ? (
         <EmptyComponent
           message={"Nessun corso disponibile nel tuo Ateneo"}
         ></EmptyComponent>

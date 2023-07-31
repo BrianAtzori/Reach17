@@ -9,6 +9,7 @@ import nextId from "react-id-generator";
 import _ from "lodash";
 import { courseSignUp } from "../../../services/student/external-calls";
 import EmptyComponent from "../../../components/EmptyComponent";
+import LoadingComponent from "../../../components/LoadingComponent";
 
 export default function CourseDetails() {
   const [selectedCourse, setSelectedCourse] = useState({
@@ -22,6 +23,7 @@ export default function CourseDetails() {
   });
 
   const [selectedUniversities, setSelectedUniversities] = useState([]);
+  const [loading, setIsLoading] = useState(true);
 
   const [selectedTeacher, setSelectedTeacher] = useState({
     name: "",
@@ -50,6 +52,8 @@ export default function CourseDetails() {
 
     let teacher = await retrieveSingleTeacher();
     setSelectedTeacher(teacher);
+
+    setIsLoading(false);
   }
 
   async function retrieveCourseData(courseID) {
@@ -125,7 +129,9 @@ export default function CourseDetails() {
 
   return (
     <div className="p-5 bg-gradient-to-t from-greensea via-jade to-emerald min-h-screen h-fit">
-      {selectedCourse.title === "" ? (
+      {loading ? (
+        <LoadingComponent></LoadingComponent>
+      ) : selectedCourse.title === "" && loading === false ? (
         <EmptyComponent message="Corso non trovato, riprova oppure contatta l'assistenza!"></EmptyComponent>
       ) : (
         <div className="w-full tablet:w-2/3 desktop:w-2/3 desktop-l:w-3/5 desktop-4k:w-3/4 desktop-4k:text-4xl shadow-xl bg-white rounded-lg p-5 max-w-md mx-auto desktop-4k:max-w-6xl desktop-4k:rounded-2xl desktop-4k:p-12">

@@ -5,9 +5,11 @@ import { useState } from "react";
 import { getSingleItemByID } from "../../../services/utilities/external-calls";
 import { getAllCourseRegistrations } from "../../../services/student/external-calls";
 import EmptyComponent from "../../../components/EmptyComponent";
+import LoadingComponent from "../../../components/LoadingComponent";
 
 export default function StudentCourses() {
   const [courses, setCourses] = useState([]);
+  const [loading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getCoursesData();
@@ -41,6 +43,7 @@ export default function StudentCourses() {
       );
     }
     setCourses(formattedCourseData);
+    setIsLoading(false);
   }
 
   async function retrieveTeacher(id) {
@@ -53,7 +56,9 @@ export default function StudentCourses() {
 
   return (
     <div className="p-5 bg-gradient-to-t from-greensea via-jade to-emerald min-h-screen h-fit tablet:p-8">
-      {courses.length === 0 ? (
+      {loading ? (
+        <LoadingComponent></LoadingComponent>
+      ) : courses.length === 0 && loading === false ? (
         <EmptyComponent
           message={"Non sei iscritt* ad alcun corso"}
         ></EmptyComponent>
