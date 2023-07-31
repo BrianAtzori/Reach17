@@ -17,11 +17,11 @@ export default function TeacherPendingRequests() {
   async function getCoursesData() {
     let coursesList = [];
 
-    coursesList = await getAllPendingRequests().then(() => {
-      setIsLoading(false);
-    });
+    coursesList = await getAllPendingRequests();
 
     setCourses(coursesList);
+
+    setIsLoading(false);
   }
 
   return (

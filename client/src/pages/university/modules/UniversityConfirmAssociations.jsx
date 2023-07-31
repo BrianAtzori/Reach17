@@ -18,11 +18,11 @@ export default function UniversityConfirmAssociations() {
   async function getCoursesData() {
     let coursesList = [];
 
-    coursesList = await getAllAssociationRequests().then(() => {
-      setIsLoading(false);
-    });
+    coursesList = await getAllAssociationRequests();
 
     setCourses(coursesList);
+
+    setIsLoading(false);
   }
 
   function confirmCourseAssociation(courseID) {
