@@ -58,7 +58,11 @@ export default function UniversityCourseDashboard() {
   return (
     <div className="p-5 bg-gradient-to-t from-greensea via-jade to-emerald min-h-screen h-fit tablet:p-8 min-w-full w-fit">
       {courses.length === 0 ? (
-        <EmptyComponent message={"Non hai ancora creato un corso e non hai corsi proposti dagli insegnanti, verifica eventuali le richieste"}></EmptyComponent>
+        <EmptyComponent
+          message={
+            "Non hai ancora creato un corso e non hai corsi proposti dagli insegnanti, verifica eventuali richieste di associazione"
+          }
+        ></EmptyComponent>
       ) : (
         <table className="w-full h-full border-separate border-spacing-2 border border-slate-400 table-auto desktop-4k:text-4xl shadow-xl bg-white rounded-lg p-5 mx-auto desktop-4k:rounded-2xl desktop-4k:p-12">
           <thead className="font-lora text-2xl text-greensea">

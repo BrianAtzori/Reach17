@@ -5,9 +5,11 @@ import { useState } from "react";
 import { getAllStudents } from "../services/university/external-calls";
 import { getAllStudentsEnrolled } from "../services/utilities/external-calls";
 import EmptyComponent from "./EmptyComponent";
+import LoadingComponent from "./LoadingComponent";
 
 export default function StudentsEnrolledComponent({ mode, singleCourseID }) {
   const [students, setStudents] = useState([]);
+  const [loading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getStudentsData();
@@ -18,31 +20,31 @@ export default function StudentsEnrolledComponent({ mode, singleCourseID }) {
 
     switch (mode) {
       case "university": //La singola uni vuole vedere tutti i suoi studenti
-        studentsList = await getAllStudents();
+        studentsList = await getAllStudents().then(setIsLoading(false));
         break;
       case "teacher": //Il teacher vede il singolo corso
         studentsList = await getAllStudentsEnrolled(
           singleCourseID,
           "teacherData"
-        );
+        ).then(setIsLoading(false));
         break;
       case "universityCourse": //L'uni vede tutti gli studenti di un corso
         studentsList = await getAllStudentsEnrolled(
           singleCourseID,
           "universityData"
-        );
+        ).then(setIsLoading(false));
         break;
       default:
         alert("Errore, riprova!");
         break;
     }
-
     setStudents(studentsList);
   }
 
   return (
     <>
-      {students.length === 0 ? (
+      {loading && <LoadingComponent></LoadingComponent>}
+      {students.length === 0 && loading === false ? (
         <EmptyComponent message={"Nessuno studente iscritto"}></EmptyComponent>
       ) : (
         <table className="mt-5 w-full h-full border-separate border-spacing-2 border border-slate-400 table-auto desktop-4k:text-4xl shadow-xl bg-white rounded-lg p-5 mx-auto desktop-4k:rounded-2xl desktop-4k:p-12 min-w-full">

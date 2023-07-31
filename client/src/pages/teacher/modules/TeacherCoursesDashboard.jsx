@@ -71,7 +71,7 @@ export default function TeacherCoursesDashboard() {
       {courses.length === 0 ? (
         <EmptyComponent
           message={
-            "Non hai ancora creato un corso o non è stato ancora confermato dall'Ateneo e gli Atenei non ti ha ancora assegnato delle lezioni"
+            "Non hai ancora creato un corso o non è stato ancora confermato dall'Ateneo e gli Atenei non ti hanno ancora assegnato delle lezioni"
           }
         ></EmptyComponent>
       ) : (
