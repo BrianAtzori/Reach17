@@ -6,7 +6,7 @@ import { writeToLocalStorage, readLocalStorage } from "../local-storage";
 const newUniversitySignUp = async function (newUniversityData) {
   axios
     .post(
-      `http://localhost:3154/api/v1/auth/register/university`,
+      `https://reach17.onrender.com/api/v1/auth/register/university`,
       newUniversityData
     )
     .then((res) => {
@@ -70,7 +70,7 @@ const newUniversitySignUp = async function (newUniversityData) {
 
 const universityLogin = async function (universityData) {
   axios
-    .post(`http://localhost:3154/api/v1/auth/login/university`, universityData)
+    .post(`https://reach17.onrender.com/api/v1/auth/login/university`, universityData)
     .then((res) => {
       writeToLocalStorage(res.data, "universityData");
     })
@@ -139,7 +139,7 @@ const createCourse = async function (courseData) {
   };
 
   axios
-    .post(`http://localhost:3154/api/v1/courses/`, courseData, config)
+    .post(`https://reach17.onrender.com/api/v1/courses/`, courseData, config)
     .then((res) => {
       alert("Corso inserito correttamente!");
     })
@@ -202,7 +202,7 @@ const getAllCourses = async function () {
     headers: { Authorization: `Bearer ${token}` },
   };
   return await axios
-    .get(`http://localhost:3154/api/v1/courses/`, config)
+    .get(`https://reach17.onrender.com/api/v1/courses/`, config)
     .then((res) => {
       return res.data;
     })
@@ -266,7 +266,7 @@ const getCourse = async function (id) {
   };
 
   return await axios
-    .get(`http://localhost:3154/api/v1/courses/${id}`, config)
+    .get(`https://reach17.onrender.com/api/v1/courses/${id}`, config)
     .then((res) => {
       return res.data;
     })
@@ -331,7 +331,7 @@ const editCourse = async function (editedCourseData, id) {
 
   axios
     .patch(
-      `http://localhost:3154/api/v1/courses/${id}`,
+      `https://reach17.onrender.com/api/v1/courses/${id}`,
       editedCourseData,
       config
     )
@@ -398,7 +398,7 @@ const deleteCourse = async function (id) {
   };
 
   axios
-    .delete(`http://localhost:3154/api/v1/courses/${id}`, config)
+    .delete(`https://reach17.onrender.com/api/v1/courses/${id}`, config)
     .then((res) => {
       alert("Corso eliminato correttamente!");
     })
@@ -464,7 +464,7 @@ const confirmAssociation = async function (courseID) {
 
   axios
     .patch(
-      `http://localhost:3154/api/v1/courses/university/confirm-association`,
+      `https://reach17.onrender.com/api/v1/courses/university/confirm-association`,
       JSON.parse(JSON.stringify({ courseId: courseID })),
       config
     )
@@ -530,7 +530,7 @@ const getAllStudents = async function () {
     headers: { Authorization: `Bearer ${token}` },
   };
   return await axios
-    .get(`http://localhost:3154/api/v1/utilities/university/students`, config)
+    .get(`https://reach17.onrender.com/api/v1/utilities/university/students`, config)
     .then((res) => {
       return res.data;
     })

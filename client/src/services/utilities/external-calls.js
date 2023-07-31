@@ -7,7 +7,7 @@ const getAllUsersByCategory = async function (userData, category) {
     headers: { Authorization: `Bearer ${token}` },
   };
   return await axios
-    .get(`http://localhost:3154/api/v1/utilities/${category}`, config)
+    .get(`https://reach17.onrender.com/api/v1/utilities/${category}`, config)
     .then((res) => {
       return res.data;
     })
@@ -59,7 +59,7 @@ const getAllUsersByCategory = async function (userData, category) {
 
 const getAllUsersByCategoryWithoutAuth = async function (category) {
   return await axios
-    .get(`http://localhost:3154/api/v1/public/for-students/${category}`)
+    .get(`https://reach17.onrender.com/api/v1/public/for-students/${category}`)
     .then((res) => {
       return res.data;
     })
@@ -115,7 +115,7 @@ const getSingleItemByStoredID = async function (userData, category) {
     headers: { Authorization: `Bearer ${token}` },
   };
   return await axios
-    .get(`http://localhost:3154/api/v1/utilities/${category}/${id}`, config)
+    .get(`https://reach17.onrender.com/api/v1/utilities/${category}/${id}`, config)
     .then((res) => {
       return res.data;
     })
@@ -173,7 +173,7 @@ const getSingleItemByID = async function (userData, category, givenID) {
 
   return await axios
     .get(
-      `http://localhost:3154/api/v1/utilities/${category}/${givenID}`,
+      `https://reach17.onrender.com/api/v1/utilities/${category}/${givenID}`,
       config
     )
     .then((res) => {
@@ -233,7 +233,7 @@ const getAllAssociationRequests = async function () {
 
   return await axios
     .get(
-      `http://localhost:3154/api/v1/utilities/university/pending-requests`,
+      `https://reach17.onrender.com/api/v1/utilities/university/pending-requests`,
       config
     )
     .then((res) => {
@@ -293,7 +293,7 @@ const getAllPendingRequests = async function () {
 
   return await axios
     .get(
-      `http://localhost:3154/api/v1/utilities/teacher/pending-requests`,
+      `https://reach17.onrender.com/api/v1/utilities/teacher/pending-requests`,
       config
     )
     .then((res) => {
@@ -352,7 +352,7 @@ const getAllStudentsEnrolled = async function (courseID, mode) {
   };
   return await axios
     .get(
-      `http://localhost:3154/api/v1/utilities/students-enrolled/${courseID}`,
+      `https://reach17.onrender.com/api/v1/utilities/students-enrolled/${courseID}`,
       config
     )
     .then((res) => {

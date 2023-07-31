@@ -5,7 +5,7 @@ import { writeToLocalStorage, readLocalStorage } from "../local-storage";
 
 const newTeacherSignUp = async function (newTeacherData) {
   axios
-    .post(`http://localhost:3154/api/v1/auth/register/teacher`, newTeacherData)
+    .post(`https://reach17.onrender.com/api/v1/auth/register/teacher`, newTeacherData)
     .then((res) => {
       writeToLocalStorage(res.data, "teacherData");
       alert(
@@ -67,7 +67,7 @@ const newTeacherSignUp = async function (newTeacherData) {
 
 const teacherLogin = async function (teacherData) {
   axios
-    .post(`http://localhost:3154/api/v1/auth/login/teacher`, teacherData)
+    .post(`https://reach17.onrender.com/api/v1/auth/login/teacher`, teacherData)
     .then((res) => {
       writeToLocalStorage(res.data, "teacherData");
     })
@@ -136,7 +136,7 @@ const createCourse = async function (courseData) {
   };
 
   axios
-    .post(`http://localhost:3154/api/v1/courses/`, courseData, config)
+    .post(`https://reach17.onrender.com/api/v1/courses/`, courseData, config)
     .then((res) => {
       alert(
         "Corso inserito correttamente, verrà effettuata la richiesta di erogazione all'università!"
@@ -208,7 +208,7 @@ const getAllCourses = async function () {
     headers: { Authorization: `Bearer ${token}` },
   };
   return await axios
-    .get(`http://localhost:3154/api/v1/courses/`, config)
+    .get(`https://reach17.onrender.com/api/v1/courses/`, config)
     .then((res) => {
       return res.data;
     })
@@ -272,7 +272,7 @@ const getCourse = async function (id) {
   };
 
   return await axios
-    .get(`http://localhost:3154/api/v1/courses/${id}`, config)
+    .get(`https://reach17.onrender.com/api/v1/courses/${id}`, config)
     .then((res) => {
       return res.data;
     })
@@ -388,7 +388,7 @@ const editCourse = async function (editedCourseData, id) {
 
   axios
     .patch(
-      `http://localhost:3154/api/v1/courses/${id}`,
+      `https://reach17.onrender.com/api/v1/courses/${id}`,
       editedCourseData,
       config
     )
@@ -466,7 +466,7 @@ const deleteCourse = async function (id) {
   };
 
   axios
-    .delete(`http://localhost:3154/api/v1/courses/${id}`, config)
+    .delete(`https://reach17.onrender.com/api/v1/courses/${id}`, config)
     .then((res) => {
       alert("Corso eliminato correttamente!");
     })
@@ -532,7 +532,7 @@ const associateCourse = async function (courseID, universityID) {
 
   axios
     .patch(
-      `http://localhost:3154/api/v1/courses/association/${courseID}`,
+      `https://reach17.onrender.com/api/v1/courses/association/${courseID}`,
       JSON.parse(JSON.stringify({ universityId: universityID })),
       config
     )

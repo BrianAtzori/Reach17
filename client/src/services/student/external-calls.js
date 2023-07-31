@@ -5,7 +5,7 @@ import { writeToLocalStorage, readLocalStorage } from "../local-storage";
 
 const newStudentSignUp = async function (newStudentData) {
   axios
-    .post(`http://localhost:3154/api/v1/auth/register`, newStudentData)
+    .post(`https://reach17.onrender.com/api/v1/auth/register`, newStudentData)
     .then((res) => {
       writeToLocalStorage(res.data, "studentData");
       alert(
@@ -67,7 +67,7 @@ const newStudentSignUp = async function (newStudentData) {
 
 const studentLogin = async function (studentData) {
   axios
-    .post(`http://localhost:3154/api/v1/auth/login`, studentData)
+    .post(`https://reach17.onrender.com/api/v1/auth/login`, studentData)
     .then((res) => {
       writeToLocalStorage(res.data, "studentData");
     })
@@ -134,7 +134,7 @@ const getAllUniversityCourses = async function () {
 
   return await axios
     .get(
-      `http://localhost:3154/api/v1/courses/student/available-courses`,
+      `https://reach17.onrender.com/api/v1/courses/student/available-courses`,
       config
     )
     .then((res) => {
@@ -201,7 +201,7 @@ const getCourse = async function (id) {
 
   return await axios
     .get(
-      `http://localhost:3154/api/v1/courses/student/course-details/${id}`,
+      `https://reach17.onrender.com/api/v1/courses/student/course-details/${id}`,
       config
     )
     .then((res) => {
@@ -268,7 +268,7 @@ const courseSignUp = async function (id) {
 
   return await axios
     .post(
-      `http://localhost:3154/api/v1/courses/student/course-registration/`,
+      `https://reach17.onrender.com/api/v1/courses/student/course-registration/`,
       JSON.parse(JSON.stringify({ courseId: id })),
       config
     )
@@ -336,7 +336,7 @@ const getAllCourseRegistrations = async function () {
   };
 
   return await axios
-    .get(`http://localhost:3154/api/v1/courses/student/courses-list/`, config)
+    .get(`https://reach17.onrender.com/api/v1/courses/student/courses-list/`, config)
     .then((res) => {
       return res.data;
     })
