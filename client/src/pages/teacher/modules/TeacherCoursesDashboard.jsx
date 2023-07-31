@@ -18,7 +18,7 @@ export default function TeacherCoursesDashboard() {
 
   async function getCoursesData() {
     let coursesList = [];
-    coursesList = await getAllCourses().then(() => setIsLoading(false));
+    coursesList = await getAllCourses();
 
     if (coursesList.length > 0) {
       let index = 0;
@@ -28,6 +28,8 @@ export default function TeacherCoursesDashboard() {
     }
 
     getUniversitiesData(coursesList);
+
+    setIsLoading(false);
   }
 
   async function getUniversitiesData(coursesList) {
