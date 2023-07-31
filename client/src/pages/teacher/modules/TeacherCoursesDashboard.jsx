@@ -28,8 +28,6 @@ export default function TeacherCoursesDashboard() {
     }
 
     getUniversitiesData(coursesList);
-
-    setIsLoading(false);
   }
 
   async function getUniversitiesData(coursesList) {
@@ -58,6 +56,8 @@ export default function TeacherCoursesDashboard() {
     }
 
     setCourses(formattedCourseData);
+
+    setIsLoading(false);
   }
 
   async function retrieveUniversity(id) {
