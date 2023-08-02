@@ -1,16 +1,17 @@
-# Reach 17
+<a name="readme-top"></a>
+<div align="center">
+<img src="Reach%2017%2042aadff118e64e9298681ed32d203712/Reach17.png"/> 
 
-![Reach17.png](Reach%2017%2042aadff118e64e9298681ed32d203712/Reach17.png)
-
-**Reach 17 | SDG For Everyone**
+## Reach 17 | SDG For Everyone
 
 Fifth exam project of the Start2Impact University - A back-end infrastructure with REST API architecture for managing courses about SDG 🎓🎯🌍
 
 [Repository](https://github.com/BrianAtzori/Reach17) · [Report Bug](https://github.com/BrianAtzori/Reach17/issues) · [Request Feature](https://github.com/BrianAtzori/Reach17/issues) · [Try the application](https://reach17.netlify.app/)
+</div>
+
+<br/>
 
 ## ABOUT THE PROJECT 🧶
-
----
 
 The exam track:
 
@@ -20,16 +21,14 @@ Your task will be to implement RESTful JSON APIs that will manage the input of t
 
 My work:
 
-- To train the front-end skills and the integration with a back-end created by me, however, I also developed the application from a graphic point of view, not taking care of it 100% and not following some patterns and optimizations but still creating a good front-ent that allows you to test all functions.
+- To train the front-end skills and the integration with a back-end created by me, however, I also developed the application from a graphic point of view, not taking care of it 100% and not following some patterns and optimizations but still creating a good front-end that allows you to test all functions.
 - I modified some design requirements to improve the app according to my point of view, for example deciding to implement some features working with the IDs of the records inside the DB rather than with other course parameters
-- I designed an alternative association system for courses that permit to a teacher to request an assosiaction to an university and that association can be accepted from the university
-- Since the UI Project was optional to speed up the design process some stylistic elements, such as the palette, the logo and some standard front-end components were created with Chat GPT
+- I designed an alternative association system for courses that permit the teacher to request an association to an university and that association can be accepted by the university
+- Since the UI Project was optional, to speed up the design process some stylistic elements such as the palette, the logo and some standard front-end components were created with Chat GPT to try the prompt-approach for simple coding tasks
 
 🔝([back to top](https://github.com/BrianAtzori/Reach17#readme-top))
 
 ## BACK-END BUILT WITH 👷🏻‍♂️
-
----
 
 ### - Built with Node.JS and Express 🐝
 
@@ -46,8 +45,6 @@ My work:
 ![Untitled](Reach%2017%2042aadff118e64e9298681ed32d203712/Untitled%203.png)
 
 ## FRONT-END BUILT WITH 🛠
-
----
 
 ### - Built with React.JS and create-react-app ⚛️
 
@@ -66,8 +63,6 @@ My work:
 🔝([back to top](https://github.com/BrianAtzori/Reach17#readme-top))
 
 ## USAGE❓
-
----
 
 ⚠️ Be careful: since this is a simple MVP created as a demo/study project the infrastracture is hosted on free service providers, so it’s slow ⚠️
 
@@ -96,8 +91,6 @@ As a student you will be able to view the courses available in your university t
 🔝([back to top](https://github.com/BrianAtzori/Awaca#readme-top))
 
 ## CONTACTS 💬
-
----
 
 🤝🏻 My portfolio/Personal Website made with ⚛️.js - [https://www.brianatzori.it/](https://www.brianatzori.it/)
 
