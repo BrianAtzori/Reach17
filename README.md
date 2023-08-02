@@ -94,4 +94,4 @@ As a student you will be able to view the courses available in your university t
 
 🔗 Project Link: [https://github.com/BrianAtzori/Reach17](https://github.com/BrianAtzori/Reach17)
 
-🔝([back to top](https://github.com/BrianAtzori/Awaca#readme-top))
+🔝([back to top](https://github.com/BrianAtzori/Reach17#readme-top))
