@@ -13,13 +13,13 @@ Fifth exam project of the Start2Impact University - A back-end infrastructure wi
 
 ## ABOUT THE PROJECT 🧶
 
-The exam track:
+### The exam track:
 
 Reach17 is a UN target-based training platform that will need to catalogue the courses it offers.
 
 Your task will be to implement RESTful JSON APIs that will manage the input of these courses. You do not need to develop a front end for this project.
 
-My work:
+### My work:
 
 - To train the front-end skills and the integration with a back-end created by me, however, I also developed the application from a graphic point of view, not taking care of it 100% and not following some patterns and optimizations but still creating a good front-end that allows you to test all functions.
 - I modified some design requirements to improve the app according to my point of view, for example deciding to implement some features working with the IDs of the records inside the DB rather than with other course parameters
